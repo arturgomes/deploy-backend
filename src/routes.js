@@ -1,23 +1,40 @@
 import React from 'react';
 
-import { BrowserRouter, Switch, Route } from 'react-router-dom';
+import { Redirect, BrowserRouter, Switch, Route } from 'react-router-dom';
 
 import Login from './pages/Login';
 import Feedback from './pages/Feedback';
 import Main from './pages/Main';
 import SignUp from './pages/SignUp';
 import SignUpRetail from './pages/SignUpRetail';
-
+import CreateShop from './pages/CreateShop';
+import { isAuthenticated } from "./services/auth";
+const PrivateRoute = ({ component: Component, ...rest }) => (
+  <Route
+    {...rest}
+    render={props =>
+      isAuthenticated() ? (
+        <Component {...props} />
+      ) : (
+          <Redirect to={{ pathname: "/login", state: { from: props.location } }} />
+        )
+    }
+  />
+);
 
 export default function Routes() {
   return (
     <BrowserRouter>
       <Switch>
         <Route path="/" exact component={Main} />
-        <Route path="/auth/:fid" component={Login} />
-        <Route path="/signup/:fid" exact component={SignUp} />
+        <Route path="/login/" exact component={Login} />
+        <Route path="/login/:fid" component={Login} />
+        <Route path="/signup/" exact component={SignUp} />
+        <Route path="/signup/:fid" component={SignUp} />
         <Route path="/retail/" exact component={SignUpRetail} />
+        <PrivateRoute path="/shop/" exact component={CreateShop} />
         <Route path="/feed/:id" component={Feedback} />
+        <Route path="*" component={() => <h1>Página não encontrada</h1>} />
       </Switch>
     </BrowserRouter>)
 }

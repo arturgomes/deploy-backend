@@ -1,7 +1,17 @@
 import React, { Component } from 'react';
 import '../../App.css';
-// import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 // import api from '../../services/api'
+import { isAuthenticated } from "../../services/auth";
+const Autenticado = ({ component: Component, ...rest }) => (
+
+  isAuthenticated() ? (
+    <>Autenticado</>
+  ) : (
+      <Redirect to={{ pathname: "/" }} />
+    )
+
+);
 
 export default class Main extends Component {
   state = {
@@ -14,31 +24,9 @@ export default class Main extends Component {
 
   }
   render() {
-    const { email } = this.state;
     return (
       <>
         <p>Bem vindo ao CouponFeed!</p>
-        <form onSubmit={() => this.handleSubmit}>
-          <label htmlFor="email">E-mail*</label>
-          <input
-            type="email"
-            id="email"
-            autoComplete="username"
-            placeholder="Seu email"
-            value={email}
-            onChange={event => this.setState({ email: event.target.value })}
-          />
-          <label htmlFor="email">Senha*</label>
-          <input
-            type="password"
-            id="passw"
-            autoComplete="current-password"
-            placeholder="senha"
-            onChange={event => this.setState({ passw: event.target.value })}
-
-          />
-          <button className="btn" type="submit">Entrar</button>
-        </form>
 
       </>
     );

@@ -1,43 +1,61 @@
 import React, { Component } from 'react';
+import { Link, withRouter } from "react-router-dom";
+
 import '../../App.css';
 // import { Link } from 'react-router-dom'
-// import api from '../../services/api'
+import api from '../../services/api'
+import { login } from "../../services/auth";
 
-export default class Login extends Component {
+
+class Login extends Component {
   state = {
-    email: null,
-    passw: null
+    email: "",
+    password: "",
+    error: ""
   }
-  handleSubmit = async event => {
-    event.preventDefault();
-    console.log(this.state);
+  handleSignIn = async e => {
+    e.preventDefault();
+    console.log("Entrou no api")
 
-  }
+    const { email, password } = this.state;
+    if (!email || !password) {
+      this.setState({ error: "Preencha e-mail e senha para continuar!" });
+    } else {
+      try {
+        console.log("Entrou no api")
+        const response = await api.post("/sessions", { email, password });
+        login(response.data.token);
+        this.props.history.push("/feed");
+      } catch (err) {
+        this.setState({
+          error:
+            "Houve um problema com o login, verifique suas credenciais. T.T"
+        });
+      }
+    }
+  };
   render() {
-    const { email } = this.state;
     return (
       <>
         <p>Bem vindo ao CouponFeed!</p>
-        <form onSubmit={() => this.handleSubmit}>
-          <label htmlFor="email">E-mail*</label>
+        <form onSubmit={() => this.handleSignIn}>
+          {this.state.error && <p>{this.state.error}</p>}
           <input
             type="email"
-            id="email"
-            autoComplete="username"
-            placeholder="Seu email"
-            value={email}
-            onChange={event => this.setState({ email: event.target.value })}
+            autoComplete="usename"
+            placeholder="Endereço de e-mail"
+            onChange={e => this.setState({ email: e.target.value })}
           />
-          <label htmlFor="email">Senha*</label>
           <input
             type="password"
-            id="passw"
+            placeholder="Senha"
             autoComplete="current-password"
-            placeholder="senha"
-            onChange={event => this.setState({ passw: event.target.value })}
-
+            onChange={e => this.setState({ password: e.target.value })}
           />
           <button className="btn" type="submit">Entrar</button>
+          {/* <Link to="/signup">
+            <button className="btn1" type="submit">Cadastre-se</button>
+          </Link> */}
         </form>
 
       </>
@@ -46,3 +64,4 @@ export default class Login extends Component {
 }
 
 
+export default withRouter(Login);

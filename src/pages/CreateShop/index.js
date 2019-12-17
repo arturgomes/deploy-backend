@@ -1,39 +1,32 @@
 import React, { Component } from 'react';
 
-// import ValCPF from 'validar-cpf';
 import '../../App.css';
 // import { Link } from 'react-router-dom'
 import api from '../../services/api'
-
 // const validator = require('cpf-cnpj-validator')
 
 export default class SignUp extends Component {
   state = {
-    email: null,
-    cpf: null,
     name: null,
+    manager: null,
     phone: null,
-    passw: null,
     done: false,
     error: null
   }
   handleSubmit = async event => {
     event.preventDefault();
-    const fid = decodeURIComponent(this.props.match.params.fid);
 
-    await api.post(`/users`, {
+    await api.post(`/shops`, {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
       password: this.state.passw,
-      cpf: this.state.cpf,
-      fid
+      cnpj: this.state.cpf,
     })
-      .then(response => this.setState({ fid: response.data.fid }, () => { }))
+      .then(response => { })
       .catch(error => { console.log(error) });
     // console.log(this.state, fid);
     this.setState({ done: true });
-    this.props.history.push("/");
   }
   handleNameInput = event => {
     this.setState({
@@ -46,23 +39,15 @@ export default class SignUp extends Component {
       phone: event.target.value
     })
   }
-  cpfMask = value => {
-    return value
-      .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
-      .replace(/(\d{3})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
-      .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
-      .replace(/(-\d{2})\d+?$/, '$1') // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
-  }
-  handleCPFInput = event => {
-    // const cpf = event.target.value;
-
-    // if (!Joi.validate(cpf, cpfSchema)) {
-    //   this.setState({ error: "CPF inválido" })
+  handleCNPJInput = event => {
+    // const cnpj = event.target.value;
+    // if (!Joi.validate(cnpj, cnpjSchema)) {
+    // console.log("cnpj invalido")
+    // this.setState({ error: "CNPJ inválido" })
     // }
     // else {
     this.setState({
-      cpf: this.cpfMask(event.target.value)
+      cnpj: event.target.value
     })
     // }
   }
@@ -81,12 +66,14 @@ export default class SignUp extends Component {
   render() {
     // const { email, name, phone } = this.state;
     // console.log(this.state)
-    if (this.state.done) {
-      return (<div>Obrigado pelo seu cadastro. Você acabou de acumular 1 Feedcoin. Lembre-se, faça seu login ao final de cada feedback que você der e acumulará mais pontos. Até breve! </div>)
+    const err = this.state.error;
+    if (this.state.done && !this.state.error) {
+      return (<p>Obrigado! Entraremos em contato para começar a nossa parceria! Até já.</p>)
     }
     return (
       <>
-        <p>Olá, que bom ver você aqui. Vamos fazer um breve cadastro seu para começar a acumular os FeedCoins.</p>
+        <p>Olá, obrigado por escolher a CouponFeed. Vamos começar nossa parceria com um breve cadastro da sua empresa.</p>
+        {err ? <p>{err}</p> : ``}
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="name">Nome *</label>
           <input
@@ -107,13 +94,12 @@ export default class SignUp extends Component {
           />
 
 
-          <label htmlFor="phone">CPF *</label>
+          <label htmlFor="phone">CNPJ *</label>
           <input
-            // type="text"
-            maxLength='14'
+            type="text"
             // autoComplete="phone"
-            placeholder="Seu cpf"
-            onChange={this.handleCPFInput}
+            placeholder="Seu CNPJ"
+            onChange={this.handleCNPJInput}
             value={this.state.cpf}
           />
 

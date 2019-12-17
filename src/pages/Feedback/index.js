@@ -14,7 +14,8 @@ export default class Feedback extends Component {
     nps: null,
     comment: null,
     finished: false,
-    phone: null
+    phone: null,
+    error: null
   }
 
 
@@ -56,21 +57,29 @@ export default class Feedback extends Component {
   async componentDidMount() {
     const qs = decodeURIComponent(this.props.match.params.id);
     const response = await api.post(`/feed/${qs}/f`);
-    const quest = response.data.questions;
-    const ope = response.data.opening;
-    // console.log(response)
-    this.setState({
-      questions: quest,
-      opening: ope
-    }, () => { });
+    if (!response.error) {
+      const quest = response.data.questions;
+      const ope = response.data.opening;
+      // console.log(response)
+      this.setState({
+        questions: quest,
+        opening: ope
+      }, () => { });
 
-
+    }
+    else {
+      this.setState({ error: "Loja não encontrada" })
+    }
   }
 
   render() {
-    if (!this.state.opening) {
+
+    if (!this.state.opening && !this.state.error) {
       return <FaSpinner color="#888" size={14} />
 
+    }
+    if (this.state.error) {
+      return (<p>{this.state.error}</p>)
     }
     const { opening, finished, nps, questions } = this.state;
     let value = null;

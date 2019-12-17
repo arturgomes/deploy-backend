@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { validate, format, generate } from 'cnpj';
 
 import '../../App.css';
 // import { Link } from 'react-router-dom'
 import api from '../../services/api'
+// const validator = require('cpf-cnpj-validator')
 
 export default class SignUp extends Component {
   state = {
@@ -29,6 +29,7 @@ export default class SignUp extends Component {
       .catch(error => { console.log(error) });
     // console.log(this.state, fid);
     this.setState({ done: true });
+    this.props.history.push("/");
   }
   handleNameInput = event => {
     this.setState({
@@ -42,15 +43,16 @@ export default class SignUp extends Component {
     })
   }
   handleCNPJInput = event => {
-    const cnpj = event.target.value;
-    if (!validate(cnpj)) {
-      this.setState({ error: "CNPJ inválido" })
-    }
-    else {
-      this.setState({
-        cnpj: format(event.target.value)
-      })
-    }
+    // const cnpj = event.target.value;
+    // if (!Joi.validate(cnpj, cnpjSchema)) {
+    // console.log("cnpj invalido")
+    // this.setState({ error: "CNPJ inválido" })
+    // }
+    // else {
+    this.setState({
+      cnpj: event.target.value
+    })
+    // }
   }
 
   handleEmailInput = event => {
@@ -67,12 +69,14 @@ export default class SignUp extends Component {
   render() {
     // const { email, name, phone } = this.state;
     // console.log(this.state)
-    if (this.state.done) {
-      return (<div>Obrigado! Entraremos em contato para começar a nossa parceria! Até já. </div>)
+    const err = this.state.error;
+    if (this.state.done && !this.state.error) {
+      return (<p>Obrigado! Entraremos em contato para começar a nossa parceria! Até já.</p>)
     }
     return (
       <>
         <p>Olá, obrigado por escolher a CouponFeed. Vamos começar nossa parceria com um breve cadastro da sua empresa.</p>
+        {err ? <p>{err}</p> : ``}
         <form onSubmit={this.handleSubmit}>
           <label htmlFor="name">Nome *</label>
           <input
@@ -93,11 +97,11 @@ export default class SignUp extends Component {
           />
 
 
-          <label htmlFor="phone">CPF *</label>
+          <label htmlFor="phone">CNPJ *</label>
           <input
             type="text"
             // autoComplete="phone"
-            placeholder="Seu cpf"
+            placeholder="Seu CNPJ"
             onChange={this.handleCNPJInput}
             value={this.state.cpf}
           />
