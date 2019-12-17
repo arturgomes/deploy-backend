@@ -1,0 +1,110 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto:500&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  outline:0;
+  box-sizing: border-box;
+}
+
+html, body, #root{
+  min-height: 100%;
+}
+
+body{
+  /* background: #fd7491; */
+  background-color: #fd85a0;
+background-image: url("data:image/svg+xml,%3Csvg width='64' height='64' viewBox='0 0 48 64' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M48 28v-4L36 12 24 24 12 12 0 24v4l4 4-4 4v4l12 12 12-12 12 12 12-12v-4l-4-4 4-4zM8 32l-6-6 10-10 10 10-6 6 6 6-10 10L2 38l6-6zm12 0l4-4 4 4-4 4-4-4zm12 0l-6-6 10-10 10 10-6 6 6 6-10 10-10-10 6-6zM0 16L10 6 4 0h4l4 4 4-4h4l-6 6 10 10L34 6l-6-6h4l4 4 4-4h4l-6 6 10 10v4L36 8 24 20 12 8 0 20v-4zm0 32l10 10-6 6h4l4-4 4 4h4l-6-6 10-10 10 10-6 6h4l4-4 4 4h4l-6-6 10-10v-4L36 56 24 44 12 56 0 44v4z' fill='%23d93f5f' fill-opacity='0.07' fill-rule='evenodd'/%3E%3C/svg%3E");
+background-repeat:  repeat;
+  background-size: cover;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+body, input, button{
+  font-family: 'Roboto', Arial, Helvetica, sans-serif;
+  
+  /* font-size: 14px; */
+}
+
+.container{
+  margin: 15px auto 0;
+  max-width: 400px;
+  width: 100%;
+  display:flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 14px;
+    /* font-size: 1.2vw; */
+}
+
+img.cflogo {
+  width: 300px;
+}
+
+.content {
+  width: 100%;
+  background: #fff;
+  margin-top:15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  border-radius: 5px;
+  padding:10px;
+  box-shadow: 0 10px 10px 0 hsla(0, 0%, 0%, 0.2);
+
+}
+.content >p{
+  /* font-size:22px; */
+  line-height: 30px;
+  margin-bottom: 30px;
+}
+.content form{
+  display:flex;
+  flex-direction: column;
+}
+.content form label {
+  /* font-size:14px; */
+  color:#444;
+  /* font-weight: bold; */
+  margin-bottom: 4px;
+}
+.content form input{
+  margin-bottom:20px;
+  border: 1px solid #ddd;
+  border-radius: 2px;
+
+  height: 45px;
+  padding:0 5px;
+  /* font-size:16px; */
+}
+.content button.btn{
+  border:0;
+  border-radius: 3px;
+  width:100%;
+  height: 42px;
+  padding: 0 20px;
+  /* font-size: 16px; */
+  font-weight: bold;
+  margin-bottom: 10px;
+  background:#FF5A5F;
+  color: #fff;
+  box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+
+}
+
+.content button.btn1{
+  border:0;
+  border-radius: 3px;
+  width:100%;
+  height: 42px;
+  padding: 0 20px;
+  /* font-size: 16px; */
+  font-weight: bold;
+  margin-bottom: 10px;
+  border:1px solid #FF5A5F;
+  color: #FF5A5F;
+  box-shadow: 0 4px 6px 0 hsla(0, 0%, 0%, 0.2);
+
+
+}

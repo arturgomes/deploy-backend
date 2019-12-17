@@ -1,0 +1,144 @@
+import React, { Component } from 'react';
+import './App.css';
+// import api from '../../services/api';
+import NPS from './nps';
+import Comment from './comment';
+
+export default class Feedback extends Component {
+  state = {
+    answers: [],
+    questions: [
+      {
+        qid: 'd3c64a66-1685-11ea-8d71-362b9e155667',
+        name: "nps",
+        question: 'O quão satisfeito você está com nosso serviço de atendimento?',
+        // (Se sua empresa está buscando melhorar o atendimento pós- venda, essa é uma boa pergunta a se fazer.)
+        options: [
+          { id: 0, value: 0, color: "#b72125", type: "detrator", text: ":(" },
+          { id: 1, value: 1, color: "#d52027", type: "detrator", text: ":(" },
+          { id: 2, value: 2, color: "#f05223", type: "detrator", text: ":(" },
+          { id: 3, value: 3, color: "#f37022", type: "detrator", text: ":(" },
+          { id: 4, value: 4, color: "#faa823", type: "detrator", text: ":(" },
+          { id: 5, value: 5, color: "#ffca27", type: "detrator", text: ":(" },
+          { id: 6, value: 6, color: "#ecdb12", type: "detrator", text: ":(" },
+          { id: 7, value: 7, color: "#e8e73d", type: "neutro", text: ":|" },
+          { id: 8, value: 8, color: "#c5d82e", type: "neutro", text: ":|" },
+          { id: 9, value: 9, color: "#afd135", type: "promotor", text: ":)" },
+          { id: 10, value: 10, color: "#65b64d", type: "promotor", text: ":)" }
+        ]
+      },
+      {
+        qid: 'd3c64a66-1685-11ea-8d71-362b9e155667',
+        name: "question",
+        question: 'O quão satisfeito você está com nosso serviço de atendimento?',
+        // (Se sua empresa está buscando melhorar o atendimento pós- venda, essa é uma boa pergunta a se fazer.)
+        options: [
+          {
+            aid: 'd3c64cc8-1685-11ea-8d71-362b9e155667',
+            question: 'Que legal! Qual a probabilidade de você recomendar a loja XYZ para um amigo ou parente que você goste ?',
+          },
+          {
+            aid: 'd3c64e1c-1685-11ea-8d71-362b9e155667',
+            question: 'O que poderíamos fazer para tornar sua experiência como consumidor ainda melhor?',
+          },
+          {
+            aid: 'd3c64f5c-1685-11ea-8d71-362b9e155667',
+            question: 'O que você acha que faltou hoje no atendimento a você ?',
+          }
+        ]
+      },
+
+    ],
+    comment: false,
+    nps: null,
+    comment_quest: null
+  }
+
+  // handleChange = (answer) => {
+  //   const { nps, questions, answers } = this.state;
+  //   let next = null;
+
+  //   if (nps === null) {
+  //     let currAnswer = questions[0].options.find(option => option.id === answer);
+  //     questions.forEach((q, index) => {
+  //       if (q.name === currAnswer.value)
+  //         next = index;
+  //     })
+  //   }
+
+  //   if (nps) {
+  //     questions.forEach((q, index) => {
+  //       if (q.name === questions[1].straightTo)
+  //         next = index;
+  //     })
+  //   }
+
+  //   if (questions[active].last) {
+  //     this.setState({
+  //       finished: true,
+  //       answers: this.state.answers.concat({
+  //         qid: questions[active].qid,
+  //         ans: answer
+  //       })
+  //     }, () => console.log(this.state.answers));
+
+  //   } else {
+  //     this.setState({
+  //       active: next ? next : (active + 1),
+  //       answers: answers.concat({
+  //         qid: questions[active].qid,
+  //         ans: answer
+  //       })
+  //     }, () => console.log(this.state.answers))
+  //   }
+  // }
+  handleNPS = (answer) => {
+    const { answers, questions } = this.state;
+    let resp = null;
+    if (answer >= 8) {
+      resp = questions[1].options[0]
+    } else if (answer >= 7 && answer < 8) {
+      resp = questions[1].options[2]
+    } else {
+      resp = questions[1].options[3]
+    }
+    this.setState({
+      comment: true,
+      nps: answer,
+      comment_quest: resp,
+      answers: answers.concat({
+        nps: answer
+      })
+    })
+  }
+
+  handleComment = (answer) => {
+    const { answers, nps } = this.state;
+    this.setState({
+      answers: answers.concat({
+        comment: answer
+      })
+    })
+  }
+
+  render() {
+    const { nps, comment_quest, questions, finished } = this.state;
+    let ans = null;
+
+    if (nps === null) {
+      ans = (<NPS
+        quest={questions[0]}
+        onChange={this.handleNPS}
+      />)
+    }
+    else {
+      ans = (<Comment
+        quest={comment_quest}
+        onChange={this.handleComment}
+      />)
+    }
+    return finished ? (
+      <div>Fim... :D</div>
+    ) : ans;
+  }
+}
