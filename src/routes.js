@@ -7,6 +7,7 @@ import Feedback from './pages/Feedback';
 import Main from './pages/Main';
 import SignUp from './pages/SignUp';
 import SignUpRetail from './pages/SignUpRetail';
+import ListFeedback from './pages/ListFeedback';
 import CreateShop from './pages/CreateShop';
 import { isAuthenticated } from "./services/auth";
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -33,6 +34,8 @@ export default function Routes() {
         <Route path="/signup/:fid" component={SignUp} />
         <Route path="/retail/" exact component={SignUpRetail} />
         <PrivateRoute path="/shop/" exact component={CreateShop} />
+        <PrivateRoute path="/list-feedbacks/" exact component={ListFeedback} />
+
         <Route path="/feed/:id" component={Feedback} />
         <Route path="*" component={() => <h1>Página não encontrada</h1>} />
       </Switch>

@@ -3,6 +3,8 @@ import React, { Component } from 'react';
 import '../../App.css';
 // import { Link } from 'react-router-dom'
 import api from '../../services/api'
+import { isAuthenticated, logout, getId, getName } from "../../services/auth";
+
 // const validator = require('cpf-cnpj-validator')
 
 export default class SignUp extends Component {
@@ -11,22 +13,21 @@ export default class SignUp extends Component {
     manager: null,
     phone: null,
     done: false,
-    error: null
+    err: null
   }
   handleSubmit = async event => {
     event.preventDefault();
 
     await api.post(`/shops`, {
       name: this.state.name,
-      email: this.state.email,
+      manager: this.state.email,
       phone: this.state.phone,
-      password: this.state.passw,
-      cnpj: this.state.cpf,
+      retail_id: getId()
     })
-      .then(response => { })
-      .catch(error => { console.log(error) });
+      .then(response => { this.setState({ done: true }); })
+      .catch(error => { console.log(error); this.setState({ err: error }); });
     // console.log(this.state, fid);
-    this.setState({ done: true });
+
   }
   handleNameInput = event => {
     this.setState({
@@ -39,46 +40,38 @@ export default class SignUp extends Component {
       phone: event.target.value
     })
   }
-  handleCNPJInput = event => {
-    // const cnpj = event.target.value;
-    // if (!Joi.validate(cnpj, cnpjSchema)) {
-    // console.log("cnpj invalido")
-    // this.setState({ error: "CNPJ inválido" })
-    // }
-    // else {
-    this.setState({
-      cnpj: event.target.value
-    })
-    // }
-  }
 
-  handleEmailInput = event => {
+
+  handleManagerInput = event => {
     this.setState({
-      email: event.target.value
+      manager: event.target.value
     });
   }
 
-  handlePasswInput = event => {
-    this.setState({
-      passw: event.target.value
-    });
-  }
+  handleLogout = e => {
+    e.preventDefault();
+    // console.log('apeertou')
+    logout();
+    this.props.history.push("/");
+  };
+
   render() {
     // const { email, name, phone } = this.state;
     // console.log(this.state)
     const err = this.state.error;
-    if (this.state.done && !this.state.error) {
-      return (<p>Obrigado! Entraremos em contato para começar a nossa parceria! Até já.</p>)
+    if (!isAuthenticated() && this.state.done && !this.state.error) {
+      this.props.history.push("/");
+
     }
     return (
       <>
-        <p>Olá, obrigado por escolher a CouponFeed. Vamos começar nossa parceria com um breve cadastro da sua empresa.</p>
+        <p>Olá, vamos cadastrar uma loja {getName()}?</p>
         {err ? <p>{err}</p> : ``}
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">Nome *</label>
+          <label htmlFor="name">Nome e Endereço da loja *</label>
           <input
             type="text"
-            placeholder="Seu nome completo"
+            placeholder="Nome e Endereço da loja"
             value={this.state.name}
             onChange={this.handleNameInput}
 
@@ -94,34 +87,19 @@ export default class SignUp extends Component {
           />
 
 
-          <label htmlFor="phone">CNPJ *</label>
+          <label htmlFor="phone">Gerente *</label>
           <input
             type="text"
             // autoComplete="phone"
-            placeholder="Seu CNPJ"
-            onChange={this.handleCNPJInput}
-            value={this.state.cpf}
+            placeholder="Gerente"
+            onChange={this.handleManagerInput}
+            value={this.state.manager}
           />
 
-          <label htmlFor="email">E-mail *</label>
-          <input
-            // type="email"
-            id="email"
-            autoComplete="username"
-            placeholder="Seu email"
-            value={this.state.email}
-            onChange={this.handleEmailInput}
-            type="text"
-          />
-          <label htmlFor="passw">Senha *</label>
-          <input
-            type="password"
-            autoComplete="current-password"
-            placeholder="senha"
-            onChange={this.handlePasswInput}
-
-          />
-          <button className="btn" type="submit">Entrar</button>
+          <button className="btn" type="submit">Cadastrar</button>
+        </form>
+        <form onSubmit={this.handleLogout}>
+          <button className="btn" type="submit">Sair</button>
         </form>
 
       </>

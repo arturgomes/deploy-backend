@@ -17,16 +17,17 @@ export default class SignUp extends Component {
   }
   handleSubmit = async event => {
     event.preventDefault();
-
+    console.log(this.state);
     await api.post(`/retails`, {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
       password: this.state.passw,
-      cnpj: this.state.cpf,
+      cnpj: this.state.cnpj,
     })
-      .then(response => { })
+      .then(response => { console.log(response) })
       .catch(error => { console.log(error) });
+    // console.log("Foi");
     // console.log(this.state, fid);
     this.setState({ done: true });
     this.props.history.push("/");
@@ -97,13 +98,13 @@ export default class SignUp extends Component {
           />
 
 
-          <label htmlFor="phone">CNPJ *</label>
+          <label htmlFor="cnpj">CNPJ *</label>
           <input
             type="text"
             // autoComplete="phone"
             placeholder="Seu CNPJ"
             onChange={this.handleCNPJInput}
-            value={this.state.cpf}
+            value={this.state.cnpj}
           />
 
           <label htmlFor="email">E-mail *</label>
