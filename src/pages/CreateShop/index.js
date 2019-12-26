@@ -21,7 +21,9 @@ import QrCode from 'react.qrcode.generator'
 class Demo extends Component {
   render() {
     return <div>
+
       <QrCode size={500} value={this.props.link} />
+
     </div>
   }
 }
@@ -109,7 +111,20 @@ export default class SignUp extends Component {
     }
     if (this.state.done) {
       const link = `http://192.168.0.104:3000/feed/${this.state.sid}`
-      return <Demo link={link} />
+      return (<><p>Aqui está o QR Code para a loja </p>
+        <Demo link={link} />
+        <p>Teste <a href={link}>aqui</a> o link de feedback: </p>
+        <Link href="/">
+          <Button
+            type="submit"
+            style={{ marginBottom: 16 }}
+            fullWidth
+            // variant="contained"
+            color="secondary"
+          // className={useStyles.submit}
+          > inicio </Button>
+        </Link>
+      </>)
     }
     return (
       <>

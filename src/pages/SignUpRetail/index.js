@@ -4,6 +4,9 @@ import '../../App.css';
 // import { Link } from 'react-router-dom'
 import api from '../../services/api'
 // const validator = require('cpf-cnpj-validator')
+import { Grid, Button, CssBaseline, TextField, Link, Typography } from '@material-ui/core/';
+import { makeStyles } from '@material-ui/core/styles';
+import Container from '@material-ui/core/Container';
 
 export default class SignUp extends Component {
   state = {
@@ -77,61 +80,128 @@ export default class SignUp extends Component {
       return (<><p>Obrigado! Entraremos em contato para começar a nossa parceria! Até já.
 
 
-      </p> </>)
+      </p> <Link href="/">
+          <Button
+            type="submit"
+            style={{ marginBottom: 16 }}
+            fullWidth
+            // variant="contained"
+            color="secondary"
+          // className={useStyles.submit}
+          > inicio </Button>
+        </Link></>)
     }
     return (
       <>
         <p>Olá, obrigado por escolher a CouponFeed. Vamos começar nossa parceria com um breve cadastro da sua empresa.</p>
         {err ? <p>{err}</p> : ``}
         <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">Nome *</label>
-          <input
-            type="text"
-            placeholder="Seu nome completo"
-            value={this.state.name}
-            onChange={this.handleNameInput}
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <TextField
+                autoComplete="fname"
+                name="name"
+                variant="outlined"
+                value={this.state.name}
+                onChange={this.handleNameInput}
+                required
+                fullWidth
+                id="name"
+                label="Nome da Empresa"
+                autoFocus
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                id="phone"
+                label="Telefone"
+                placeholder="(__) __________"
+                onChange={this.handlePhoneInput}
+                value={this.state.phone}
+                name="phone"
+                autoComplete="phone"
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="email"
+                style={{ marginBottom: 16 }}
+                label="Email"
+                onChange={this.handleEmailInput}
+                value={this.state.email}
+                autoComplete="fname"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="cnpj"
+                style={{ marginBottom: 16 }}
+                label="CNPJ"
+                onChange={this.handleCNPJInput}
+                value={this.state.cpf}
+                autoComplete="fname"
+              />
+            </Grid>
+            <Grid item xs={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="passw"
+                style={{ marginBottom: 16 }}
+                label="Senha"
+                type="password"
 
-          />
+                onChange={this.handlePasswInput}
+                value={this.state.passw}
+                autoComplete="fname"
+              />
+            </Grid>
+            {/* <Grid xs={6}>
+              <TextField
+                variant="outlined"
+                required
+                fullWidth
+                name="password"
+                label="senha"
+                type="password"
+                autoComplete="current-password"
+                onChange={this.handlePasswInput}
+              />
+            </Grid> */}
+          </Grid>
 
-          <label htmlFor="phone">Telefone *</label>
-          <input
-            type="text"
-            // autoComplete="phone"
-            placeholder="(__) __________"
-            onChange={this.handlePhoneInput}
-            value={this.state.phone}
-          />
+          <Button
+            type="submit"
+            style={{ marginBottom: 16 }}
+            fullWidth
+            variant="contained"
+            color="primary"
+          // className={useStyles.submit}
+          >
+            Cadastrar-se
+          </Button>
 
-
-          <label htmlFor="cnpj">CNPJ *</label>
-          <input
-            type="text"
-            // autoComplete="phone"
-            placeholder="Seu CNPJ"
-            onChange={this.handleCNPJInput}
-            value={this.state.cnpj}
-          />
-
-          <label htmlFor="email">E-mail *</label>
-          <input
-            // type="email"
-            id="email"
-            autoComplete="username"
-            placeholder="Seu email"
-            value={this.state.email}
-            onChange={this.handleEmailInput}
-            type="text"
-          />
-          <label htmlFor="passw">Senha *</label>
-          <input
-            type="password"
-            autoComplete="current-password"
-            placeholder="senha"
-            onChange={this.handlePasswInput}
-
-          />
-          <button className="btn" type="submit">Entrar</button>
         </form>
+        <Link href="/">
+          <Button
+            type="submit"
+            style={{ marginBottom: 16 }}
+            fullWidth
+            // variant="contained"
+            color="secondary"
+          // className={useStyles.submit}
+          > voltar </Button>
+        </Link>
 
       </>
     );
