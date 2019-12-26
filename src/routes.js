@@ -5,8 +5,11 @@ import { Redirect, BrowserRouter, Switch, Route } from 'react-router-dom';
 import Login from './pages/Login';
 import Feedback from './pages/Feedback';
 import Main from './pages/Main';
+import ListQRCodes from './pages/ListQrCodes';
+
 import SignUp from './pages/SignUp';
 import SignUpRetail from './pages/SignUpRetail';
+// import ListFeedback from './pages/ListFeedback/DemoPages/Main';
 import ListFeedback from './pages/ListFeedback';
 import CreateShop from './pages/CreateShop';
 import { isAuthenticated } from "./services/auth";
@@ -35,6 +38,7 @@ export default function Routes() {
         <Route path="/retail/" exact component={SignUpRetail} />
         <PrivateRoute path="/shop/" exact component={CreateShop} />
         <PrivateRoute path="/list-feedbacks/" exact component={ListFeedback} />
+        <PrivateRoute path="/list-qr/" exact component={ListQRCodes} />
 
         <Route path="/feed/:id" component={Feedback} />
         <Route path="*" component={() => <h1>Página não encontrada</h1>} />

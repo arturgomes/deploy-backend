@@ -1,9 +1,9 @@
 import React from 'react';
 
 import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Routes from './routes'
-import logo from './assets/completa_fundo_escuro@4x.png';
+import logo from './assets/completa_fundo_claro@4x.png'
 function App() {
   return (
     <div className="container">
@@ -12,7 +12,6 @@ function App() {
       </a>
       <div className="content">
         <Routes />
-
       </div>
     </div>
   );

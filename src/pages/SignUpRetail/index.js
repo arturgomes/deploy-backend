@@ -13,7 +13,8 @@ export default class SignUp extends Component {
     phone: null,
     passw: null,
     done: false,
-    error: null
+    error: null,
+    id: null
   }
   handleSubmit = async event => {
     event.preventDefault();
@@ -25,12 +26,12 @@ export default class SignUp extends Component {
       password: this.state.passw,
       cnpj: this.state.cnpj,
     })
-      .then(response => { console.log(response) })
+      .then(response => { console.log(response); this.setState({ id: response.id }) })
       .catch(error => { console.log(error) });
     // console.log("Foi");
     // console.log(this.state, fid);
     this.setState({ done: true });
-    this.props.history.push("/");
+    // this.props.history.push("/");
   }
   handleNameInput = event => {
     this.setState({
@@ -70,9 +71,13 @@ export default class SignUp extends Component {
   render() {
     // const { email, name, phone } = this.state;
     // console.log(this.state)
+
     const err = this.state.error;
     if (this.state.done && !this.state.error) {
-      return (<p>Obrigado! Entraremos em contato para começar a nossa parceria! Até já.</p>)
+      return (<><p>Obrigado! Entraremos em contato para começar a nossa parceria! Até já.
+
+
+      </p> </>)
     }
     return (
       <>

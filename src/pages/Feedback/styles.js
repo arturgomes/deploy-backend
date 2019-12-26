@@ -3,7 +3,7 @@ import styled from 'styled-components';
 export const ScoreButton = styled.button`
   display:inline-flex;
   border:0;
-  width:27px;
+  width:24px;
   margin:3px;
   border-radius:3px;
   border:#000 solid 1px;
@@ -17,9 +17,9 @@ export const ScoreButton = styled.button`
   background-color:${props => props.theme};
   font-family:Arial, Helvetica, sans-serif;
 
-&:hover {
-  opacity:50%;
-}
+  &:hover {
+    opacity:50%;
+  }
 `
 export const QuestionBox = styled.div`
   div{
