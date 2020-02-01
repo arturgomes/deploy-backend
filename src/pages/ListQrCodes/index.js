@@ -77,7 +77,7 @@ export default class ListFeedback extends Component {
 
       listShops = Object.keys(this.state.qr).map(key => {
         const { name, id } = this.state.qr[key]
-        const link = `http://192.168.0.4:3000/feed/${id}`
+        const link = `http://couponfeed.co/feed/${id}`
         return (<><h5>QR code para a loja {name}</h5><Demo link={link} /></>)
       })
       // return listShops

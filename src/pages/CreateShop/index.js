@@ -110,7 +110,7 @@ export default class SignUp extends Component {
 
     }
     if (this.state.done) {
-      const link = `https://master.d6tpfwtth31n.amplifyapp.com/feed/${this.state.sid}`
+      const link = `https://couponfeed.co/feed/${this.state.sid}`
       return (<><p>Aqui está o QR Code para a loja </p>
         <Demo link={link} />
         <p>Teste <a href={link}>aqui</a> o link de feedback: </p>
