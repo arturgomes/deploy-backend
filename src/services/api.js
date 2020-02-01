@@ -3,7 +3,7 @@ import { getToken } from "./auth";
 
 
 const api = axios.create({
-  baseURL: 'http://192.168.0.104:8080',
+  baseURL: 'http://54.172.28.174:3000',
 });
 
 
