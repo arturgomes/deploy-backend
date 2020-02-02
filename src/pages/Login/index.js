@@ -36,7 +36,7 @@ class Login extends Component {
   state = {
     email: "",
     password: "",
-    err: null
+    error: null
   }
   handleSignIn = async e => {
     console.log("entrou aqui no handleSignIn");
@@ -49,6 +49,7 @@ class Login extends Component {
     } else {
       await api.post("/sessions", { email, password })
         .then(response => {
+          console.log(response.data);
           if (response.data.login !== null) {
             const { name, id, tu } = response.data.login;
             login(response.data.token, name, id, tu);
