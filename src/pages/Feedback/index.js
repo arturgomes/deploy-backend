@@ -39,6 +39,7 @@ export default class Feedback extends Component {
     }, () => { })
 
     const qs = decodeURIComponent(this.props.match.params.id);
+    console.log(qs);
     await api.post(`/feed/${qs}/c`, {
       answers: {
         nps: this.state.nps,

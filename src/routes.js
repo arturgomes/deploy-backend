@@ -6,14 +6,14 @@ import Login from './pages/Login';
 import Feedback from './pages/Feedback';
 import Main from './pages/Main';
 import ListQRCodes from './pages/ListQrCodes';
-
-import PNP from './pages/PNP';
+import FNF from './pages/FNF';
 import SignUp from './pages/SignUp';
 import SignUpRetail from './pages/SignUpRetail';
-// import ListFeedback from './pages/ListFeedback/DemoPages/Main';
 import ListFeedback from './pages/ListFeedback';
 import CreateShop from './pages/CreateShop';
+
 import { isAuthenticated } from "./services/auth";
+
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
@@ -41,7 +41,7 @@ export default function Routes() {
         <PrivateRoute path="/shop/" exact component={CreateShop} />
         <PrivateRoute path="/list-feedbacks/" exact component={ListFeedback} />
         <PrivateRoute path="/list-qr/" exact component={ListQRCodes} />
-        <Route path="*" component={PNP} />
+        <Route path="*" component={FNF} />
       </Switch>
     </BrowserRouter>)
 }

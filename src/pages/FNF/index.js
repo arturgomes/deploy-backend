@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
 
-import { Button, CssBaseline, TextField, Link, Typography } from '@material-ui/core/';
+import { CssBaseline, Typography } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import '../../App.css';
-import api from '../../services/api'
-
-import { login, isAuthenticated } from "../../services/auth";
 
 
 const useStyles = makeStyles(theme => ({
