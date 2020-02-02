@@ -4,9 +4,9 @@ import '../../App.css';
 // import { Link } from 'react-router-dom'
 import api from '../../services/api'
 // const validator = require('cpf-cnpj-validator')
-import { Grid, Button, CssBaseline, TextField, Link, Typography } from '@material-ui/core/';
-import { makeStyles } from '@material-ui/core/styles';
-import Container from '@material-ui/core/Container';
+import { Grid, Button, TextField, Link } from '@material-ui/core/';
+// import { makeStyles } from '@material-ui/core/styles';
+// import Container from '@material-ui/core/Container';
 
 export default class SignUp extends Component {
   state = {

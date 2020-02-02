@@ -39,7 +39,9 @@ class Login extends Component {
     err: null
   }
   handleSignIn = async e => {
+    console.log("entrou aqui no handleSignIn");
     e.preventDefault();
+
     const { email, password } = this.state;
     if (!email || !password) {
       this.setState({ error: "Preencha e-mail e senha para continuar!" });
@@ -87,7 +89,7 @@ class Login extends Component {
       console.log("Autenticado")
       this.props.history.push("/")
     }
-    const err = this.state.error;
+    // const err = this.state.error;
     return (
       <>
         {/* {err ? <div className="divError">{err}</div> : ``}*/}

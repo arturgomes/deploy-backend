@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
-import { PHigh, PSmall } from './styles'
-import { Button, Typography, TextField, ButtonGroup, Slider, Container } from "@material-ui/core";
+// import { PHigh, PSmall } from './styles'
+import { Button, Typography } from "@material-ui/core";
 
 export default class Conclusion extends Component {
   render() {

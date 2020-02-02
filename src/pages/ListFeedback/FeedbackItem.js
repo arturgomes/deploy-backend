@@ -1,13 +1,13 @@
 import React from 'react';
-import { withStyles } from "@material-ui/core/styles";
+// import { withStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Card from "@material-ui/core/Card";
-import { CardMedia, Fade } from "@material-ui/core";
+import { Fade } from "@material-ui/core";
 import CardContent from "@material-ui/core/CardContent";
-import Divider from "@material-ui/core/Divider";
+// import Divider from "@material-ui/core/Divider";
 import Typography from "@material-ui/core/Typography";
 
-import styles from '../../App.css'
+// import styles from '../../App.css'
 
 // export const FeedHeader = ({ nps, avatar, date }) => {
 //   return (
@@ -29,11 +29,11 @@ const stylesS = muiBaseTheme => ({
       boxShadow: "0 16px 70px -12.125px rgba(0,0,0,0.3)"
     }
   },
-  avatar: {
-    margin: '10px',
-    backgroundColor: '#fff'
+  // avatar: {
+  //   margin: '10px',
+  //   backgroundColor: '#fff'
 
-  },
+  // },
   media: {
     paddingTop: "56.25%",
     // width: '50px'
@@ -53,6 +53,8 @@ const stylesS = muiBaseTheme => ({
     lineHeight: 1.8
   },
   avatar: {
+    margin: '10px',
+    backgroundColor: '#fff',
     display: "inline-block",
     border: "2px solid white",
     "&:not(:first-of-type)": {

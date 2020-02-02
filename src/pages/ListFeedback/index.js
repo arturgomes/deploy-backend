@@ -1,5 +1,5 @@
 import React, { Component, Fragment } from 'react';
-import { CardMedia, Container, Box, Button } from "@material-ui/core";
+import { Container, Box, Button } from "@material-ui/core";
 
 import { FeedItem } from './FeedbackItem'
 import '../../App.css';

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { QInput, ScoreButton, QuestionBox, PHigh, PSmall } from './styles'
-import { Button, Typography, TextField, ButtonGroup, Slider, Container } from "@material-ui/core";
+// import { QInput, ScoreButton, QuestionBox, PHigh, PSmall } from './styles'
+import { Button, Typography, TextField, ButtonGroup, Container } from "@material-ui/core";
 
 export default class Question extends Component {
   state = {

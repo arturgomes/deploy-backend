@@ -1,15 +1,14 @@
 import React, { Component, Fragment } from 'react';
-import { CardMedia, Container, Box, Button } from "@material-ui/core";
+import { Container, Box, Button } from "@material-ui/core";
 
 import QrCode from 'react.qrcode.generator'
-import { FeedItem } from './FeedbackItem'
 import '../../App.css';
 import api from '../../services/api'
 import { isAuthenticated, getId, getName, logout } from "../../services/auth";
 // import ReactSpeedometer from 'react-d3-speedometer';
-import contente from '../../assets/contente@4x.png'
-import imparcial from '../../assets/imparcial1@4x.png'
-import descontente from '../../assets/descontente@4x.png'
+// import contente from '../../assets/contente@4x.png'
+// import imparcial from '../../assets/imparcial1@4x.png'
+// import descontente from '../../assets/descontente@4x.png'
 // import Dashboard from './dashboard/dashboard'
 // import Main from './DemoPages/Main';
 
