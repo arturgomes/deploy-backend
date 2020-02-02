@@ -3,7 +3,7 @@ import { getToken } from "./auth";
 
 
 const api = axios.create({
-  baseURL: 'http://54.172.28.174:3000',
+  baseURL: 'http://api.couponfeed.co',
 });
 
 

@@ -147,13 +147,15 @@ class Login extends Component {
             </form>
             <Link to="/signup">
               <Button
-                type="submit"
+                type="button"
                 style={{ marginBottom: 16 }}
                 fullWidth
                 variant="contained"
                 color="secondary"
                 className={useStyles.submit}
-              > Cadastre-se </Button>
+              >
+                Cadastre-se
+              </Button>
             </Link>
           </div>
         </Container>
