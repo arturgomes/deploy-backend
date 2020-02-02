@@ -2,6 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
+import * as Sentry from '@sentry/browser';
+
+Sentry.init({ dsn: "https://cb3fbccb62764b31a231c13b1b33311a@sentry.io/2180063" });
 // import { HashRouter } from 'react-router-dom';
 
 // import * as serviceWorker from './serviceWorker';

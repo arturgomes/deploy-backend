@@ -48,10 +48,8 @@ class Login extends Component {
       await api.post("/sessions", { email, password })
         .then(response => {
           if (response.data.login !== null) {
-            login(response.data.token,
-              response.data.login.name,
-              response.data.login.id,
-              response.data.login.tu);
+            const { name, id, tu } = response.data.login;
+            login(response.data.token, name, id, tu);
             this.props.history.push("/");
           }
           else {
