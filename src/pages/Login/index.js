@@ -43,6 +43,7 @@ class Login extends Component {
     const { email, password } = this.state;
     if (!email || !password) {
       this.setState({ error: "Preencha e-mail e senha para continuar!" });
+      console.log(this.state.error);
     } else {
       await api.post("/sessions", { email, password })
         .then(response => {
@@ -142,29 +143,17 @@ class Login extends Component {
               >
                 Entrar
           </Button>
-              <Link to="/signup">
-                <Button
-                  type="submit"
-                  style={{ marginBottom: 16 }}
-                  fullWidth
-                  variant="contained"
-                  color="secondary"
-                  className={useStyles.submit}
-                > Cadastre-se </Button>
-              </Link>
-              {/* <Grid container> */}
-              {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-              </Link>
-                </Grid> */}
-              {/* <Grid item>
-                  <Link href="/signup" variant="body2">
-                    {"Ainda não tem uma conta? Cadastre-se"}
-                  </Link>
-                </Grid> */}
-              {/* </Grid> */}
             </form>
+            <Link to="/signup">
+              <Button
+                type="submit"
+                style={{ marginBottom: 16 }}
+                fullWidth
+                variant="contained"
+                color="secondary"
+                className={useStyles.submit}
+              > Cadastre-se </Button>
+            </Link>
           </div>
         </Container>
 
