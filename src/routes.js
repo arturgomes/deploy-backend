@@ -7,6 +7,7 @@ import Feedback from './pages/Feedback';
 import Main from './pages/Main';
 import ListQRCodes from './pages/ListQrCodes';
 
+import PNP from './pages/PNP';
 import SignUp from './pages/SignUp';
 import SignUpRetail from './pages/SignUpRetail';
 // import ListFeedback from './pages/ListFeedback/DemoPages/Main';
@@ -40,7 +41,7 @@ export default function Routes() {
         <PrivateRoute path="/shop/" exact component={CreateShop} />
         <PrivateRoute path="/list-feedbacks/" exact component={ListFeedback} />
         <PrivateRoute path="/list-qr/" exact component={ListQRCodes} />
-        <Route path="*" component={() => <h1>Página não encontrada</h1>} />
+        <Route path="*" component={PNP} />
       </Switch>
     </BrowserRouter>)
 }
