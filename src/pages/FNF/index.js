@@ -32,7 +32,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-class Login extends Component {
+class PNP extends Component {
   state = {
     email: "",
     password: "",
@@ -45,11 +45,9 @@ class Login extends Component {
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={useStyles.paper}>
-
             <Typography component="h1" variant="h1">
               Página não encontrada.
             </Typography>
-
           </div>
         </Container>
 
@@ -61,4 +59,4 @@ class Login extends Component {
 }
 
 
-export default withRouter(Login);
+export default withRouter(PNP);
