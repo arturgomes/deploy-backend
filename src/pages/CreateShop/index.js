@@ -110,7 +110,7 @@ export default class SignUp extends Component {
 
     }
     if (this.state.done) {
-      const link = `https://couponfeed.co/feed/${this.state.sid}`
+      const link = `https://couponfeed.co/fb/${this.state.sid}`
       return (<><p>Aqui está o QR Code para a loja </p>
         <Demo link={link} />
         <p>Teste <a href={link}>aqui</a> o link de feedback: </p>
@@ -209,45 +209,6 @@ export default class SignUp extends Component {
           </div>
 
         </Container>
-
-
-
-
-        {/* <form onSubmit={this.handleSubmit}>
-          <label htmlFor="name">Nome e Endereço da loja *</label>
-          <input
-            type="text"
-            placeholder="Nome e Endereço da loja"
-            value={this.state.name}
-            onChange={this.handleNameInput}
-
-          />
-
-          <label htmlFor="phone">Telefone *</label>
-          <input
-            type="text"
-            // autoComplete="phone"
-            placeholder="(__) __________"
-            onChange={this.handlePhoneInput}
-            value={this.state.phone}
-          />
-
-
-          <label htmlFor="phone">Gerente *</label>
-          <input
-            type="text"
-            // autoComplete="phone"
-            placeholder="Gerente"
-            onChange={this.handleManagerInput}
-            value={this.state.manager}
-          />
-
-          <button className="btn" type="submit">Cadastrar</button>
-        </form>
-        <form onSubmit={this.handleLogout}>
-          <button className="btn" type="submit">Sair</button>
-        </form> */}
-
       </>
     );
   }

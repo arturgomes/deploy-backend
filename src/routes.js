@@ -37,7 +37,7 @@ export default function Routes() {
         <Route path="/signup" exact component={SignUp} />
         <Route path="/signup/:fid" component={SignUp} />
         <Route path="/retail" exact component={SignUpRetail} />
-        <Route path="/feed/:id" component={Feedback} />
+        <Route path="/fb/:id" component={Feedback} />
         <PrivateRoute path="/shop" exact component={CreateShop} />
         <PrivateRoute path="/list-feedbacks" exact component={ListFeedback} />
         <PrivateRoute path="/list-qr" exact component={ListQRCodes} />
