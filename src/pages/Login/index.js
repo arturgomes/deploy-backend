@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import { withRouter } from "react-router-dom";
-// import Avatar from '@material-ui/core/Avatar';
+
 import { Button, CssBaseline, TextField, Link, Typography } from '@material-ui/core/';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 import '../../App.css';
-// import { Link } from 'react-router-dom'
 import api from '../../services/api'
+
 import { login, isAuthenticated } from "../../services/auth";
 
 
@@ -40,29 +40,21 @@ class Login extends Component {
   }
   handleSignIn = async e => {
     e.preventDefault();
-
     const { email, password } = this.state;
     if (!email || !password) {
       this.setState({ error: "Preencha e-mail e senha para continuar!" });
     } else {
-
       await api.post("/sessions", { email, password })
         .then(response => {
-
           if (response.data.login !== null) {
-            // console.log(response.data.login)
             login(response.data.token,
               response.data.login.name,
               response.data.login.id,
               response.data.login.tu);
             this.props.history.push("/");
           }
-
           else {
-            // login(token, user.name, user.id);
             this.setState({ err: "Usuario ou senha inválidos" })
-
-            // this.props.history.push("/");
           }
         })
         .catch((error) => {
@@ -74,8 +66,7 @@ class Login extends Component {
              */
             console.log(error.response.data);
             this.setState({ err: error.response.data })
-            // console.log(error.response.status);
-            // console.log(error.response.headers);
+
           } else if (error.request) {
             /*
              * The request was made but no response was received, `error.request`
@@ -85,23 +76,14 @@ class Login extends Component {
             console.log(error.request);
           } else {
             // Something happened in setting up the request and triggered an Error
-            // console.log('Error', error.message);
           }
-          // console.log(error.config);
         });
-      // .catch(err => {
-      //   console.error(err);
-      //   this.setState({ error: err.response })
-      // })
-      // this.setState({
-      //   error:
-      //     "Houve um problema com o login, verifique suas credenciais. T.T"
-      // });
 
     }
   };
   render() {
     // const useStyles.= useStyles();
+    console.log("isAuthenticated==", isAuthenticated())
     if (isAuthenticated()) {
       console.log("Autenticado")
       this.props.history.push("/")
