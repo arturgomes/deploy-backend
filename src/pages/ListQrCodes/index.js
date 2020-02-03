@@ -28,11 +28,9 @@ export default class ListFeedback extends Component {
   }
 
   async componentDidMount() {
-    // console.log("entrou");
     await api.post("/qr", { retail_id: getId() })
       .then(response => {
         this.setState({ qr: response.data })
-        // console.log(response.data);
       })
       .catch((error) => {
         // Error 😨
@@ -69,14 +67,12 @@ export default class ListFeedback extends Component {
   render() {
     let listShops;
     if (isAuthenticated()) {
-      // console.log(this.state.qr)
 
       listShops = Object.keys(this.state.qr).map(key => {
         const { name, id } = this.state.qr[key]
         const link = `http://couponfeed.co/feed/${id}`
         return (<><h5>QR code para a loja {name}</h5><Demo link={link} /></>)
       })
-      // return listShops
     }
 
 

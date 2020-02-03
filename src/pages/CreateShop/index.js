@@ -1,29 +1,24 @@
 import React, { Component } from 'react';
-// import Avatar from '@material-ui/core/Avatar';
+
 import Button from '@material-ui/core/Button';
+import QrCode from 'react.qrcode.generator'
 import CssBaseline from '@material-ui/core/CssBaseline';
 import TextField from '@material-ui/core/TextField';
-// import FormControlLabel from '@material-ui/core/FormControlLabel';
-// import Checkbox from '@material-ui/core/Checkbox';
 import Link from '@material-ui/core/Link';
 import Grid from '@material-ui/core/Grid';
-// import Box from '@material-ui/core/Box';
-// import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
-import '../../App.css';
-// import { Link } from 'react-router-dom'
+
 import api from '../../services/api'
 import { isAuthenticated, logout, getId, getName } from "../../services/auth";
-import QrCode from 'react.qrcode.generator'
+import '../../App.css';
+
 
 class Demo extends Component {
   render() {
     return <div>
-
       <QrCode size={500} value={this.props.link} />
-
     </div>
   }
 }
@@ -71,9 +66,6 @@ export default class SignUp extends Component {
 
       })
       .catch(error => { console.log(error); this.setState({ err: error }); });
-
-
-
   }
   handleNameInput = event => {
     this.setState({
@@ -86,7 +78,6 @@ export default class SignUp extends Component {
       phone: event.target.value
     })
   }
-
 
   handleManagerInput = event => {
     this.setState({
@@ -102,15 +93,12 @@ export default class SignUp extends Component {
   };
 
   render() {
-    // const { email, name, phone } = this.state;
-    // console.log(this.state)
     const err = this.state.error;
     if (!isAuthenticated() && this.state.done && !this.state.error) {
       this.props.history.push("/");
-
     }
     if (this.state.done) {
-      const link = `https://couponfeed.co/fb/${this.state.sid}`
+      const link = `https://couponfeed.co/feed/${this.state.sid}`
       return (<><p>Aqui está o QR Code para a loja </p>
         <Demo link={link} />
         <p>Teste <a href={link}>aqui</a> o link de feedback: </p>
@@ -119,27 +107,21 @@ export default class SignUp extends Component {
             type="submit"
             style={{ marginBottom: 16 }}
             fullWidth
-            // variant="contained"
             color="secondary"
-          // className={useStyles.submit}
           > inicio </Button>
         </Link>
       </>)
     }
     return (
       <>
-
         {err ? <p>{err}</p> : ``}
-
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={useStyles.paper}>
-
             <Typography component="h1" variant="h5" style={{ marginBottom: 16 }}>
               Olá, vamos cadastrar uma loja {getName()}?
         </Typography>
             <CssBaseline />
-
             <form className={useStyles.form} noValidate onSubmit={this.handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
@@ -193,15 +175,13 @@ export default class SignUp extends Component {
                 className={useStyles.submit}
               >
                 Cadastrar
-          </Button>
+              </Button>
             </form>
-
             <Link href="/">
               <Button
                 type="submit"
                 style={{ marginBottom: 16 }}
                 fullWidth
-                // variant="contained"
                 color="secondary"
                 className={useStyles.submit}
               > Voltar </Button>
