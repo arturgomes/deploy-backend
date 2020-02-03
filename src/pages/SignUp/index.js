@@ -90,11 +90,13 @@ export default class SignUp extends Component {
     if (this.state.done) {
       if (this.state.fid) {
         return (<div className="thanks">Obrigado, {this.state.name}, pelo seu cadastro. Você acabou de acumular 1 Feedcoin. Lembre-se, faça seu login ao final de cada feedback que você der e acumulará mais pontos. Até breve!
+
         <Link href='/' ><Button >Voltar ao Inicio</Button></Link>
         </div>)
       }
       return (<div>Obrigado, {this.state.name}, pelo seu cadastro. Lembre-se, faça seu login ao final de cada feedback que você der e acumulará mais pontos. Até breve!
-        <Link thref="/" ><Button>Voltar ao Inicio</Button></Link>
+
+        <Link href="/" ><Button>Voltar ao Inicio</Button></Link>
       </div>)
     }
     const err = this.state.error;
