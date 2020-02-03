@@ -39,7 +39,7 @@ class Login extends Component {
     error: null
   }
   handleSignIn = async e => {
-    console.log("entrou aqui no handleSignIn");
+    // console.log("entrou aqui no handleSignIn");
     e.preventDefault();
 
     const { email, password } = this.state;
@@ -49,7 +49,7 @@ class Login extends Component {
     } else {
       await api.post("/sessions", { email, password })
         .then(response => {
-          console.log(response.data);
+          // console.log(response.data);
           if (response.data.login !== null) {
             const { name, id, tu } = response.data.login;
             login(response.data.token, name, id, tu);
@@ -85,9 +85,9 @@ class Login extends Component {
   };
   render() {
     // const useStyles.= useStyles();
-    console.log("isAuthenticated==", isAuthenticated())
+    // console.log("isAuthenticated==", isAuthenticated())
     if (isAuthenticated()) {
-      console.log("Autenticado")
+      // console.log("Autenticado")
       this.props.history.push("/")
     }
     // const err = this.state.error;

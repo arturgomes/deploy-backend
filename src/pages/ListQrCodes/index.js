@@ -28,11 +28,11 @@ export default class ListFeedback extends Component {
   }
 
   async componentDidMount() {
-    console.log("entrou");
+    // console.log("entrou");
     await api.post("/qr", { retail_id: getId() })
       .then(response => {
         this.setState({ qr: response.data })
-        console.log(response.data);
+        // console.log(response.data);
       })
       .catch((error) => {
         // Error 😨
@@ -41,7 +41,7 @@ export default class ListFeedback extends Component {
            * The request was made and the server responded with a
            * status code that falls out of the range of 2xx
            */
-          console.log(error.response.data);
+          // console.log(error.response.data);
           this.setState({ err: error.response.data })
         } else if (error.request) {
           /*
@@ -49,7 +49,7 @@ export default class ListFeedback extends Component {
            * is an instance of XMLHttpRequest in the browser and an instance
            * of http.ClientRequest in Node.js
            */
-          console.log(error.request);
+          // console.log(error.request);
         }
 
       })
@@ -69,7 +69,7 @@ export default class ListFeedback extends Component {
   render() {
     let listShops;
     if (isAuthenticated()) {
-      console.log(this.state.qr)
+      // console.log(this.state.qr)
 
       listShops = Object.keys(this.state.qr).map(key => {
         const { name, id } = this.state.qr[key]

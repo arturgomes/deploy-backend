@@ -30,7 +30,6 @@ export default class Main extends Component {
     await api.post("/users/s", { user_id: getId() })
       .then(response => {
         console.log(response)
-
       })
       .catch((error) => {
         // Error 😨
