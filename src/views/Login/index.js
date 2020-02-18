@@ -96,7 +96,7 @@ class Login extends Component {
         {/* {err ? <div className="divError">{err}</div> : ``}*/}
 
 
-        <Container component="main" maxWidth="xs">
+        <Container style={{ background: 'linear-gradient(to right bottom, #430089, #82ffa1)' }} component="main" maxWidth="xs">
           <CssBaseline />
           <div className={useStyles.paper}>
             {/* <Avatar className={useStyles.avatar}>

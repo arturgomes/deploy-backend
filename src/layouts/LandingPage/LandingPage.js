@@ -6,28 +6,8 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
-// import { makeStyles } from "@material-ui/core/styles";
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
-// import { Carousel } from "react-responsive-carousel";
-// core components
-// import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
-// import "./js/vendor/jquery-1.12.4.min.js";
-// import "./js/vendor/jquery-ui.js";
-// import "./js/vendor/bootstrap.min.js";
-
-// import "./js/owl.carousel.min.js";
-// import "./js/contact-form.js";
-// import "./js/ajaxchimp.js";
-// import "./js/scrollUp.min.js";
-// import "./js/magnific-popup.min.js";
-// import "./js/wow.min.js";
-
-// import "./js/main.js";
-// import OwlCarousel from "react-owl-carousel";
-
-// import "owl.carousel/dist/assets/owl.carousel.css";
-// import "owl.carousel/dist/assets/owl.theme.default.css";
 
 import "./css/bootstrap.min.css";
 
@@ -38,17 +18,10 @@ import "./css/normalize.css";
 import "./style.css";
 import "./css/responsive.css";
 
-// import dashboardRoutes from "../routes.js";
-
-// import styles from "../../assets/jss/material-dashboard-react/layouts/adminStyle.js";
-
-// import bgImage from "../../assets/img/sidebar-2.jpg";
-// import logo from "assets/img/reactlogo.png";
 import logo from "../../assets/img/completa_fundo_escuro@4x.png";
 
 let ps;
 
-// const useStyles = makeStyles(styles);
 
 export default function Admin({ ...rest }) {
   // styles

@@ -100,12 +100,11 @@ class Dashboard extends Component {
           });
 
           const items = listItems.flat(1)
-          let nf = items.filter(function (f) { return (f.nps_value < 7) });
-          let ne = items.filter(function (f) { return (f.nps_value >= 7 && f.nps_value < 9) }).lenght;
-          let po = items.filter(function (f) {
-            return (f.nps_value >= 9)
-          }).lenght;
+          let nf = items.filter(f => f.nps_value < 7);
+          let ne = items.filter(f => f.nps_value >= 7 && f.nps_value < 9);
+          let po = items.filter(f => f.nps_value >= 9);
           let tot = items;
+          console.log(nf, ne, po);
           // console.log(items.filter(negativeF).lenght);
 
           // console.log(nf.filter(negativeF).lenght,
@@ -113,8 +112,8 @@ class Dashboard extends Component {
           //   po.filter(posF)).lenght,
           //   tot.lenght);
           this.setState({
-            negFeedbacks: nf.lenght,
-            posFeedbacks: po.length,
+            negFeedbacks: nf.lenght === 0 ? 0 : nf.lenght,
+            posFeedbacks: po.length === 0 ? 0 : po.length,
             neutralFeedbacks: ne.length,
             totalFeedbacks: items.length,
             isLoading: false

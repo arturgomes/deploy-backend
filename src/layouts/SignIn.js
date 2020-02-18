@@ -1,4 +1,10 @@
 import React, { Component } from "react";
+import { Switch, Route, Redirect } from "react-router-dom";
+// creates a beautiful scrollbar
+import PerfectScrollbar from "perfect-scrollbar";
+import "perfect-scrollbar/css/perfect-scrollbar.css";
+// @material-ui/core components
+import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -6,16 +12,44 @@ import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
-import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+
+// core components
+import Navbar from "../components/Navbars/Navbar.js";
+import Footer from "../components/Footer/Footer.js";
+import Sidebar from "../components/Sidebar/Sidebar.js";
+// import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
+
+import dashboardRoutes from "../routes.js";
+
+import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
+
+import bgImage from "../assets/img/sidebar-2.jpg";
+// import logo from "assets/img/reactlogo.png";
+import logo from "../assets/img/completa_fundo_claro@4x.png";
+import Paper from '@material-ui/core/Paper';
+import Grid from '@material-ui/core/Grid';
 
 import api from "../services/api";
 
-import { login, getTu } from "../services/auth";
+import { login, getTu, isAuthenticated } from "../services/auth";
+
+const useStyles = makeStyles(theme => ({
+  root: {
+    flexGrow: 1,
+    overflow: 'hidden',
+    padding: theme.spacing(0, 3),
+  },
+  paper: {
+    maxWidth: 300,
+    margin: `${theme.spacing(1)}px auto`,
+    padding: theme.spacing(2),
+  },
+}));
+let ps;
 
 function Copyright() {
   return (
@@ -30,32 +64,20 @@ function Copyright() {
   );
 }
 
-const useStyles = makeStyles(theme => ({
-  paper: {
-    marginTop: theme.spacing(8),
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-  avatar: {
-    margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main
-  },
-  form: {
-    width: "100%", // Fix IE 11 issue.
-    marginTop: theme.spacing(1)
-  },
-  submit: {
-    margin: theme.spacing(3, 0, 2)
-  }
-}));
-
-class SignIn extends Component {
-  state = {
-    email: "",
-    password: "",
-    error: null
-  };
+export default class SignIn extends Component {
+  // styles
+  // const classes = useStyles();
+  // ref to help us initialize PerfectScrollbar on windows devices
+  // const mainPanel = React.createRef();
+  // states and functions
+  // const [image] = React.useState(bgImage);
+  // const [color] = React.useState("blue");
+  // const [mobileOpen, setMobileOpen] = React.useState(false);
+  // state = {
+  //   email: "",
+  //   password: "",
+  //   error: null
+  // };
   handleSignIn = async e => {
     // console.log("entrou aqui no handleSignIn");
     e.preventDefault();
@@ -75,8 +97,12 @@ class SignIn extends Component {
 
             //parei aqui, tenho que fazer if para o tipo de autenticaçao
             //se eh usuario final ou se é retail, pra mudar os dashboards.
-            // ver linha 79
-
+            // ver linha 79 
+            {
+              (getTu() !== "897316929176464ebc9ad085f31e7284") ?
+                this.props.history.push("/retail")
+                : this.props.history.push("/customer")
+            }
             this.props.history.push("/");
           } else {
             this.setState({ err: "Usuario ou senha inválidos" });
@@ -104,78 +130,135 @@ class SignIn extends Component {
         });
     }
   };
+
+  // handleDrawerToggle = () => {
+  //   setMobileOpen(!mobileOpen);
+  // };
+  // getRoute = () => {
+  //   return window.location.pathname !== "/retail/maps";
+  // };
+  // resizeFunction = () => {
+  //   if (window.innerWidth >= 960) {
+  //     setMobileOpen(false);
+  //   }
+  // };
+  // // initialize and destroy the PerfectScrollbar plugin
+  // React.useEffect(() => {
+  //   if (navigator.platform.indexOf("Win") > -1) {
+  //     ps = new PerfectScrollbar(mainPanel.current, {
+  //       suppressScrollX: true,
+  //       suppressScrollY: false
+  //     });
+  //     document.body.style.overflow = "hidden";
+  //   }
+  //   window.addEventListener("resize", resizeFunction);
+  //   // Specify how to clean up after this effect:
+  //   return function cleanup() {
+  //     if (navigator.platform.indexOf("Win") > -1) {
+  //       ps.destroy();
+  //     }
+  //     window.removeEventListener("resize", resizeFunction);
+  //   };
+  // }, [mainPanel]);
   render() {
+    if (isAuthenticated()) {
+      (getTu() !== "897316929176464ebc9ad085f31e7284") ?
+        this.props.history.push("/retail")
+        : this.props.history.push("/customer")
+    }
+
     return (
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={useStyles.paper}>
-          <Avatar className={useStyles.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Sign in
+      <div
+        style={{
+          position: 'absolute',
+          left: '50%',
+          top: '50%',
+          transform: 'translate(-50%, -50%)',
+        }}
+      >
+        {/* <Paper className={classes.paper}> */}
+        <Grid container
+          container
+          spacing={0}
+          align="center"
+          justify="center"
+          direction="column"
+        // style={{ backgroundColor: 'teal' }}
+        >
+          <div className={useStyles.content}>
+            <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+            <Avatar className={useStyles.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Sign in
           </Typography>
-          <form
-            className={useStyles.form}
-            noValidate
-            onSubmit={this.handleSignIn}
-          >
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
-              autoFocus
-              onChange={e => this.setState({ email: e.target.value })}
-            />
-            <TextField
-              variant="outlined"
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={e => this.setState({ password: e.target.value })}
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={useStyles.submit}
+            <form
+              className={useStyles.form}
+              noValidate
+              onSubmit={this.handleSignIn}
             >
-              Sign In
+              <TextField
+                // variant="outlined"
+                margin="normal"
+                required
+                fullWidth
+                id="email"
+                label="Endereço de e-mail"
+                name="email"
+                autoComplete="email"
+                autoFocus
+                onChange={e => this.setState({ email: e.target.value })}
+              />
+              <TextField
+                // variant="outlined"
+                style={{ marginBottom: '30px' }}
+                margin="normal"
+                required
+                fullWidth
+                name="password"
+                label="Senha"
+                type="password"
+                id="password"
+                autoComplete="current-password"
+                onChange={e => this.setState({ password: e.target.value })}
+              />
+              {/* <FormControlLabel
+                control={<Checkbox value="remember" color="primary" />}
+                label="Remember me"
+              /> */}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+              // className={useStyles.submit}
+              >
+                Faça login
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2">
-                  Forgot password?
+              <Grid container>
+                {/* <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
                 </Link>
+                </Grid> */}
+                <Grid item>
+                  <Link
+                    href="#" variant="body2">
+                    {"Ainda não se cadastrou? Faça já o seu!"}
+                  </Link>
+                </Grid>
               </Grid>
-              <Grid item>
-                <Link href="#" variant="body2">
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={8}>
-          <Copyright />
-        </Box>
-      </Container>
+            </form>
+          </div>
+          <Box mt={8}>
+            <Copyright />
+          </Box>
+          {/* </Container> */}
+        </Grid >
+        {/* </Paper> */}
+
+      </div >
     );
   }
 }
-export default SignIn;
