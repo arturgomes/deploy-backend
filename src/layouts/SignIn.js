@@ -246,7 +246,7 @@ export default class SignIn extends Component {
                 </Grid> */}
                 <Grid item>
                   <Link
-                    href="#" variant="body2">
+                    href="/signup" variant="body2">
                     {"Ainda não se cadastrou? Faça já o seu!"}
                   </Link>
                 </Grid>
