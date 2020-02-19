@@ -11,6 +11,7 @@ import Retail from "./layouts/Retail.js";
 // import Customer from "./layouts/Customer.js";
 // import SignUp from "./layouts/SignUp.js";
 import SignIn from "./layouts/SignIn.js";
+import SignUp from "./layouts/SignUp.js";
 import LandingPage from "./layouts/LandingPage/LandingPage.js";
 
 import { isAuthenticated } from "./services/auth";
@@ -59,6 +60,7 @@ ReactDOM.render(
     <Switch>
       <Route path="/" exact component={LandingPage} />
       <Route path="/signin" component={SignIn} />
+      <Route path="/signup" component={SignUp} />
 
       <PrivateRoute path="/retail" component={Retail} />
 

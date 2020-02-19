@@ -1,24 +1,31 @@
-import React from "react";
-import Avatar from "@material-ui/core/Avatar";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
+import React, { Component } from "react";
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
-import Container from "@material-ui/core/Container";
+import TextField from "@material-ui/core/TextField";
+
+import GridItem from "../components/Grid/GridItem.js";
+import GridContainer from "../components/Grid/GridContainer.js";
+import CustomInput from "../components/CustomInput/CustomInput.js";
+import Button from "../components/CustomButtons/Button.js";
+import Card from "../components/Card/Card.js";
+import CardHeader from "../components/Card/CardHeader.js";
+// import CardAvatar from "components/Card/CardAvatar.js";
+import CardBody from "../components/Card/CardBody.js";
+import CardFooter from "../components/Card/CardFooter.js";
+
+
+import api from "../services/api"
+import logo from "../assets/img/completa_fundo_claro@4x.png";
 
 function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" href="https://couponfeed.co">
+        CouponFeed
       </Link>{" "}
       {new Date().getFullYear()}
       {"."}
@@ -46,72 +53,384 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-export default function SignIn() {
-  const classes = useStyles();
 
-  return (
-    <Container component="main" maxWidth="xs">
-      <CssBaseline />
-      <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlinedIcon />
-        </Avatar>
-        <Typography component="h1" variant="h5">
-          Sign in
-        </Typography>
-        <form className={classes.form} noValidate>
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="email"
-            label="Email Address"
-            name="email"
-            autoComplete="email"
-            autoFocus
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            name="password"
-            label="Password"
-            type="password"
-            id="password"
-            autoComplete="current-password"
-          />
-          <FormControlLabel
-            control={<Checkbox value="remember" color="primary" />}
-            label="Remember me"
-          />
-          <Button
-            type="submit"
-            fullWidth
-            variant="contained"
-            color="primary"
-            className={classes.submit}
+export default class SignUp extends Component {
+  state = {
+    email: null,
+    cpf: null,
+    name: null,
+    phone: null,
+    passw: null,
+    done: false,
+    error: null
+  }
+  handleSubmit = async event => {
+    event.preventDefault();
+    const fid = decodeURIComponent(this.props.match.params.fid) || null;
+
+    await api.post(`/users`, {
+      name: this.state.name,
+      email: this.state.email,
+      phone: this.state.phone,
+      password: this.state.passw,
+      cpf: this.state.cpf
+      ,
+      fid
+    })
+      .then(response => {
+        this.setState({ fid: response.data.fid, done: true }, () => { )
+
+      })
+      .catch(err => { console.error(err.response.data.error); this.setState({ error: err.response.data.error }) })
+
+    // console.log(this.state, fid);
+
+  }
+  handleNameInput = event => {
+    console.log(event.target.value);
+    this.setState({
+      name: event.target.value
+    })
+  }
+
+  handlePhoneInput = event => {
+    this.setState({
+      phone: event.target.value
+    })
+  }
+  cpfMask = value => {
+    return value
+      .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
+      .replace(/(\d{3})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
+      .replace(/(\d{3})(\d)/, '$1.$2')
+      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
+      .replace(/(-\d{2})\d+?$/, '$1') // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
+  }
+  handleCPFInput = event => {
+    // const cpf = event.target.value;
+
+    // if (!Joi.validate(cpf, cpfSchema)) {
+    //   this.setState({ error: "CPF inválido" })
+    // }
+    // else {
+    this.setState({
+      cpf: this.cpfMask(event.target.value)
+    })
+    // }
+  }
+
+  handleEmailInput = event => {
+    this.setState({
+      email: event.target.value
+    });
+  }
+
+  handlePasswInput = event => {
+    this.setState({
+      passw: event.target.value
+    });
+  }
+  render() {
+
+    if (this.state.done) {
+      if (this.state.fid) {
+        return (
+          <>
+            <div
+              style={{
+                position: 'absolute',
+                left: '50%',
+                top: '50%',
+                transform: 'translate(-50%, -50%)',
+              }}
+            >
+              {/* <Paper className={useStyles.paper}> */}
+              <Grid container
+                container
+                spacing={0}
+                align="center"
+                justify="center"
+                direction="column"
+              // style={{ backgroundColor: 'teal' }}
+              >
+                <div className={useStyles.content}>
+                  <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+
+
+                  <GridContainer>
+                    <GridItem xs={12} sm={12} md={12}>
+                      {/* <Card> */}
+                      <CardHeader color="success">
+                        <h4 className={useStyles.cardTitleWhite}>Cadastro realizado com sucesso!</h4>
+                        <p className={useStyles.cardCategoryWhite}> Obrigado, {this.state.name}, pelo seu cadastro. Você acabou de acumular 1 Feedcoin. Lembre-se, faça seu login ao final de cada feedback que você der e acumulará mais pontos. Até breve!</p>
+
+                        {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
+                      </CardHeader>
+
+                      {/* </Card> */}
+
+                    </GridItem>
+                  </GridContainer>
+
+                </div>
+                <Box mt={8}>
+                  <Copyright />
+                </Box>
+                {/* </Container> */}
+              </Grid >
+              {/* </Paper> */}
+
+            </div >
+          </>
+        );
+      }
+      return (
+        <>
+          <div
+            style={{
+              position: 'absolute',
+              left: '50%',
+              top: '50%',
+              transform: 'translate(-50%, -50%)',
+            }}
           >
-            Sign In
-          </Button>
-          <Grid container>
-            <Grid item xs>
-              <Link href="#" variant="body2">
-                Forgot password?
-              </Link>
-            </Grid>
-            <Grid item>
-              <Link href="#" variant="body2">
-                {"Don't have an account? Sign Up"}
-              </Link>
-            </Grid>
-          </Grid>
-        </form>
-      </div>
-      <Box mt={8}>
-        <Copyright />
-      </Box>
-    </Container>
-  );
+            {/* <Paper className={useStyles.paper}> */}
+            <Grid container
+              container
+              spacing={0}
+              align="center"
+              justify="center"
+              direction="column"
+            // style={{ backgroundColor: 'teal' }}
+            >
+              <div className={useStyles.content}>
+                <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+
+
+                <GridContainer>
+                  <GridItem xs={12} sm={12} md={12}>
+                    {/* <Card> */}
+                    <CardHeader color="success">
+                      <h4 className={useStyles.cardTitleWhite}>Cadastro realizado com sucesso!</h4>
+                      <p className={useStyles.cardCategoryWhite}>Obrigado, {this.state.name}, pelo seu cadastro. Lembre-se, faça seu login ao final de cada feedback que você der e acumulará mais pontos. Até breve!</p>
+
+                      {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
+                    </CardHeader>
+                    {/* <CardBody>
+                        
+                        </CardBody> */}
+                    {/* </Card> */}
+
+                  </GridItem>
+                </GridContainer>
+
+              </div>
+              <Box mt={8}>
+                <Copyright />
+              </Box>
+              {/* </Container> */}
+            </Grid >
+            {/* </Paper> */}
+
+          </div >
+        </>
+      );
+    }
+    const { error } = this.state;
+    return (
+      <>
+        <div
+          style={{
+            position: 'absolute',
+            left: '50%',
+            top: '50%',
+            transform: 'translate(-50%, -50%)',
+          }}
+        >
+          {/* <Paper className={useStyles.paper}> */}
+          <Grid container
+            container
+            spacing={0}
+            align="center"
+            justify="center"
+            direction="column"
+          // style={{ backgroundColor: 'teal' }}
+          >
+            <div className={useStyles.content}>
+              <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+
+
+              <GridContainer>
+                <GridItem xs={12} sm={12} md={12}>
+                  <Card>
+                    <CardHeader color="primary">
+                      <h4 className={useStyles.cardTitleWhite}>Cadastrar Consumidor</h4>
+                      <p className={useStyles.cardCategoryWhite}>Olá, que bom ver você aqui. Vamos fazer um breve cadastro seu para começar a acumular os FeedCoins.</p>
+
+                      {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
+                    </CardHeader>
+                    <CardBody>
+                      <form
+                        className={useStyles.form}
+                        noValidate
+                        onSubmit={this.handleSubmit}
+                      >
+                        {error ? <div className="divError">{error}</div> : ``}
+
+                        <GridContainer>
+                          <GridItem xs={12} sm={12} md={12}>
+                            <TextField
+                              autoComplete="fname"
+                              name="name"
+                              // variant="outlined"
+                              value={this.state.name}
+                              onChange={this.handleNameInput}
+                              required
+                              fullWidth
+                              id="name"
+                              label="Nome"
+                              autoFocus
+                            />
+                            {/* <CustomInput
+                              labelText="Nome"
+                              id="first-name"
+                              value={this.state.name}
+                              onChange={this.handleNameInput}
+                              formControlProps={{
+                                fullWidth: true
+                              }}
+                            /> */}
+                          </GridItem>
+
+                        </GridContainer>
+                        <GridContainer>
+                          <GridItem xs={12} sm={12} md={6}>
+                            <TextField
+                              // variant="outlined"
+                              required
+                              fullWidth
+                              name="cpf"
+                              // style={{ marginBottom: 16 }}
+                              label="CPF"
+                              onChange={this.handleCPFInput}
+                              value={this.state.cpf}
+                              autoComplete="fname"
+                            />
+                            {/* <CustomInput
+                              labelText="CPF"
+                              id="cpf"
+                              onChange={this.handleCPFInput}
+                              value={this.state.cpf}
+                              formControlProps={{
+                                fullWidth: true
+                              }}
+                            /> */}
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={6}>
+                            <TextField
+                              // variant="outlined"
+                              required
+                              fullWidth
+                              id="phone"
+                              label="Telefone"
+                              placeholder="(__) __________"
+                              onChange={this.handlePhoneInput}
+                              value={this.state.phone}
+                              name="phone"
+                              autoComplete="phone"
+                            />
+                            {/* <CustomInput
+                              labelText="Telefone"
+                              placeholder="(__) __________"
+                              onChange={this.handlePhoneInput}
+                              value={this.state.phone}
+                              id="email-address"
+                              formControlProps={{
+                                fullWidth: true
+                              }}
+                            /> */}
+                          </GridItem>
+                        </GridContainer>
+                        <GridContainer>
+                          <GridItem xs={12} sm={12} md={6}>
+                            <TextField
+                              // variant="outlined"
+                              required
+                              fullWidth
+                              name="email"
+                              style={{ marginBottom: 16 }}
+                              label="Endereço de Email"
+                              onChange={this.handleEmailInput}
+                              value={this.state.email}
+                              autoComplete="fname"
+                            />
+                            {/* <CustomInput
+                              labelText="Endereço de Email"
+                              id="email-address"
+                              onChange={this.handleEmailInput}
+                              value={this.state.email}
+                              formControlProps={{
+                                fullWidth: true
+                              }}
+                            /> */}
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={6}>
+                            <TextField
+                              required
+                              fullWidth
+                              name="passw"
+                              // style={{ marginBottom: 16 }}
+                              label="Senha"
+                              type="password"
+                              onChange={this.handlePasswInput}
+                              value={this.state.passw}
+                              autoComplete="fname"
+                            />
+                          </GridItem>
+                        </GridContainer>
+
+
+                        <GridContainer>
+
+                          <GridItem xs={12} sm={12} md={12}>
+                            <Button
+                              fullWidth
+                              type="submit"
+
+                              color="success">
+                              Tudo pronto pra começar!</Button>
+                          </GridItem>
+                        </GridContainer>
+                      </form>
+
+                      <GridContainer>
+                        <GridItem xs={12} sm={12} md={12}>
+                          <Link href="/">
+
+                            <Button
+                              fullWidth
+                              color="warning">
+                              Sou Lojista e quero começar!</Button>
+                          </Link>
+
+                        </GridItem>
+                      </GridContainer>
+                    </CardBody>
+                  </Card>
+
+                </GridItem>
+              </GridContainer>
+
+            </div>
+            <Box mt={8}>
+              <Copyright />
+            </Box>
+            {/* </Container> */}
+          </Grid >
+          {/* </Paper> */}
+
+        </div >
+      </>
+    );
+  }
 }
