@@ -66,30 +66,20 @@ export default class SignUp extends Component {
   }
   handleSubmit = async event => {
     event.preventDefault();
-    const fid = decodeURIComponent(this.props.match.params.fid) || null;
-    console.log({
+    console.log(this.state);
+    await api.post(`/retails`, {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
       password: this.state.passw,
-      cpf: this.state.cpf
-      // ,
-      // fid
+      cnpj: this.state.cnpj,
     })
-    await api.post(`/users`, {
-      name: this.state.name,
-      email: this.state.email,
-      phone: this.state.phone,
-      password: this.state.passw,
-      cpf: this.state.cpf
-      // ,
-      // fid
-    })
-      .then(response => {
-        this.setState({ fid: response.data.fid, done: true }, () => { console.log(this.state.fid) })
-
-      })
-      .catch(err => { console.error(err.response.data.error); this.setState({ error: err.response.data.error }) })
+      .then(response => { console.log(response); this.setState({ id: response.id }) })
+      .catch(error => { console.log(error) });
+    // console.log("Foi");
+    // console.log(this.state, fid);
+    this.setState({ done: true });
+    // this.props.history.push("/");
 
     // console.log(this.state, fid);
 
@@ -257,6 +247,7 @@ export default class SignUp extends Component {
         >
           {/* <Paper className={useStyles.paper}> */}
           <Grid container
+            container
             spacing={0}
             align="center"
             justify="center"
