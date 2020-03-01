@@ -1,6 +1,6 @@
 import React from "react";
 import classNames from "classnames";
-import PropTypes from "prop-types";
+import { Redirect } from 'react-router';
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -22,11 +22,12 @@ import CustomInput from "../../components/CustomInput/CustomInput.js";
 import Button from "../../components/CustomButtons/Button.js";
 
 import styles from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
-import { logout } from "../../services/auth";
+import { logout, isAuthenticated } from "../../services/auth";
 
 const useStyles = makeStyles(styles);
 
 export default function AdminNavbarLinks(props) {
+
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
@@ -50,10 +51,14 @@ export default function AdminNavbarLinks(props) {
   const handleCloseProfile = e => {
     e.preventDefault();
     logout();
-    props.history.push("/");
-    // setOpenProfile(null);
+    window.location.href = '/'
   };
+
+  if (!isAuthenticated())
+    return (<Redirect to="/signin" />)
+
   return (
+
     <div>
       <div className={classes.searchWrapper}>
         <CustomInput

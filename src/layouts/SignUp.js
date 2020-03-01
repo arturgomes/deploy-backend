@@ -154,7 +154,7 @@ export default class SignUp extends Component {
             >
               {/* <Paper className={useStyles.paper}> */}
               <Grid container
-                container
+                // container
                 spacing={0}
                 align="center"
                 justify="center"
@@ -162,7 +162,7 @@ export default class SignUp extends Component {
               // style={{ backgroundColor: 'teal' }}
               >
                 <div className={useStyles.content}>
-                  <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+                  <img src={logo} alt="" style={{ width: '300px', paddingBottom: '70px' }} />
 
 
                   <GridContainer>
@@ -204,7 +204,6 @@ export default class SignUp extends Component {
           >
             {/* <Paper className={useStyles.paper}> */}
             <Grid container
-              container
               spacing={0}
               align="center"
               justify="center"
@@ -212,7 +211,7 @@ export default class SignUp extends Component {
             // style={{ backgroundColor: 'teal' }}
             >
               <div className={useStyles.content}>
-                <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+                <img src={logo} alt="" style={{ width: '300px', paddingBottom: '70px' }} />
 
 
                 <GridContainer>
@@ -264,7 +263,10 @@ export default class SignUp extends Component {
           // style={{ backgroundColor: 'teal' }}
           >
             <div className={useStyles.content}>
-              <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+              <Link
+                href="/" variant="body2">
+                <img src={logo} alt="" style={{ width: '300px', paddingBottom: '70px' }} />
+              </Link>
 
 
               <GridContainer>
@@ -412,7 +414,7 @@ export default class SignUp extends Component {
 
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
-                          <Link href="/">
+                          <Link href="/rsignup">
 
                             <Button
                               fullWidth
@@ -420,6 +422,18 @@ export default class SignUp extends Component {
                               Sou Lojista e quero começar!</Button>
                           </Link>
 
+                        </GridItem>
+                        {/* <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                </Link>
+                </Grid> */}
+                        <GridItem xs={12} sm={12} md={12}>
+
+                          <Link
+                            href="/signin" variant="body2">
+                            {"Já é cadastrado? Faça já o seu login!"}
+                          </Link>
                         </GridItem>
                       </GridContainer>
                     </CardBody>

@@ -166,18 +166,6 @@ export default class SignUp extends Component {
                 autoComplete="fname"
               />
             </Grid>
-            {/* <Grid xs={6}>
-              <TextField
-                variant="outlined"
-                required
-                fullWidth
-                name="password"
-                label="senha"
-                type="password"
-                autoComplete="current-password"
-                onChange={this.handlePasswInput}
-              />
-            </Grid> */}
           </Grid>
 
           <Button
@@ -186,7 +174,6 @@ export default class SignUp extends Component {
             fullWidth
             variant="contained"
             color="primary"
-          // className={useStyles.submit}
           >
             Cadastrar-se
           </Button>

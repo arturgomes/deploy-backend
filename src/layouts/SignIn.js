@@ -1,7 +1,5 @@
 import React, { Component } from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
 // creates a beautiful scrollbar
-import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -9,30 +7,12 @@ import Avatar from "@material-ui/core/Avatar";
 import Button from "../components/CustomButtons/Button.js";
 
 // import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Checkbox from "@material-ui/core/Checkbox";
 import Link from "@material-ui/core/Link";
 import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import Container from "@material-ui/core/Container";
-
-// core components
-import Navbar from "../components/Navbars/Navbar.js";
-import Footer from "../components/Footer/Footer.js";
-import Sidebar from "../components/Sidebar/Sidebar.js";
-// import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
-
-import dashboardRoutes from "../routes.js";
-
-import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
-
-import bgImage from "../assets/img/sidebar-2.jpg";
-// import logo from "assets/img/reactlogo.png";
 import logo from "../assets/img/completa_fundo_claro@4x.png";
-import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 
 import api from "../services/api";
@@ -51,7 +31,7 @@ const useStyles = makeStyles(theme => ({
     padding: theme.spacing(2),
   },
 }));
-let ps;
+
 
 function Copyright() {
   return (
@@ -81,7 +61,6 @@ export default class SignIn extends Component {
   //   error: null
   // };
   handleSignIn = async e => {
-    // console.log("entrou aqui no handleSignIn");
     e.preventDefault();
 
     const { email, password } = this.state;
@@ -97,18 +76,15 @@ export default class SignIn extends Component {
             const { name, id, tu } = response.data.login;
             login(response.data.token, name, id, tu);
 
-            //parei aqui, tenho que fazer if para o tipo de autenticaçao
-            //se eh usuario final ou se é retail, pra mudar os dashboards.
-            // ver linha 79 
-            {
-              (getTu() !== "897316929176464ebc9ad085f31e7284") ?
-                this.props.history.push("/retail")
-                : this.props.history.push("/customer")
-            }
+
             this.props.history.push("/");
           } else {
             this.setState({ err: "Usuario ou senha inválidos" });
           }
+          //parei aqui, tenho que fazer if para o tipo de autenticaçao
+          //se eh usuario final ou se é retail, pra mudar os dashboards.
+          // ver linha 79 
+
         })
         .catch(error => {
           // Error 😨
@@ -130,6 +106,7 @@ export default class SignIn extends Component {
             // Something happened in setting up the request and triggered an Error
           }
         });
+
     }
   };
 

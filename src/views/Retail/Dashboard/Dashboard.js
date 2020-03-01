@@ -5,7 +5,6 @@ import LinearProgress from '@material-ui/core/LinearProgress';
 
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
-import GaugeChart from "react-gauge-chart";
 // @material-ui/core
 import Icon from "@material-ui/core/Icon";
 // import SpeedIcon from "@material-ui/icons/Speed";
@@ -41,8 +40,6 @@ import api from "../../../services/api";
 import {
   isAuthenticated,
   getId,
-  getName,
-  logout
 } from "../../../services/auth";
 // import { bugs, website, server } from "variables/general.js";
 
@@ -89,9 +86,9 @@ class Dashboard extends Component {
           // console.log(this.state.fb);
           listItems = Object.keys(this.state.fb).map(key => {
             const shop = this.state.fb[key];
-            const { f, shop_name } = shop;
+            const { f } = shop;
             listShops = Object.keys(f).map(g => {
-              const { nps_value, date, comment_optional } = f[g];
+              const { nps_value, date } = f[g];
               let date1 = new Date(date).toLocaleDateString("pt-BR");
               // date1 = date1.toLocaleDateString()
               return { nps_value, date1 };
@@ -103,8 +100,7 @@ class Dashboard extends Component {
           let nf = items.filter(f => f.nps_value < 7);
           let ne = items.filter(f => f.nps_value >= 7 && f.nps_value < 9);
           let po = items.filter(f => f.nps_value >= 9);
-          let tot = items;
-          console.log(nf, ne, po);
+          // console.log(nf, ne, po);
           // console.log(items.filter(negativeF).lenght);
 
           // console.log(nf.filter(negativeF).lenght,
@@ -118,7 +114,7 @@ class Dashboard extends Component {
             totalFeedbacks: items.length,
             isLoading: false
           });
-          console.log(this.state);
+          // console.log(this.state);
 
         }
 

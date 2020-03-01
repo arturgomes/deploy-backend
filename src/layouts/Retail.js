@@ -11,7 +11,7 @@ import Footer from "../components/Footer/Footer.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 // import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
-import dashboardRoutes from "../routes.js";
+import dashboardRoutes from "../routes/routes.js";
 
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
@@ -35,7 +35,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/retail" to="/retail/dashboard" />
+    <Redirect to="/retail/dashboard" />
   </Switch>
 );
 

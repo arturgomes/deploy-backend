@@ -1,6 +1,6 @@
 import React from "react";
-import { Router, Route, Switch, Redirect } from "react-router-dom";
-import { createBrowserHistory } from "history";
+import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
+
 import ReactDOM from "react-dom";
 
 import "./index.css";
@@ -8,10 +8,11 @@ import "./index.css";
 import * as Sentry from "@sentry/browser";
 import "./assets/css/material-dashboard-react.css?v=1.8.0";
 import Retail from "./layouts/Retail.js";
-// import Customer from "./layouts/Customer.js";
+import Customer from "./layouts/Customer.js";
 // import SignUp from "./layouts/SignUp.js";
 import SignIn from "./layouts/SignIn.js";
 import SignUp from "./layouts/SignUp.js";
+import SignUpRetail from "./layouts/SignUpRetail.js";
 import LandingPage from "./layouts/LandingPage/LandingPage.js";
 
 import { isAuthenticated } from "./services/auth";
@@ -24,7 +25,10 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
         <Component {...props} />
       ) : (
           <Redirect
-            to={{ pathname: "/signin", state: { from: props.location } }}
+            to={{
+              pathname: "/signin",
+              state: { from: props.location }
+            }}
           />
         )
     }
@@ -34,43 +38,29 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
 Sentry.init({
   dsn: "https://cb3fbccb62764b31a231c13b1b33311a@sentry.io/2180063"
 });
-// import { HashRouter } from 'react-router-dom';
 
-// import * as serviceWorker from './serviceWorker';
-// import configureStore from './config/configureStore';
-// import { Provider } from 'react-redux';
-// const store = configureStore();
 
-// ReactDOM.render(
-//   // <Provider store={store}>
-//   // {/* // <HashRouter> */ }
-//   <App />,
-//   // {/* // </HashRouter> */ }
-//   // </Provider>,
-//   document.getElementById("root")
-// );
-const hist = createBrowserHistory();
 const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";
 styleLink.href =
   "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
 document.head.appendChild(styleLink);
 ReactDOM.render(
-  <Router history={hist}>
+  <BrowserRouter>
     <Switch>
       <Route path="/" exact component={LandingPage} />
-      <Route path="/signin" component={SignIn} />
+      <Route path="/login" component={SignIn} />
       <Route path="/signup" component={SignUp} />
+      <Route path="/rsignup" component={SignUpRetail} />
 
+      <PrivateRoute path="/customer" component={Customer} />
       <PrivateRoute path="/retail" component={Retail} />
+      {/* <PrivateRoute path="/customer" component={Customer} /> */}
 
       {/* <Route path="/rtl" component={RTL} /> */}
       {/* <Redirect from="/" to="/" /> */}
     </Switch>
-  </Router>,
+  </BrowserRouter>,
   document.getElementById("root")
 );
-// If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
-// Learn more about service workers: https://bit.ly/CRA-PWA
-// serviceWorker.unregister();
+

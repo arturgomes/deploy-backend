@@ -8,13 +8,11 @@ import TextField from "@material-ui/core/TextField";
 
 import GridItem from "../components/Grid/GridItem.js";
 import GridContainer from "../components/Grid/GridContainer.js";
-import CustomInput from "../components/CustomInput/CustomInput.js";
 import Button from "../components/CustomButtons/Button.js";
 import Card from "../components/Card/Card.js";
 import CardHeader from "../components/Card/CardHeader.js";
 // import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "../components/Card/CardBody.js";
-import CardFooter from "../components/Card/CardFooter.js";
 
 
 import api from "../services/api"
@@ -57,12 +55,12 @@ const useStyles = makeStyles(theme => ({
 export default class SignUp extends Component {
   state = {
     email: null,
-    cpf: null,
+    cnpj: null,
     name: null,
     phone: null,
     passw: null,
     done: false,
-    error: null
+    error: null,
   }
   handleSubmit = async event => {
     event.preventDefault();
@@ -85,7 +83,7 @@ export default class SignUp extends Component {
 
   }
   handleNameInput = event => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     this.setState({
       name: event.target.value
     })
@@ -96,27 +94,18 @@ export default class SignUp extends Component {
       phone: event.target.value
     })
   }
-  cpfMask = value => {
-    return value
-      .replace(/\D/g, '') // substitui qualquer caracter que nao seja numero por nada
-      .replace(/(\d{3})(\d)/, '$1.$2') // captura 2 grupos de numero o primeiro de 3 e o segundo de 1, apos capturar o primeiro grupo ele adiciona um ponto antes do segundo grupo de numero
-      .replace(/(\d{3})(\d)/, '$1.$2')
-      .replace(/(\d{3})(\d{1,2})/, '$1-$2')
-      .replace(/(-\d{2})\d+?$/, '$1') // captura 2 numeros seguidos de um traço e não deixa ser digitado mais nada
-  }
-  handleCPFInput = event => {
-    // const cpf = event.target.value;
-
-    // if (!Joi.validate(cpf, cpfSchema)) {
-    //   this.setState({ error: "CPF inválido" })
+  handleCNPJInput = event => {
+    // const cnpj = event.target.value;
+    // if (!Joi.validate(cnpj, cnpjSchema)) {
+    // console.log("cnpj invalido")
+    // this.setState({ error: "CNPJ inválido" })
     // }
     // else {
     this.setState({
-      cpf: this.cpfMask(event.target.value)
+      cnpj: event.target.value
     })
     // }
   }
-
   handleEmailInput = event => {
     this.setState({
       email: event.target.value
@@ -129,59 +118,9 @@ export default class SignUp extends Component {
     });
   }
   render() {
+    const err = this.state.error;
 
-    if (this.state.done) {
-      if (this.state.fid) {
-        return (
-          <>
-            <div
-              style={{
-                position: 'absolute',
-                left: '50%',
-                top: '50%',
-                transform: 'translate(-50%, -50%)',
-              }}
-            >
-              {/* <Paper className={useStyles.paper}> */}
-              <Grid container
-                container
-                spacing={0}
-                align="center"
-                justify="center"
-                direction="column"
-              // style={{ backgroundColor: 'teal' }}
-              >
-                <div className={useStyles.content}>
-                  <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
-
-
-                  <GridContainer>
-                    <GridItem xs={12} sm={12} md={12}>
-                      {/* <Card> */}
-                      <CardHeader color="success">
-                        <h4 className={useStyles.cardTitleWhite}>Cadastro realizado com sucesso!</h4>
-                        <p className={useStyles.cardCategoryWhite}> Obrigado, {this.state.name}, pelo seu cadastro. Você acabou de acumular 1 Feedcoin. Lembre-se, faça seu login ao final de cada feedback que você der e acumulará mais pontos. Até breve!</p>
-
-                        {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
-                      </CardHeader>
-
-                      {/* </Card> */}
-
-                    </GridItem>
-                  </GridContainer>
-
-                </div>
-                <Box mt={8}>
-                  <Copyright />
-                </Box>
-                {/* </Container> */}
-              </Grid >
-              {/* </Paper> */}
-
-            </div >
-          </>
-        );
-      }
+    if (this.state.done && !this.state.error) {
       return (
         <>
           <div
@@ -210,7 +149,7 @@ export default class SignUp extends Component {
                     {/* <Card> */}
                     <CardHeader color="success">
                       <h4 className={useStyles.cardTitleWhite}>Cadastro realizado com sucesso!</h4>
-                      <p className={useStyles.cardCategoryWhite}>Obrigado, {this.state.name}, pelo seu cadastro. Lembre-se, faça seu login ao final de cada feedback que você der e acumulará mais pontos. Até breve!</p>
+                      <p className={useStyles.cardCategoryWhite}>Obrigado, {this.state.name}, pelo seu cadastro! Entraremos em contato para começar a nossa parceria! Até já!</p>
 
                       {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
                     </CardHeader>
@@ -255,15 +194,18 @@ export default class SignUp extends Component {
           // style={{ backgroundColor: 'teal' }}
           >
             <div className={useStyles.content}>
-              <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+              <Link
+                href="/" variant="body2">
+                <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+              </Link>
 
 
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   <Card>
                     <CardHeader color="primary">
-                      <h4 className={useStyles.cardTitleWhite}>Cadastrar Consumidor</h4>
-                      <p className={useStyles.cardCategoryWhite}>Olá, que bom ver você aqui. Vamos fazer um breve cadastro seu para começar a acumular os FeedCoins.</p>
+                      <h4 className={useStyles.cardTitleWhite}>Cadastrar Lojista</h4>
+                      <h5 className={useStyles.cardCategoryWhite}>Olá, obrigado por escolher a CouponFeed. Vamos começar nossa parceria com um breve cadastro da sua empresa.</h5>
 
                       {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
                     </CardHeader>
@@ -307,11 +249,11 @@ export default class SignUp extends Component {
                               // variant="outlined"
                               required
                               fullWidth
-                              name="cpf"
+                              name="cnpj"
                               // style={{ marginBottom: 16 }}
-                              label="CPF"
-                              onChange={this.handleCPFInput}
-                              value={this.state.cpf}
+                              label="CNPJ"
+                              onChange={this.handleCNPJInput}
+                              value={this.state.cnpj}
                               autoComplete="fname"
                             />
                             {/* <CustomInput
@@ -398,10 +340,17 @@ export default class SignUp extends Component {
                               color="success">
                               Tudo pronto pra começar!</Button>
                           </GridItem>
+                          <GridItem xs={12} sm={12} md={12}>
+
+                            <Link
+                              href="/signin" variant="body2">
+                              {"Já é cadastrado? Faça já o seu login!"}
+                            </Link>
+                          </GridItem>
                         </GridContainer>
                       </form>
 
-                      <GridContainer>
+                      {/* <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
                           <Link href="/">
 
@@ -412,7 +361,7 @@ export default class SignUp extends Component {
                           </Link>
 
                         </GridItem>
-                      </GridContainer>
+                      </GridContainer> */}
                     </CardBody>
                   </Card>
 

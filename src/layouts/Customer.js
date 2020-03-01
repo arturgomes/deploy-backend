@@ -11,7 +11,7 @@ import Footer from "../components/Footer/Footer.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 // import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
-import routes from "../routes.js";
+import dashboardRoutes from "../routes/routes.js";
 
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
@@ -23,7 +23,7 @@ let ps;
 
 const switchRoutes = (
   <Switch>
-    {routes.map((prop, key) => {
+    {dashboardRoutes.map((prop, key) => {
       if (prop.layout === "/customer") {
         return (
           <Route
@@ -35,7 +35,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect from="/customer" to="/customer/dashboard" />
+    <Redirect to="/customer/dashboard" />
   </Switch>
 );
 
@@ -47,23 +47,9 @@ export default function Customer({ ...rest }) {
   // ref to help us initialize PerfectScrollbar on windows devices
   const mainPanel = React.createRef();
   // states and functions
-  const [image, setImage] = React.useState(bgImage);
-  const [color, setColor] = React.useState("blue");
-  const [fixedClasses, setFixedClasses] = React.useState("dropdown show");
+  const [image] = React.useState(bgImage);
+  const [color] = React.useState("blue");
   const [mobileOpen, setMobileOpen] = React.useState(false);
-  const handleImageClick = image => {
-    setImage(image);
-  };
-  const handleColorClick = color => {
-    setColor(color);
-  };
-  const handleFixedClick = () => {
-    if (fixedClasses === "dropdown") {
-      setFixedClasses("dropdown show");
-    } else {
-      setFixedClasses("dropdown");
-    }
-  };
   const handleDrawerToggle = () => {
     setMobileOpen(!mobileOpen);
   };
@@ -96,7 +82,7 @@ export default function Customer({ ...rest }) {
   return (
     <div className={classes.wrapper}>
       <Sidebar
-        routes={routes}
+        routes={dashboardRoutes}
         logoText={"CouponFeed"}
         logo={logo}
         image={image}
@@ -107,7 +93,7 @@ export default function Customer({ ...rest }) {
       />
       <div className={classes.mainPanel} ref={mainPanel}>
         <Navbar
-          routes={routes}
+          routes={dashboardRoutes}
           handleDrawerToggle={handleDrawerToggle}
           {...rest}
         />
@@ -120,14 +106,7 @@ export default function Customer({ ...rest }) {
             <div className={classes.map}>{switchRoutes}</div>
           )}
         {getRoute() ? <Footer /> : null}
-        {/* <FixedPlugin
-          handleImageClick={handleImageClick}
-          handleColorClick={handleColorClick}
-          bgColor={color}
-          bgImage={image}
-          handleFixedClick={handleFixedClick}
-          fixedClasses={fixedClasses}
-        /> */}
+
       </div>
     </div>
   );
