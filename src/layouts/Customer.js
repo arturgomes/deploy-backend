@@ -35,7 +35,7 @@ const switchRoutes = (
       }
       return null;
     })}
-    <Redirect to="/customer/dashboard" />
+    <Redirect from="/customer/" to="/customer/dashboard" />
   </Switch>
 );
 

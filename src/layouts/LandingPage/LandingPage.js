@@ -3,6 +3,14 @@ import React, { useRef, useEffect, useState } from "react";
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import PerfectScrollbar from "perfect-scrollbar";
 
+import { FaQrcode, FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
+
+
+//Material.ui
+import QueryBuilderOutlinedIcon from '@material-ui/icons/QueryBuilderOutlined'; //clock
+import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
+
+
 import AnchorLink from "react-anchor-link-smooth-scroll";
 import "react-responsive-carousel/lib/styles/carousel.min.css";
 import slogan from "./images/sem_slogan_fundo_claro@4x.png"
@@ -181,8 +189,7 @@ export default function LandingPage(props) {
                       o varejista na coleta de feedbacks das experiências de seu cliente. E em troca, o
                       cliente acumula pontos que podem ser convertidos em descontos em produtos e também
                                 participa de promoções exclusivas.</p>
-                  <AnchorLink className="btn-solid-lg1" href="#services">DECOLE AGORA
-                                MESMO</AnchorLink >
+                  <AnchorLink className="btn-solid-lg1" href="#services">DECOLE AGORA MESMO</AnchorLink >
                 </div>
               </div>
               <div className="col-lg-6">
@@ -200,47 +207,62 @@ export default function LandingPage(props) {
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <h2>Business Growth Services</h2>
-              <p className="p-heading p-large">We serve small and medium sized companies in all tech related
-                        industries with high quality growth services which are presented below</p>
+              <h2>Solução completa para seu negócio</h2>
+              <p className="p-heading p-large">Independente do tamanho do seu negócio, a opinião do seu consumidor é essencial para avaliar a qualidade do atendimento, do serviço prestado, e até mesmo do produto disponível no estoque. A CouponFeed te auxilia na tomada de decisões para o crescimento do seu negócio.</p>
             </div>
           </div>
           <div className="row">
             <div className="col-lg-12">
-
-
               <div className="card">
-                <img className="card-image" src={sv1} alt="alternative" />
+                <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20 }} />
                 <div className="card-body">
-                  <h4 className="card-title">Market Analysis</h4>
+                  <h4 className="card-title">Obtenha feedbacks 24/7</h4>
+                  <p>Obtenha feedbacks dos clientes a qualquer hora, enqunato que seu estabelecimento estiver aberto.</p>
+                </div>
+              </div>
+              <div className="card">
+                <TransferWithinAStationIcon style={{ fontSize: 120, paddingBottom: 20 }} />
+                <div className="card-body">
+                  <h4 className="card-title">Feedback da experiência do cliente</h4>
+                  <p>Ao usar o CouponFeed, o seu cliente irá fornecer um feedback de sua experiência antes de deixar seu estabelecimento.</p>
+                </div>
+              </div>
+              <div className="card">
+                <FaQrcode style={{ fontSize: 120, paddingBottom: 20 }} />
+                <div className="card-body">
+                  <h4 className="card-title">QR Code ao invés de totens</h4>
                   <p>Our team of enthusiastic marketers will analyse and evaluate how your company stacks
                                 against the closest competitors</p>
                 </div>
               </div>
-
-
-
+            </div>
+          </div>
+          <div className="row">
+            <div className="col-lg-12">
               <div className="card">
-                <img className="card-image" src={sv2} alt="alternative" />
+                <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20 }} />
                 <div className="card-body">
-                  <h4 className="card-title">Opportunity Scan</h4>
-                  <p>Once the market analysis process is completed our staff will search for opportunities
-                                that are in reach</p>
+                  <h4 className="card-title">Obtenha feedbacks 24/7</h4>
+                  <p>Our team of enthusiastic marketers will analyse and evaluate how your company stacks
+                                against the closest competitors</p>
                 </div>
               </div>
-
-
-
               <div className="card">
-                <img className="card-image" src={sv3} alt="alternative" />
+                <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20 }} />
                 <div className="card-body">
-                  <h4 className="card-title">Action Plan</h4>
-                  <p>With all the information in place you will be presented with an action plan that your
-                                company needs to follow</p>
+                  <h4 className="card-title">Obtenha feedbacks 24/7</h4>
+                  <p>Our team of enthusiastic marketers will analyse and evaluate how your company stacks
+                                against the closest competitors</p>
                 </div>
               </div>
-
-
+              <div className="card">
+                <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20 }} />
+                <div className="card-body">
+                  <h4 className="card-title">Obtenha feedbacks 24/7</h4>
+                  <p>Our team of enthusiastic marketers will analyse and evaluate how your company stacks
+                                against the closest competitors</p>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -401,11 +423,11 @@ export default function LandingPage(props) {
               <ul className="list-unstyled li-space-lg">
                 <li className="address">Não hesite em nos contactar ou mandar uma mensagem</li>
 
-                <li>Olga <i className="fas fa-whatsapp"></i><AnchorLink className="turquoise"
+                <li>Olga <FaWhatsapp className="turquoise" style={{ fontSize: 20 }} /> <AnchorLink className="turquoise"
                   href="https://wa.me/5567992432095">+55 67
                                 9243-2095</AnchorLink >
                 </li>
-                <li>Artur <i className="fas fa-whatsapp"></i><AnchorLink className="turquoise"
+                <li>Artur <FaWhatsapp className="turquoise" style={{ fontSize: 20 }} /> <AnchorLink className="turquoise"
                   href="https://wa.me/5567993021141">+55
                   67
                                 99302-1141</AnchorLink >
@@ -434,37 +456,11 @@ export default function LandingPage(props) {
 
             <div className="col-md-6">
               <div className="footer-col last">
-                <h4>Social Media</h4>
-                <span className="fa-stack">
-                  <AnchorLink href="#your-link">
-                    <i className="fas fa-circle fa-stack-2x"></i>
-                    <i className="fab fa-facebook-f fa-stack-1x"></i>
-                  </AnchorLink >
-                </span>
-                <span className="fa-stack">
-                  <AnchorLink href="#your-link">
-                    <i className="fas fa-circle fa-stack-2x"></i>
-                    <i className="fab fa-twitter fa-stack-1x"></i>
-                  </AnchorLink >
-                </span>
-                <span className="fa-stack">
-                  <AnchorLink href="#your-link">
-                    <i className="fas fa-circle fa-stack-2x"></i>
-                    <i className="fab fa-google-plus-g fa-stack-1x"></i>
-                  </AnchorLink >
-                </span>
-                <span className="fa-stack">
-                  <AnchorLink href="#your-link">
-                    <i className="fas fa-circle fa-stack-2x"></i>
-                    <i className="fab fa-instagram fa-stack-1x"></i>
-                  </AnchorLink >
-                </span>
-                <span className="fa-stack">
-                  <AnchorLink href="#your-link">
-                    <i className="fas fa-circle fa-stack-2x"></i>
-                    <i className="fab fa-linkedin-in fa-stack-1x"></i>
-                  </AnchorLink >
-                </span>
+                <h4>Siga-nos nas redes sociais</h4>
+
+                <a href="https://fb.com/couponfeed"> <FaFacebook style={{ fontSize: 30 }} /></a>
+
+                <a href="https://instagram.com/couponfeed"> <FaInstagram style={{ fontSize: 30, marginLeft: 10 }} /></a>
               </div>
             </div>
           </div>

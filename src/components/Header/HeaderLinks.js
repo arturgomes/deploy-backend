@@ -5,7 +5,7 @@ import IconButton from "@material-ui/core/IconButton";
 // react components for routing our app without refresh
 import { Link } from "react-router-dom";
 import AnchorLink from "react-anchor-link-smooth-scroll";
-
+import { FaFacebook, FaInstagram } from "react-icons/fa";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
@@ -53,7 +53,7 @@ export default function HeaderLinks(props) {
         <ListItem className={classes.listItem}>
           <AnchorLink className={classes.dropdownLink} href="#contact">Contato</AnchorLink>
         </ListItem>
-
+        {/* 
         <ListItem className={classes.listItem}>
           <Tooltip
             id="instagram-tooltip"
@@ -70,13 +70,13 @@ export default function HeaderLinks(props) {
               <i className={classes.socialIcons + " fab fa-instagram"} />
             </Button>
           </Tooltip>
-          {/* <AnchorLink href="#your-link">
-            <i className="fas fa-circle fa-stack-2x twitter"></i>
-            <i className="fab fa-twitter fa-stack-1x"></i>
-          </AnchorLink > */}
-        </ListItem>
+          
+        </ListItem> */}
         <ListItem className={classes.listItem}>
-          <Tooltip
+          <a href="https://fb.com/couponfeed"> <FaFacebook style={{ fontSize: 30 }} /></a>
+
+
+          {/* <Tooltip
             id="instagram-facebook"
             title="Nos siga no facebook"
             placement={window.innerWidth > 959 ? "top" : "left"}
@@ -90,9 +90,11 @@ export default function HeaderLinks(props) {
             >
               <i className={classes.socialIcons + " fab fa-facebook"} />
             </Button>
-          </Tooltip>
+          </Tooltip> */}
         </ListItem>
-
+        <ListItem className={classes.listItem}>
+          <a href="https://instagram.com/couponfeed"> <FaInstagram style={{ fontSize: 30, marginLeft: 10 }} /></a>
+        </ListItem>
       </List>
 
     </>
