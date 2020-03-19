@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import Chartist from "chartist";
-import moment from "moment"
 
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
@@ -43,7 +41,6 @@ import imparcial from "../../../assets/img/imparcial_branco@4x.png";
 
 import api from "../../../services/api";
 import {
-  isAuthenticated,
   getId,
 } from "../../../services/auth";
 // import { bugs, website, server } from "variables/general.js";
@@ -82,7 +79,6 @@ class Dashboard extends Component {
           totalFeedbacks,
           average,
           dados
-    
         } = response.data
         this.setState({
           posFeedbacks,
@@ -94,8 +90,6 @@ class Dashboard extends Component {
           dados
         })
         console.log(this.state)
-
-
 
       })
       .catch(error => {
@@ -118,78 +112,6 @@ class Dashboard extends Component {
       });
   }
 
-  genFeedbackPorDia = () => {
-    var delays = 80,
-      durations = 500;
-  
-    let listItems, listShops;
-
-    if (isAuthenticated()) {
-      listItems = Object.keys(this.state.fb).map(key => {
-        const shop = this.state.fb[key];
-        const { f } = shop;
-        listShops = Object.keys(f).map(g => {
-          const { nps_value, date } = f[g];
-          return { nps_value, date };
-        });
-        return listShops;
-      });
-    }
-    var time7daysAgo = moment().subtract(7, 'days').startOf('day');
-    // var time30daysAgo = moment().subtract(30, 'days').startOf('day');
-    // var time1YearAgo = moment().subtract(365, 'days').startOf('day');
-    console.log(time7daysAgo);
-
-    return {
-      data: {
-        labels: ["S", "T", "Q", "Q", "S", "S", "D"],
-        series: [[16, 19, 7, 8, 20, 6, 3]]
-      },
-      options: {
-        lineSmooth: Chartist.Interpolation.cardinal({
-          tension: 0
-        }),
-        low: 0,
-        high: 30, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
-        chartPadding: {
-          top: 0,
-          right: 0,
-          bottom: 0,
-          left: 0
-        }
-      },
-      // for animation
-      animation: {
-        draw: function (data) {
-          if (data.type === "line" || data.type === "area") {
-            data.element.animate({
-              d: {
-                begin: 600,
-                dur: 700,
-                from: data.path
-                  .clone()
-                  .scale(1, 0)
-                  .translate(0, data.chartRect.height())
-                  .stringify(),
-                to: data.path.clone().stringify(),
-                easing: Chartist.Svg.Easing.easeOutQuint
-              }
-            });
-          } else if (data.type === "point") {
-            data.element.animate({
-              opacity: {
-                begin: (data.index + 1) * delays,
-                dur: durations,
-                from: 0,
-                to: 1,
-                easing: "ease"
-              }
-            });
-          }
-        }
-      }
-    };
-  }
 
   handleTotalFeedback = () => {
     return this.state.totalFeedbacks;
@@ -210,16 +132,12 @@ class Dashboard extends Component {
 
   };
   handleNPS = () => {
-    return this.state.media;
+    return this.state.average;
   };
   render() {
     // this.genFeedbackPorDia();
     const {
-      negFeedbacks,
-      posFeedbacks,
-      neutralFeedbacks,
-      totalFeedbacks,
-      media } = this.state;
+      average } = this.state;
     const { classes } = this.props;
     if (this.state.isLoading) {
       return <LinearProgress />
@@ -253,7 +171,7 @@ class Dashboard extends Component {
                     </Icon>
                   </CardIcon>
                   <p className={classes.cardCategory}>Feedbacks Negativos</p>
-                  <h3 className={classes.cardTitle}>{negFeedbacks}</h3>
+                  <h3 className={classes.cardTitle}>{this.handleNegativeFeedback()}</h3>
                 </CardHeader>
 
               </Card>
@@ -301,7 +219,7 @@ class Dashboard extends Component {
                     nrOfLevels={420}
                     arcsLength={[0.69, 0.1, 0.21]}
                     colors={["#EA4228", "#F5CD19", "#5BE12C"]}
-                    percent={media / 10}
+                    percent={average / 10}
                     hideText={true}
                     needleBaseColor={"#EA4228"}
                     arcPadding={0.01}
