@@ -5,15 +5,15 @@ import { makeStyles } from "@material-ui/core/styles";
 // core components
 
 import { TextField, } from "@material-ui/core";
-import DatePicker from 'react-datepicker';
-import { parseISO, isAfter } from 'date-fns';
-import { pt } from 'date-fns/locale';
+// import DatePicker from 'react-datepicker';
+// import { parseISO, isAfter } from 'date-fns';
+// import { pt } from 'date-fns/locale';
 
-import {
-  MuiPickersUtilsProvider,
-  KeyboardTimePicker,
-  KeyboardDatePicker,
-} from '@material-ui/pickers';
+// import {
+//   MuiPickersUtilsProvider,
+//   KeyboardTimePicker,
+//   KeyboardDatePicker,
+// } from '@material-ui/pickers';
 
 import GridItem from "../../../components/Grid/GridItem.js";
 import GridContainer from "../../../components/Grid/GridContainer.js";
@@ -24,7 +24,7 @@ import CardHeader from "../../../components/Card/CardHeader.js";
 import CardFooter from "../../../components/Card/CardFooter.js";
 import CardBody from "../../../components/Card/CardBody.js";
 import api from "../../../services/api"
-import { logout, getId } from "../../../services/auth";
+import { getId } from "../../../services/auth";
 // import avatar from "assets/img/faces/marc.jpg";
 
 const useStyles = makeStyles(theme => ({
@@ -93,7 +93,7 @@ export default class CreateCoupon extends Component {
 
   isValidDate = date => {
 
-    return date == 'dd/mm/yyyy' ||
+    return date === 'dd/mm/yyyy' ||
       (/^\d{2}\/\d{2}\/\d{4}$/.test(date) && new Date(date).getTime());
   }
 

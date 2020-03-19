@@ -94,45 +94,7 @@ class Dashboard extends Component {
           dados
         })
         console.log(this.state)
-        let listItems, listShops;
-        // console.log(this.state.fb);
 
-        // if (isAuthenticated()) {
-        //   // console.log(this.state.fb);
-        //   listItems = Object.keys(this.state.fb).map(key => {
-        //     const shop = this.state.fb[key];
-        //     const { f } = shop;
-        //     listShops = Object.keys(f).map(g => {
-        //       const { nps_value, date } = f[g];
-        //       let date1 = new Date(date).toLocaleDateString("pt-BR");
-        //       // date1 = date1.toLocaleDateString()
-        //       return { nps_value, date1 };
-        //     });
-        //     return listShops;
-        //   });
-
-        //   const items = listItems.flat(1) // uncomment for online values
-        //   let media = items.map(f => { return parseInt(f.nps_value) });
-        //   // console.log(media);
-        //   const total = media.reduce((result, number) => result + number);
-        //   // console.log(media.length);
-        //   // console.log("Media: ", total / media.length)
-        //   let nf = items.filter(f => f.nps_value < 7);
-        //   let ne = items.filter(f => f.nps_value >= 7 && f.nps_value < 9);
-        //   let po = items.filter(f => f.nps_value >= 9);
-        //   const negf = nf.length;
-
-        //   this.setState({
-        //     posFeedbacks: po.length,
-        //     negFeedbacks: negf,
-        //     neutralFeedbacks: ne.length,
-        //     totalFeedbacks: items.length,
-        //     media: (total / media.length),
-        //     isLoading: false
-        //   });
-        //   // console.log(this.state);
-
-        // }
 
 
       })
@@ -159,9 +121,7 @@ class Dashboard extends Component {
   genFeedbackPorDia = () => {
     var delays = 80,
       durations = 500;
-    var delays2 = 80,
-      durations2 = 500;
-
+  
     let listItems, listShops;
 
     if (isAuthenticated()) {
@@ -176,8 +136,8 @@ class Dashboard extends Component {
       });
     }
     var time7daysAgo = moment().subtract(7, 'days').startOf('day');
-    var time30daysAgo = moment().subtract(30, 'days').startOf('day');
-    var time1YearAgo = moment().subtract(365, 'days').startOf('day');
+    // var time30daysAgo = moment().subtract(30, 'days').startOf('day');
+    // var time1YearAgo = moment().subtract(365, 'days').startOf('day');
     console.log(time7daysAgo);
 
     return {

@@ -60,7 +60,7 @@
     "faker": "^4.1.0",
     "file-loader": "2.0.0",
     "fs-extra": "7.0.1",
-    "fsevents": "^2.1.2",
+    // "fsevents": "^2.1.2",
     "geopattern": "^1.2.3",
     "gh-pages": "^2.0.1",
     "globalize": "^0.1.1",
