@@ -8,13 +8,13 @@ import TextField from "@material-ui/core/TextField";
 
 import GridItem from "../components/Grid/GridItem.js";
 import GridContainer from "../components/Grid/GridContainer.js";
-import CustomInput from "../components/CustomInput/CustomInput.js";
+// import CustomInput from "../components/CustomInput/CustomInput.js";
 import Button from "../components/CustomButtons/Button.js";
 import Card from "../components/Card/Card.js";
 import CardHeader from "../components/Card/CardHeader.js";
 // import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "../components/Card/CardBody.js";
-import CardFooter from "../components/Card/CardFooter.js";
+// import CardFooter from "../components/Card/CardFooter.js";
 
 
 import api from "../services/api"
@@ -66,7 +66,7 @@ export default class SignUp extends Component {
   }
   handleSubmit = async event => {
     event.preventDefault();
-    const fid = decodeURIComponent(this.props.match.params.fid) || null;
+    // const fid = decodeURIComponent(this.props.match.params.fid) || null;
     console.log({
       name: this.state.name,
       email: this.state.email,
@@ -431,7 +431,7 @@ export default class SignUp extends Component {
                         <GridItem xs={12} sm={12} md={12}>
 
                           <Link
-                            href="/signin" variant="body2">
+                            href="/login" variant="body2">
                             {"Já é cadastrado? Faça já o seu login!"}
                           </Link>
                         </GridItem>

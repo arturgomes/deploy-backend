@@ -1,7 +1,12 @@
 import React, { Component } from "react";
+import Chartist from "chartist";
+import moment from "moment"
+
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { MdContentCopy } from "react-icons/md";
+import GaugeChart from 'react-gauge-chart'
 
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
@@ -62,61 +67,72 @@ class Dashboard extends Component {
     posFeedbacks: 0,
     neutralFeedbacks: 0,
     totalFeedbacks: 0,
-    fb: [
-      {
-        name: null,
-        f: []
-      }
-    ]
+    average: 0,
+    dados:[]
   };
   async componentDidMount() {
-
     await api
-      .post("/list", { retail_id: getId() })
+      .post("/dashboardData", { retail_id: getId() })
       .then(response => {
         // console.log(response.data);
-
+        const {
+          posFeedbacks,
+          negFeedbacks,
+          neutralFeedbacks,
+          totalFeedbacks,
+          average,
+          dados
+    
+        } = response.data
         this.setState({
-          fb: response.data,
+          posFeedbacks,
+          negFeedbacks,
+          neutralFeedbacks,
+          totalFeedbacks,
+          average,
+          isLoading: false,
+          dados
         })
+        console.log(this.state)
         let listItems, listShops;
         // console.log(this.state.fb);
 
-        if (isAuthenticated()) {
-          // console.log(this.state.fb);
-          listItems = Object.keys(this.state.fb).map(key => {
-            const shop = this.state.fb[key];
-            const { f } = shop;
-            listShops = Object.keys(f).map(g => {
-              const { nps_value, date } = f[g];
-              let date1 = new Date(date).toLocaleDateString("pt-BR");
-              // date1 = date1.toLocaleDateString()
-              return { nps_value, date1 };
-            });
-            return listShops;
-          });
+        // if (isAuthenticated()) {
+        //   // console.log(this.state.fb);
+        //   listItems = Object.keys(this.state.fb).map(key => {
+        //     const shop = this.state.fb[key];
+        //     const { f } = shop;
+        //     listShops = Object.keys(f).map(g => {
+        //       const { nps_value, date } = f[g];
+        //       let date1 = new Date(date).toLocaleDateString("pt-BR");
+        //       // date1 = date1.toLocaleDateString()
+        //       return { nps_value, date1 };
+        //     });
+        //     return listShops;
+        //   });
 
-          const items = listItems.flat(1)
-          let nf = items.filter(f => f.nps_value < 7);
-          let ne = items.filter(f => f.nps_value >= 7 && f.nps_value < 9);
-          let po = items.filter(f => f.nps_value >= 9);
-          // console.log(nf, ne, po);
-          // console.log(items.filter(negativeF).lenght);
+        //   const items = listItems.flat(1) // uncomment for online values
+        //   let media = items.map(f => { return parseInt(f.nps_value) });
+        //   // console.log(media);
+        //   const total = media.reduce((result, number) => result + number);
+        //   // console.log(media.length);
+        //   // console.log("Media: ", total / media.length)
+        //   let nf = items.filter(f => f.nps_value < 7);
+        //   let ne = items.filter(f => f.nps_value >= 7 && f.nps_value < 9);
+        //   let po = items.filter(f => f.nps_value >= 9);
+        //   const negf = nf.length;
 
-          // console.log(nf.filter(negativeF).lenght,
-          //   ne.filter(neutralF).lenght,
-          //   po.filter(posF)).lenght,
-          //   tot.lenght);
-          this.setState({
-            negFeedbacks: nf.lenght === 0 ? 0 : nf.lenght,
-            posFeedbacks: po.length === 0 ? 0 : po.length,
-            neutralFeedbacks: ne.length,
-            totalFeedbacks: items.length,
-            isLoading: false
-          });
-          // console.log(this.state);
+        //   this.setState({
+        //     posFeedbacks: po.length,
+        //     negFeedbacks: negf,
+        //     neutralFeedbacks: ne.length,
+        //     totalFeedbacks: items.length,
+        //     media: (total / media.length),
+        //     isLoading: false
+        //   });
+        //   // console.log(this.state);
 
-        }
+        // }
 
 
       })
@@ -140,6 +156,81 @@ class Dashboard extends Component {
       });
   }
 
+  genFeedbackPorDia = () => {
+    var delays = 80,
+      durations = 500;
+    var delays2 = 80,
+      durations2 = 500;
+
+    let listItems, listShops;
+
+    if (isAuthenticated()) {
+      listItems = Object.keys(this.state.fb).map(key => {
+        const shop = this.state.fb[key];
+        const { f } = shop;
+        listShops = Object.keys(f).map(g => {
+          const { nps_value, date } = f[g];
+          return { nps_value, date };
+        });
+        return listShops;
+      });
+    }
+    var time7daysAgo = moment().subtract(7, 'days').startOf('day');
+    var time30daysAgo = moment().subtract(30, 'days').startOf('day');
+    var time1YearAgo = moment().subtract(365, 'days').startOf('day');
+    console.log(time7daysAgo);
+
+    return {
+      data: {
+        labels: ["S", "T", "Q", "Q", "S", "S", "D"],
+        series: [[16, 19, 7, 8, 20, 6, 3]]
+      },
+      options: {
+        lineSmooth: Chartist.Interpolation.cardinal({
+          tension: 0
+        }),
+        low: 0,
+        high: 30, // creative tim: we recommend you to set the high sa the biggest value + something for a better look
+        chartPadding: {
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0
+        }
+      },
+      // for animation
+      animation: {
+        draw: function (data) {
+          if (data.type === "line" || data.type === "area") {
+            data.element.animate({
+              d: {
+                begin: 600,
+                dur: 700,
+                from: data.path
+                  .clone()
+                  .scale(1, 0)
+                  .translate(0, data.chartRect.height())
+                  .stringify(),
+                to: data.path.clone().stringify(),
+                easing: Chartist.Svg.Easing.easeOutQuint
+              }
+            });
+          } else if (data.type === "point") {
+            data.element.animate({
+              opacity: {
+                begin: (data.index + 1) * delays,
+                dur: durations,
+                from: 0,
+                to: 1,
+                easing: "ease"
+              }
+            });
+          }
+        }
+      }
+    };
+  }
+
   handleTotalFeedback = () => {
     return this.state.totalFeedbacks;
   };
@@ -159,13 +250,16 @@ class Dashboard extends Component {
 
   };
   handleNPS = () => {
-    return this.state.totalFeedbacks / 10;
+    return this.state.media;
   };
   render() {
-    const { negFeedbacks,
+    // this.genFeedbackPorDia();
+    const {
+      negFeedbacks,
       posFeedbacks,
       neutralFeedbacks,
-      totalFeedbacks } = this.state;
+      totalFeedbacks,
+      media } = this.state;
     const { classes } = this.props;
     if (this.state.isLoading) {
       return <LinearProgress />
@@ -174,43 +268,43 @@ class Dashboard extends Component {
       return (
         <div>
           <GridContainer>
-            <GridItem xs={12} sm={6} md={3}>
+            <GridItem xs={12} sm={3} md={3}>
               <Card>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
-                    <Icon>content_copy</Icon>
+                    <MdContentCopy />
+
                   </CardIcon>
                   <p className={classes.cardCategory}>Total de Feedbacks</p>
-                  <h3 className={classes.cardTitle}>
-                    {this.handleTotalFeedback()}
+                  <h3 className={classes.cardTitle}> {this.handleTotalFeedback()}
                   </h3>
                 </CardHeader>
 
               </Card>
             </GridItem>
-            <GridItem xs={12} sm={6} md={3}>
+            <GridItem xs={12} sm={3} md={3}>
               <Card>
                 <CardHeader color="danger" stats icon>
                   <CardIcon color="danger">
                     <Icon classes={{ root: classes.iconRoot }}>
                       <img
-                        style={{ height: "50px", marginTop: "-40px" }}
+                        style={{ height: "50px", margin: "5px" }}
                         src={descontente} alt="" />
                     </Icon>
                   </CardIcon>
                   <p className={classes.cardCategory}>Feedbacks Negativos</p>
-                  <h3 className={classes.cardTitle}>{this.handleNegativeFeedback()}</h3>
+                  <h3 className={classes.cardTitle}>{negFeedbacks}</h3>
                 </CardHeader>
 
               </Card>
             </GridItem>
-            <GridItem xs={12} sm={6} md={3}>
+            <GridItem xs={12} sm={3} md={3}>
               <Card>
                 <CardHeader color="warning" stats icon>
                   <CardIcon color="warning">
                     <Icon classes={{ root: classes.iconRoot }}>
                       <img
-                        style={{ height: "50px", marginTop: "-40px" }}
+                        style={{ height: "50px", margin: "5px" }}
                         src={imparcial} alt="" />
                     </Icon>
                   </CardIcon>
@@ -226,7 +320,7 @@ class Dashboard extends Component {
                   <CardIcon color="success">
                     <Icon classes={{ root: classes.iconRoot }}>
                       <img
-                        style={{ height: "50px", marginTop: "-40px" }}
+                        style={{ height: "50px", margin: "5px" }}
                         src={contente} alt="" />
                     </Icon>
                   </CardIcon>
@@ -239,7 +333,7 @@ class Dashboard extends Component {
           </GridContainer>
 
           <GridContainer>
-            {/* <GridItem xs={12} sm={3} md={3}>
+            <GridItem xs={12} sm={3} md={3}>
               <Card chart>
                 <CardHeader color="info">
                   <GaugeChart
@@ -247,7 +341,7 @@ class Dashboard extends Component {
                     nrOfLevels={420}
                     arcsLength={[0.69, 0.1, 0.21]}
                     colors={["#EA4228", "#F5CD19", "#5BE12C"]}
-                    percent={this.handleNPS}
+                    percent={media / 10}
                     hideText={true}
                     needleBaseColor={"#EA4228"}
                     arcPadding={0.01}
@@ -255,10 +349,10 @@ class Dashboard extends Component {
                 </CardHeader>
                 <CardBody>
                   <p className={classes.cardCategory}>Pontos NPS</p>
-                  <h3 className={classes.cardTitle}>{this.handleNPS * 10}</h3>
+                  <h3 className={classes.cardTitle}>{this.handleNPS()}</h3>
                 </CardBody>
               </Card>
-            </GridItem> */}
+            </GridItem>
 
             <GridItem xs={12} sm={3} md={3}>
               <Card chart>

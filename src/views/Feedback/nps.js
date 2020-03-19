@@ -35,7 +35,19 @@ export default class NPS extends Component {
             value={this.state.text}
             onChange={(e) => this.setState({ text: e.target.value })}
           />
-          <button // vamo pro outro
+          <TextField
+            autoComplete="fname"
+            name="name"
+            variant="outlined"
+            value={this.state.name}
+            onChange={this.handleNameInput}
+            required
+            fullWidth
+            id="name"
+            label="Nome da Loja"
+            autoFocus
+          />
+          <button
             onClick={() => this.props.onChange(this.state.text)}
             type="button"
           >Enviar</button>

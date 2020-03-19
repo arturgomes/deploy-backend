@@ -14,11 +14,11 @@ import Poppers from "@material-ui/core/Popper";
 import Divider from "@material-ui/core/Divider";
 // @material-ui/icons
 import Person from "@material-ui/icons/Person";
-import Notifications from "@material-ui/icons/Notifications";
-import Dashboard from "@material-ui/icons/Dashboard";
-import Search from "@material-ui/icons/Search";
+// import Notifications from "@material-ui/icons/Notifications";
+// import Dashboard from "@material-ui/icons/Dashboard";
+// import Search from "@material-ui/icons/Search";
 // core components
-import CustomInput from "../../components/CustomInput/CustomInput.js";
+// import CustomInput from "../../components/CustomInput/CustomInput.js";
 import Button from "../../components/CustomButtons/Button.js";
 
 import styles from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
@@ -31,13 +31,13 @@ export default function AdminNavbarLinks(props) {
   const classes = useStyles();
   const [openNotification, setOpenNotification] = React.useState(null);
   const [openProfile, setOpenProfile] = React.useState(null);
-  const handleClickNotification = event => {
-    if (openNotification && openNotification.contains(event.target)) {
-      setOpenNotification(null);
-    } else {
-      setOpenNotification(event.currentTarget);
-    }
-  };
+  // const handleClickNotification = event => {
+  //   if (openNotification && openNotification.contains(event.target)) {
+  //     setOpenNotification(null);
+  //   } else {
+  //     setOpenNotification(event.currentTarget);
+  //   }
+  // };
   const handleCloseNotification = () => {
     setOpenNotification(null);
   };
@@ -60,23 +60,23 @@ export default function AdminNavbarLinks(props) {
   return (
 
     <div>
-      <div className={classes.searchWrapper}>
+      {/* <div className={classes.searchWrapper}>
         <CustomInput
           formControlProps={{
             className: classes.margin + " " + classes.search
           }}
           inputProps={{
-            placeholder: "Search",
+            placeholder: "Busca",
             inputProps: {
-              "aria-label": "Search"
+              "aria-label": "Busca"
             }
           }}
         />
         <Button color="white" aria-label="edit" justIcon round>
           <Search />
         </Button>
-      </div>
-      <Button
+      </div> */}
+      {/* <Button
         color={window.innerWidth > 959 ? "transparent" : "white"}
         justIcon={window.innerWidth > 959}
         simple={!(window.innerWidth > 959)}
@@ -87,9 +87,9 @@ export default function AdminNavbarLinks(props) {
         <Hidden mdUp implementation="css">
           <p className={classes.linkText}>Dashboard</p>
         </Hidden>
-      </Button>
+      </Button> */}
       <div className={classes.manager}>
-        <Button
+        {/* <Button
           color={window.innerWidth > 959 ? "transparent" : "white"}
           justIcon={window.innerWidth > 959}
           simple={!(window.innerWidth > 959)}
@@ -99,13 +99,13 @@ export default function AdminNavbarLinks(props) {
           className={classes.buttonLink}
         >
           <Notifications className={classes.icons} />
-          {/* <span className={classes.notifications}>5</span> */}
+          <span className={classes.notifications}>5</span>
           <Hidden mdUp implementation="css">
             <p onClick={handleCloseNotification} className={classes.linkText}>
               Notification
             </p>
           </Hidden>
-        </Button>
+        </Button> */}
         <Poppers
           open={Boolean(openNotification)}
           anchorEl={openNotification}

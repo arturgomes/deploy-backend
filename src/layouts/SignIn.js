@@ -76,8 +76,7 @@ export default class SignIn extends Component {
             const { name, id, tu } = response.data.login;
             login(response.data.token, name, id, tu);
 
-
-            this.props.history.push("/");
+            getTu() === '897316929176464ebc9ad085f31e7284' ? this.props.history.push("/customer") : this.props.history.push("/retail");
           } else {
             this.setState({ err: "Usuario ou senha inválidos" });
           }
@@ -157,7 +156,6 @@ export default class SignIn extends Component {
       >
         {/* <Paper className={classes.paper}> */}
         <Grid container
-          container
           spacing={0}
           align="center"
           justify="center"
@@ -165,7 +163,7 @@ export default class SignIn extends Component {
         // style={{ backgroundColor: 'teal' }}
         >
           <div className={useStyles.content}>
-            <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+            <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} alt="" />
             <Avatar className={useStyles.avatar}>
               <LockOutlinedIcon />
             </Avatar>

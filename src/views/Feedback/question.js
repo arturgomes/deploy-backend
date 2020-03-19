@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 // import { QInput, ScoreButton, QuestionBox, PHigh, PSmall } from './styles'
-import { Button, Typography, TextField, ButtonGroup, Container } from "@material-ui/core";
+import { Grid, Button, Typography, TextField, ButtonGroup, } from "@material-ui/core";
 
 export default class Question extends Component {
   state = {
@@ -36,34 +36,38 @@ export default class Question extends Component {
 
       </ >)
     } else if (quest.type === 'text') {
-      fields = (
-        <Container maxWidth="sm" style={{ fontSize: '14px' }}>
-          {/* <QInput> */}
-          <br />
-          <TextField id="outlined-basic"
-            value={this.state.text}
-            multiline
-            rowsMin={3}
-            style={{ minWidth: '100%' }}
-            onChange={(e) => this.setState({ text: e.target.value })} label="descreva aqui em poucas palavras" variant="outlined" />
-          <br />
+      fields = (<>
+        {/* // <Container maxWidth="sm" style={{ fontSize: '14px' }}> */}
+        {/* <QInput> */}
+        <br />
+        <TextField id="filled-basic"
+          value={this.state.text}
+          multiline
+          rowsMin={3}
+          fullWidth
+          onChange={(e) => this.setState({ text: e.target.value })} label="descreva aqui em poucas palavras" />
+        <br />
 
-          <Button
-            // className='btn'
-            onClick={() => this.props.onChange(this.state.text)}
-            style={{ marginTop: 16, marginBottom: 16 }}
-            fullWidth
-            variant="contained"
-            color="primary"
-          >Enviar</Button>
-        </Container>
-      )
+        <Button
+          // className='btn'
+          onClick={() => this.props.onChange(this.state.text)}
+          style={{ marginTop: 16, marginBottom: 16 }}
+          fullWidth
+          variant="contained"
+          color="primary"
+        >Enviar</Button>
+        {/* // </Container> */}
+      </>)
       return (<>
 
         <Typography variant="body1" component="body1">
           {title}
         </Typography>
-        {fields}
+        <Grid container spacing={2}>
+          <Grid item xs={12}>
+            {fields}
+          </Grid>
+        </Grid>
       </>)
     }
 

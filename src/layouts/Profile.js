@@ -1,5 +1,5 @@
 import React from "react";
-import { Switch, Route, Redirect } from "react-router-dom";
+import { Switch, Route } from "react-router-dom";
 // creates a beautiful scrollbar
 import PerfectScrollbar from "perfect-scrollbar";
 import "perfect-scrollbar/css/perfect-scrollbar.css";
@@ -24,7 +24,7 @@ let ps;
 const switchRoutes = (
   <Switch>
     {dashboardRoutes.map((prop, key) => {
-      if (prop.layout === "/dashboard") {
+      if (prop.layout === "/retail" || prop.layout === "/customer") {
         return (
           <Route
             path={prop.layout + prop.path}

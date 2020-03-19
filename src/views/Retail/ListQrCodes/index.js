@@ -1,4 +1,4 @@
-import React, { Component, Fragment } from "react";
+import React, { Component, } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
@@ -17,7 +17,6 @@ import {
   isAuthenticated,
   getId,
   getName,
-  logout
 } from "../../../services/auth";
 // import ReactSpeedometer from 'react-d3-speedometer';
 // import contente from '../../assets/contente@4x.png'

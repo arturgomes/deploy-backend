@@ -9,7 +9,8 @@ import * as Sentry from "@sentry/browser";
 import "./assets/css/material-dashboard-react.css?v=1.8.0";
 import Retail from "./layouts/Retail.js";
 import Customer from "./layouts/Customer.js";
-// import SignUp from "./layouts/SignUp.js";
+import Profile from "./layouts/Profile.js";
+import Feedback from "./layouts/Feedback.js";
 import SignIn from "./layouts/SignIn.js";
 import SignUp from "./layouts/SignUp.js";
 import SignUpRetail from "./layouts/SignUpRetail.js";
@@ -52,7 +53,9 @@ ReactDOM.render(
       <Route path="/login" component={SignIn} />
       <Route path="/signup" component={SignUp} />
       <Route path="/rsignup" component={SignUpRetail} />
+      <Route path="/feed/:id" component={Feedback} />
 
+      <PrivateRoute path="/profile" component={Profile} />
       <PrivateRoute path="/customer" component={Customer} />
       <PrivateRoute path="/retail" component={Retail} />
       {/* <PrivateRoute path="/customer" component={Customer} /> */}

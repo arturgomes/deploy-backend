@@ -1,5 +1,5 @@
-import React, { Component, Fragment } from "react";
-import { List, Container, Box, Button } from "@material-ui/core";
+import React, { Component } from "react";
+import { List } from "@material-ui/core";
 // import { Feed, Icon, Item } from "semantic-ui-react";
 import LinearProgress from '@material-ui/core/LinearProgress';
 
@@ -13,8 +13,7 @@ import api from "../../../services/api";
 import {
   isAuthenticated,
   getId,
-  getName,
-  logout
+  getName
 } from "../../../services/auth";
 // import ReactSpeedometer from 'react-d3-speedometer';
 // import Dashboard from './dashboard/dashboard'
@@ -38,7 +37,6 @@ export default class ListFeedback extends Component {
     await api
       .post("/list", { retail_id: getId() })
       .then(response => {
-
         this.setState({ fb: response.data, isLoading: false });
         // console.log(response.data);
       })

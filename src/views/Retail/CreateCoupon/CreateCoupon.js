@@ -3,7 +3,17 @@ import React, { Link, Component } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 // import InputLabel from "@material-ui/core/InputLabel";
 // core components
+
 import { TextField, } from "@material-ui/core";
+import DatePicker from 'react-datepicker';
+import { parseISO, isAfter } from 'date-fns';
+import { pt } from 'date-fns/locale';
+
+import {
+  MuiPickersUtilsProvider,
+  KeyboardTimePicker,
+  KeyboardDatePicker,
+} from '@material-ui/pickers';
 
 import GridItem from "../../../components/Grid/GridItem.js";
 import GridContainer from "../../../components/Grid/GridContainer.js";
@@ -38,11 +48,8 @@ const useStyles = makeStyles(theme => ({
 
 
 
-export default class CreateShop extends Component {
+export default class CreateCoupon extends Component {
   state = {
-    name: null,
-    manager: null,
-    phone: null,
     done: false,
     error: null,
     sid: null,
@@ -51,42 +58,51 @@ export default class CreateShop extends Component {
   handleSubmit = async event => {
     event.preventDefault();
 
-    await api.post(`/shops`, {
+    await api.post(`/coupon`, {
       name: this.state.name,
-      manager: this.state.manager,
-      phone: this.state.phone,
+      description: this.state.description,
+      discount: this.state.discount,
       retail_id: getId()
     })
       .then(response => {
         this.setState({ done: true, sid: response.data.id })
 
       })
-      .catch(error => { console.log(error); this.setState({ error: error }); });
+      .catch(error => {
+        // console.log(error); 
+        this.setState({ error: error });
+      });
   }
-  handleNameInput = event => {
+  handleNome = event => {
     this.setState({
       name: event.target.value
     })
   }
 
-  handlePhoneInput = event => {
+  handleTypeDiscount = event => {
     this.setState({
-      phone: event.target.value
+      discount: event.target.value
     })
   }
 
-  handleManagerInput = event => {
+  handleDescription = event => {
     this.setState({
-      manager: event.target.value
+      description: event.target.value
     });
   }
-  ß
-  handleLogout = e => {
-    e.preventDefault();
-    // console.log('apeertou')
-    logout();
-    this.props.history.push("/");
-  };
+
+  isValidDate = date => {
+
+    return date == 'dd/mm/yyyy' ||
+      (/^\d{2}\/\d{2}\/\d{4}$/.test(date) && new Date(date).getTime());
+  }
+
+  handleValidade = date => {
+    if (this.isValidDate(date))
+      this.setState({
+        expireDate: date
+      });
+  }
 
 
   render() {
@@ -101,14 +117,14 @@ export default class CreateShop extends Component {
             fontSize: "18px",
             marginTop: "0",
             marginBottom: "10px"
-          }}>Cadastrar nova loja</h4>
+          }}>Cadastrar novo cupom</h4>
           <p style={{
             color: "rgba(255,255,255,.62)",
             margin: "0",
             fontSize: "14px",
             marginTop: "0",
             marginBottom: "0"
-          }}>Oba! Nova loja cadastrada com sucesso!</p>
+          }}>Oba! No cupom cadastrado com sucesso!</p>
 
           {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
         </CardHeader>
@@ -118,7 +134,7 @@ export default class CreateShop extends Component {
               fullWidth
               type="submit"
               color="warning">
-              Cadastrar nova loja?</Button>
+              Cadastrar novo cupom?</Button>
           </Link>
         </CardFooter>
       </Card>)
@@ -141,30 +157,27 @@ export default class CreateShop extends Component {
                     fontSize: "18px",
                     marginTop: "0",
                     marginBottom: "10px"
-                  }}>Cadastrar nova loja</h4>
+                  }}>Cadastrar novo cupom</h4>
                   <p style={{
                     color: "rgba(255,255,255,.62)",
                     margin: "0",
                     fontSize: "14px",
                     marginTop: "0",
                     marginBottom: "0"
-                  }}>Vamos lá, preencha aqui os dados sobre a nova loja a ser cadastrada.</p>
-
-                  {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
+                  }}>Vamos lá, preencha aqui os dados sobre a novo cupom a ser cadastrado.</p>
                 </CardHeader>
                 <CardBody>
                   {error ? <div className="divError">{error}</div> : ``}
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={12}>
                       <TextField
-                        autoComplete="fname"
                         name="name"
                         value={this.state.name}
-                        onChange={this.handleNameInput}
+                        onChange={this.handleNome}
                         required
                         fullWidth
                         id="name"
-                        label="Nome da Loja"
+                        label="Nome do cupom"
                       />
                     </GridItem>
                   </GridContainer>
@@ -173,25 +186,34 @@ export default class CreateShop extends Component {
                       <TextField
                         required
                         fullWidth
-                        id="phone"
-                        label="Telefone"
-                        placeholder="(__) __________"
-                        onChange={this.handlePhoneInput}
-                        value={this.state.phone}
-                        name="phone"
-                        autoComplete="phone"
+                        id="discount"
+                        label="Desconto"
+                        onChange={this.handleTypeDiscount}
+                        value={this.state.discount}
+                        name="discount"
                       />
                     </GridItem>
                     <GridItem xs={12} sm={12} md={6}>
                       <TextField
                         required
                         fullWidth
-                        name="manager"
+                        name="description"
                         style={{ marginBottom: 16 }}
-                        label="Gerente"
-                        onChange={this.handleManagerInput}
-                        value={this.state.manager}
+                        label="Descrição do Cupom"
+                        onChange={this.handleDescription}
+                        value={this.state.description}
                         autoComplete="fname"
+                      />
+                    </GridItem>
+                    <GridItem xs={12} sm={12} md={6}>
+                      <TextField
+                        required
+                        fullWidth
+                        name="expireDate"
+                        style={{ marginBottom: 16 }}
+                        label="Validade"
+                        onChange={this.handleValidade}
+                        value={this.state.expireDate}
                       />
                     </GridItem>
                   </GridContainer>

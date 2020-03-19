@@ -118,7 +118,7 @@ export default class SignUp extends Component {
     });
   }
   render() {
-    const err = this.state.error;
+    // const err = this.state.error;
 
     if (this.state.done && !this.state.error) {
       return (
@@ -133,7 +133,6 @@ export default class SignUp extends Component {
           >
             {/* <Paper className={useStyles.paper}> */}
             <Grid container
-              container
               spacing={0}
               align="center"
               justify="center"
@@ -141,7 +140,7 @@ export default class SignUp extends Component {
             // style={{ backgroundColor: 'teal' }}
             >
               <div className={useStyles.content}>
-                <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+                <img src={logo} alt="" style={{ width: '300px', paddingBottom: '70px' }} />
 
 
                 <GridContainer>
@@ -186,7 +185,6 @@ export default class SignUp extends Component {
         >
           {/* <Paper className={useStyles.paper}> */}
           <Grid container
-            container
             spacing={0}
             align="center"
             justify="center"
@@ -196,7 +194,7 @@ export default class SignUp extends Component {
             <div className={useStyles.content}>
               <Link
                 href="/" variant="body2">
-                <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} />
+                <img src={logo} alt="" style={{ width: '300px', paddingBottom: '70px' }} />
               </Link>
 
 
@@ -343,7 +341,7 @@ export default class SignUp extends Component {
                           <GridItem xs={12} sm={12} md={12}>
 
                             <Link
-                              href="/signin" variant="body2">
+                              href="/login" variant="body2">
                               {"Já é cadastrado? Faça já o seu login!"}
                             </Link>
                           </GridItem>

@@ -1,4 +1,4 @@
-import React, { useRef, useEffect, useState } from "react";
+import React, { useState } from "react";
 
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import PerfectScrollbar from "perfect-scrollbar";
@@ -23,13 +23,13 @@ import "./css/styles.css";
 import Header from "../../components/Header/Header.js";
 import HeaderLinks from "../../components/Header/HeaderLinks.js";
 
-import sv1 from "./images/services-icon-1.svg"
-import sv2 from "./images/services-icon-2.svg"
-import sv3 from "./images/services-icon-3.svg"
+// import sv1 from "./images/services-icon-1.svg"
+// import sv2 from "./images/services-icon-2.svg"
+// import sv3 from "./images/services-icon-3.svg"
 import feedback from "./images/feedback.svg";
 
-import logo from "../../assets/img/completa_fundo_escuro@4x.png";
-import { isAuthenticated, getTu } from '../../services/auth'
+// import logo from "../../assets/img/completa_fundo_escuro@4x.png";
+// import { isAuthenticated, getTu } from '../../services/auth'
 const dashboardRoutes = [];
 
 let ps;
@@ -66,13 +66,13 @@ export default function LandingPage(props) {
     };
   }, [mainPanel]);
 
-  const [headerStyle, setHeaderStyle] = useState({
+  const [headerStyle] = useState({
     transition: 'all 200ms ease-in'
   })
 
   useScrollPosition(
     ({ prevPos, currPos }) => {
-      const isVisible = currPos.y > prevPos.y
+      // const isVisible = currPos.y > prevPos.y
 
       // const shouldBeStyle = isVisible ? {
       //   backgroundColor: 'transparent',

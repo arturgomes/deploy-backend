@@ -11,6 +11,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
+import { isAuthenticated, getTu } from '../../services/auth';
 
 // @material-ui/icons
 import { Apps, CloudDownload } from "@material-ui/icons";
@@ -38,6 +39,13 @@ export default function HeaderLinks(props) {
         <ListItem className={classes.listItem}>
           <AnchorLink className={classes.dropdownLink} href="#pricing">Preços</AnchorLink>
         </ListItem>
+        {isAuthenticated() ?
+          (<ListItem className={classes.listItem}>
+            <a className={classes.dropdownLink} href={getTu() === '897316929176464ebc9ad085f31e7284' ? "/customer" : "/retail"}>Seu perfil</a>
+          </ListItem>) :
+          (<ListItem className={classes.listItem}>
+            <a className={classes.dropdownLink} href="/login">Login</a>
+          </ListItem>)}
 
         {/* <ListItem className={classes.listItem}>
           <AnchorLink className={classes.dropdownLink} href="#about" id="navbarDropdown" role="button"

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import { MdContentCopy } from "react-icons/md";
 
 // react plugin for creating charts
 import ChartistGraph from "react-chartist";
@@ -159,7 +160,7 @@ class Dashboard extends Component {
               <Card>
                 <CardHeader color="info" stats icon>
                   <CardIcon color="info">
-                    <Icon>content_copy</Icon>
+                    <MdContentCopy />
                   </CardIcon>
                   <p className={classes.cardCategory}>Total de Feedbacks</p>
                   <h3 className={classes.cardTitle}>
