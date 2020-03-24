@@ -1,36 +1,18 @@
 import React, { Component } from "react";
 
+
+
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { MdContentCopy } from "react-icons/md";
 import GaugeChart from 'react-gauge-chart'
 
-// react plugin for creating charts
 import ChartistGraph from "react-chartist";
-// @material-ui/core
 import Icon from "@material-ui/core/Icon";
-// import SpeedIcon from "@material-ui/icons/Speed";
-
-// @material-ui/icons
-// import Store from "@material-ui/icons/Store";
-// import Warning from "@material-ui/icons/Warning";
-// import DateRange from "@material-ui/icons/DateRange";
-// import LocalOffer from "@material-ui/icons/LocalOffer";
-// import Update from "@material-ui/icons/Update";
-// import ArrowUpward from "@material-ui/icons/ArrowUpward";
-// import AccessTime from "@material-ui/icons/AccessTime";
-// import Accessibility from "@material-ui/icons/Accessibility";
-// import BugReport from "@material-ui/icons/BugReport";
-// import Code from "@material-ui/icons/Code";
-// import Cloud from "@material-ui/icons/Cloud";
 // core components
 import GridItem from "../../../components/Grid/GridItem.js";
 import GridContainer from "../../../components/Grid/GridContainer.js";
-// import Table from "components/Table/Table.js";
-// import Tasks from "components/Tasks/Tasks.js";
-// import CustomTabs from "components/CustomTabs/CustomTabs.js";
-// import Danger from "components/Typography/Danger.js";
 import Card from "../../../components/Card/Card.js";
 import CardHeader from "../../../components/Card/CardHeader.js";
 import CardIcon from "../../../components/Card/CardIcon.js";
@@ -43,7 +25,6 @@ import api from "../../../services/api";
 import {
   getId,
 } from "../../../services/auth";
-// import { bugs, website, server } from "variables/general.js";
 
 import {
   feedbacksPorDia,
@@ -80,6 +61,7 @@ class Dashboard extends Component {
           average,
           dados
         } = response.data
+        console.log(dados)
         this.setState({
           posFeedbacks,
           negFeedbacks,
@@ -89,7 +71,7 @@ class Dashboard extends Component {
           isLoading: false,
           dados
         })
-        console.log(this.state)
+        // console.log(this.state)
 
       })
       .catch(error => {
@@ -111,7 +93,15 @@ class Dashboard extends Component {
         }
       });
   }
-
+  handleDataGraph = () => {
+    // const data = {
+    //   labels: [],
+    //   // labels: ["J", "F", "M", "A", "M", "J", "J", "A", "S", "O", "N", "D"],
+    //   series:[]
+    //   // series: [[1861, 292, 2698, 2856, 998, 189, 295, 1412, 616, 544, 1832, 480]]
+    // }
+    return {}
+  }
 
   handleTotalFeedback = () => {
     return this.state.totalFeedbacks;

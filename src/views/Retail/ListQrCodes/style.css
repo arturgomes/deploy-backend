@@ -1,0 +1,39 @@
+/* Default left, right, top, bottom margin is 2cm */
+@page { margin: 2cm;
+justify-content: center; } 
+
+/* First page, 10 cm margin on top */
+@page :first {
+  margin-top: 10cm;
+}
+
+/* Left pages, a wider margin on the left */
+@page :left {
+  margin-left: 2cm;
+  margin-right: 2cm;
+}
+
+@page :right {
+  margin-left: 2cm;
+  margin-right: 2cm;
+}
+.main {
+  background-color: lightcoral;
+  display: flex;
+  flex-direction: column;
+  /* margin: auto; */
+  /* grid-template-columns: min-content max-content; */
+  /* grid-template-rows: min-content 1fr min-content; */
+  /* grid-template-areas: 'a a' */
+                        /* 'b c'
+                        'd d';
+  grid-gap: 1em; */
+  /* justify-content: center; */
+  align-items: center;
+  text-align: center;
+}
+
+img.print, svg.print {
+  /* display: block; */
+  max-width: 100%;
+}

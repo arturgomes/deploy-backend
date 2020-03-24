@@ -7,24 +7,16 @@ import ExpansionPanelDetails from "@material-ui/core/ExpansionPanelDetails";
 import Typography from "@material-ui/core/Typography";
 import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LinearProgress from '@material-ui/core/LinearProgress';
-
-
 import QrCode from "qrcode.react";
-// import '../../App.css';
 import api from "../../../services/api";
+import cflogo from "../../../assets/img/completa_fundo_claro@4x.png"
 
 import {
   isAuthenticated,
   getId,
   getName,
 } from "../../../services/auth";
-// import ReactSpeedometer from 'react-d3-speedometer';
-// import contente from '../../assets/contente@4x.png'
-// import imparcial from '../../assets/imparcial1@4x.png'
-// import descontente from '../../assets/descontente@4x.png'
-// import Dashboard from './dashboard/dashboard'
-// import Main from './DemoPages/Main';
-// import styles from "../../../assets/jss/material-dashboard-react/layouts/adminStyle.js";
+
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -37,21 +29,54 @@ const useStyles = makeStyles(theme => ({
   heading: {
     fontSize: theme.typography.pxToRem(15),
     fontWeight: theme.typography.fontWeightRegular
+  },
+  print:{
+    alignContent:'center'
   }
 }));
+
+// // Create styles
+// const styles = StyleSheet.create({
+//   page: {
+//     flexDirection: 'row',
+//     backgroundColor: '#E4E4E4'
+//   },
+//   section: {
+//     margin: 10,
+//     padding: 10,
+//     flexGrow: 1
+//   }
+// });
 
 class Demo extends Component {
 
   render() {
     return (
       <div>
-        <QrCode size={500} renderAs='svg' value={this.props.link} />
+        <QrCode size={300} renderAs='svg' value={this.props.link} />
+      </div>
+    );
+  }
+}
+
+class ComponentToPrint extends React.Component {
+  render() {
+    return (
+      
+      <div className="main">
+        <div >
+          <img src={cflogo} alt=""></img>
+        </div>
+        <div >
+                <Demo link={this.props.link} />
+        </div>
+        <div >
+        </div>
       </div>
     );
   }
 }
 export default class ListQrCodes extends Component {
-
 
   state = {
     qr: [],
@@ -91,7 +116,17 @@ export default class ListQrCodes extends Component {
   componentWillUnmount() {
     this._isMounted = false;
   }
+  handleMyQR = event =>{
 
+
+  }
+
+  openInNewTab = (url) => {
+    var win = window.open(url, '_blank');
+    win.focus();
+  }
+  
+  
   render() {
     let listShops;
     if (isAuthenticated()) {
@@ -99,7 +134,7 @@ export default class ListQrCodes extends Component {
 
       listShops = Object.keys(this.state.qr).map(key => {
         const { name, id } = this.state.qr[key];
-        const link = `http://couponfeed.co/feed/${id}`;
+        const link = `https://couponfeed.co/feed/${id}`;
         return (
           <>
             <ExpansionPanel key={key}>
@@ -114,6 +149,19 @@ export default class ListQrCodes extends Component {
               </ExpansionPanelSummary>
               <ExpansionPanelDetails>
                 <Demo link={link} />
+                <div>
+                <a onClick={() => this.openInNewTab(`/print-qr/${id}`)}>Imprimir Código</a>
+                  {/* <ReactToPrint
+                    trigger={() => openInNewTab('https://www.google.com')}
+                    trigger={() => <a onClick={() => this.openInNewTab('https://www.google.com')}>Imprimir Código</a>}
+                    trigger={() => <a href="#" onClick={this.handleMyQR}>Imprimir Código</a>}
+                    content={() => this.componentRef}
+                  /> */}
+                  <div style={{ display: "none" }}>
+                    <ComponentToPrint link={link} ref={el => (this.componentRef = el)} />
+                    </div>
+                </div>
+                
               </ExpansionPanelDetails>
             </ExpansionPanel>
           </>

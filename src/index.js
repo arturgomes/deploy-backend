@@ -10,6 +10,7 @@ import "./assets/css/material-dashboard-react.css?v=1.8.0";
 import Retail from "./layouts/Retail.js";
 import Customer from "./layouts/Customer.js";
 import Profile from "./layouts/Profile.js";
+import PrintQR from "./layouts/PrintQR.js";
 import Feedback from "./layouts/Feedback.js";
 import SignIn from "./layouts/SignIn.js";
 import SignUp from "./layouts/SignUp.js";
@@ -54,6 +55,7 @@ ReactDOM.render(
       <Route path="/signup" component={SignUp} />
       <Route path="/rsignup" component={SignUpRetail} />
       <Route path="/feed/:id" component={Feedback} />
+      <Route path="/print-qr/:id" component={PrintQR} />
 
       <PrivateRoute path="/profile" component={Profile} />
       <PrivateRoute path="/customer" component={Customer} />

@@ -95,6 +95,7 @@ export default class SignIn extends Component {
     // return response;
 
   }
+  
   async componentDidMount() {
     const qs = decodeURIComponent(this.props.match.params.id);
     const response = await api.post(`/feed/${qs}/f`);

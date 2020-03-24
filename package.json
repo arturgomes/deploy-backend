@@ -125,6 +125,7 @@
     "react-scrollspy": "^3.3.5",
     "react-simple-maps": "^0.12.1",
     "react-sizeme": "^2.5.2",
+    "react-to-print": "^2.6.3",
     "react-toastify": "^4.5.2",
     "react-transition-group": "^2.5.3",
     "react.qrcode.generator": "^0.0.3",
