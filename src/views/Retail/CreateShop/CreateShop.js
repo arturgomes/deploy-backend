@@ -1,4 +1,4 @@
-import React, { Link, Component } from "react";
+import React, { Component } from "react";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 // import InputLabel from "@material-ui/core/InputLabel";
@@ -39,27 +39,35 @@ const useStyles = makeStyles(theme => ({
 
 
 export default class CreateShop extends Component {
+
   state = {
-    name: null,
-    manager: null,
-    phone: null,
-    done: false,
+    name: '',
+    manager: '',
+    phone: '',
+    done: 'false',
     error: null,
-    sid: null,
-    finished: false
   }
+  
   handleSubmit = async event => {
     event.preventDefault();
-
+    console.log({
+      name: this.state.name,
+      manager: this.state.manager,
+      phone: this.state.phone,
+      retail_id: getId(),
+      short_url:this.getrandom()
+    })
     await api.post(`/shops`, {
       name: this.state.name,
       manager: this.state.manager,
       phone: this.state.phone,
-      retail_id: getId()
+      retail_id: getId(),
+      short_url:this.getrandom()
     })
       .then(response => {
-        this.setState({ done: true, sid: response.data.id })
-
+        if(response.status === 200){
+          this.setState({ done: 'true' })
+        }
       })
       .catch(error => { console.log(error); this.setState({ error: error }); });
   }
@@ -87,12 +95,19 @@ export default class CreateShop extends Component {
     logout();
     this.props.history.push("/");
   };
+  getrandom = () => {
+    let text = "";
+    const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
+    for (let i = 0; i < 5; i++)
+        text += possible.charAt(Math.floor(Math.random() * possible.length));
+    return text;
+  }
 
   render() {
-    const { error } = this.state;
+    // const { error } = this.state;
 
-    if (this.state.done) {
+    if (this.state.done === 'true') {
       return (<Card>
         <CardHeader color="success">
           <h4 style={{
@@ -102,24 +117,26 @@ export default class CreateShop extends Component {
             marginTop: "0",
             marginBottom: "10px"
           }}>Cadastrar nova loja</h4>
-          <p style={{
-            color: "rgba(255,255,255,.62)",
-            margin: "0",
-            fontSize: "14px",
-            marginTop: "0",
-            marginBottom: "0"
-          }}>Oba! Nova loja cadastrada com sucesso!</p>
+         
 
           {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
         </CardHeader>
         <CardFooter>
-          <Link to="/retail/shop">
+        <p style={{
+            color: "#000",
+            margin: "0",
+            fontSize: "18px",
+            marginTop: "0",
+            marginBottom: "0"
+          }}>Oba! Nova loja cadastrada com sucesso!</p>
+          
+          {/* <Link to="/retail/shop">
             <Button
               fullWidth
               type="submit"
               color="warning">
               Cadastrar nova loja?</Button>
-          </Link>
+          </Link> */}
         </CardFooter>
       </Card>)
     }
@@ -153,7 +170,7 @@ export default class CreateShop extends Component {
                   {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
                 </CardHeader>
                 <CardBody>
-                  {error ? <div className="divError">{error}</div> : ``}
+                  {/* {error ? <div className="divError">{error}</div> : ``} */}
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={12}>
                       <TextField

@@ -11,6 +11,7 @@ import Retail from "./layouts/Retail.js";
 import Customer from "./layouts/Customer.js";
 import Profile from "./layouts/Profile.js";
 import PrintQR from "./layouts/PrintQR.js";
+import Shortner from "./layouts/Shortner.js";
 import Feedback from "./layouts/Feedback.js";
 import SignIn from "./layouts/SignIn.js";
 import SignUp from "./layouts/SignUp.js";
@@ -55,6 +56,7 @@ ReactDOM.render(
       <Route path="/signup" component={SignUp} />
       <Route path="/rsignup" component={SignUpRetail} />
       <Route path="/feed/:id" component={Feedback} />
+      <Route path="/f/:code" component={Shortner} />
       <Route path="/print-qr/:id" component={PrintQR} />
 
       <PrivateRoute path="/profile" component={Profile} />

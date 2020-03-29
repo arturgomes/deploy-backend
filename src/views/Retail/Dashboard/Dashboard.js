@@ -61,7 +61,7 @@ class Dashboard extends Component {
           average,
           dados
         } = response.data
-        console.log(dados)
+        // console.log(dados)
         this.setState({
           posFeedbacks,
           negFeedbacks,

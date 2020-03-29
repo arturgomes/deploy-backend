@@ -1,5 +1,6 @@
 import React, { Component, } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import { Button } from "@material-ui/core";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -9,7 +10,6 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import QrCode from "qrcode.react";
 import api from "../../../services/api";
-import cflogo from "../../../assets/img/completa_fundo_claro@4x.png"
 
 import {
   isAuthenticated,
@@ -35,18 +35,6 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-// // Create styles
-// const styles = StyleSheet.create({
-//   page: {
-//     flexDirection: 'row',
-//     backgroundColor: '#E4E4E4'
-//   },
-//   section: {
-//     margin: 10,
-//     padding: 10,
-//     flexGrow: 1
-//   }
-// });
 
 class Demo extends Component {
 
@@ -59,23 +47,6 @@ class Demo extends Component {
   }
 }
 
-class ComponentToPrint extends React.Component {
-  render() {
-    return (
-      
-      <div className="main">
-        <div >
-          <img src={cflogo} alt=""></img>
-        </div>
-        <div >
-                <Demo link={this.props.link} />
-        </div>
-        <div >
-        </div>
-      </div>
-    );
-  }
-}
 export default class ListQrCodes extends Component {
 
   state = {
@@ -150,16 +121,7 @@ export default class ListQrCodes extends Component {
               <ExpansionPanelDetails>
                 <Demo link={link} />
                 <div>
-                <a onClick={() => this.openInNewTab(`/print-qr/${id}`)}>Imprimir Código</a>
-                  {/* <ReactToPrint
-                    trigger={() => openInNewTab('https://www.google.com')}
-                    trigger={() => <a onClick={() => this.openInNewTab('https://www.google.com')}>Imprimir Código</a>}
-                    trigger={() => <a href="#" onClick={this.handleMyQR}>Imprimir Código</a>}
-                    content={() => this.componentRef}
-                  /> */}
-                  <div style={{ display: "none" }}>
-                    <ComponentToPrint link={link} ref={el => (this.componentRef = el)} />
-                    </div>
+                <Button onClick={() => this.openInNewTab(`/print-qr/${id}`)}>Imprimir Código</Button>
                 </div>
                 
               </ExpansionPanelDetails>
