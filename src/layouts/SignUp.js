@@ -297,44 +297,25 @@ export default class SignUp extends Component {
                               label="Nome"
                               autoFocus
                             />
-                            {/* <CustomInput
-                              labelText="Nome"
-                              id="first-name"
-                              value={this.state.name}
-                              onChange={this.handleNameInput}
-                              formControlProps={{
-                                fullWidth: true
-                              }}
-                            /> */}
+                           
                           </GridItem>
 
                         </GridContainer>
                         <GridContainer>
                           <GridItem xs={12} sm={12} md={6}>
                             <TextField
-                              // variant="outlined"
                               required
                               fullWidth
                               name="cpf"
-                              // style={{ marginBottom: 16 }}
                               label="CPF"
                               onChange={this.handleCPFInput}
                               value={this.state.cpf}
                               autoComplete="fname"
                             />
-                            {/* <CustomInput
-                              labelText="CPF"
-                              id="cpf"
-                              onChange={this.handleCPFInput}
-                              value={this.state.cpf}
-                              formControlProps={{
-                                fullWidth: true
-                              }}
-                            /> */}
+                           
                           </GridItem>
                           <GridItem xs={12} sm={12} md={6}>
                             <TextField
-                              // variant="outlined"
                               required
                               fullWidth
                               id="phone"
@@ -345,40 +326,21 @@ export default class SignUp extends Component {
                               name="phone"
                               autoComplete="phone"
                             />
-                            {/* <CustomInput
-                              labelText="Telefone"
-                              placeholder="(__) __________"
-                              onChange={this.handlePhoneInput}
-                              value={this.state.phone}
-                              id="email-address"
-                              formControlProps={{
-                                fullWidth: true
-                              }}
-                            /> */}
+                            
                           </GridItem>
                         </GridContainer>
                         <GridContainer>
                           <GridItem xs={12} sm={12} md={6}>
                             <TextField
-                              // variant="outlined"
                               required
                               fullWidth
                               name="email"
-                              style={{ marginBottom: 16 }}
                               label="Endereço de Email"
                               onChange={this.handleEmailInput}
                               value={this.state.email}
                               autoComplete="fname"
                             />
-                            {/* <CustomInput
-                              labelText="Endereço de Email"
-                              id="email-address"
-                              onChange={this.handleEmailInput}
-                              value={this.state.email}
-                              formControlProps={{
-                                fullWidth: true
-                              }}
-                            /> */}
+                           
                           </GridItem>
                           <GridItem xs={12} sm={12} md={6}>
                             <TextField

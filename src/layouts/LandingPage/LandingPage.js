@@ -1,11 +1,13 @@
 import React, { useState } from "react";
+import { makeStyles } from "@material-ui/core/styles";
 
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import PerfectScrollbar from "perfect-scrollbar";
 
 import { FaQrcode, FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
 
-
+import List from "@material-ui/core/List";
+import ListItem from "@material-ui/core/ListItem";
 //Material.ui
 import QueryBuilderOutlinedIcon from '@material-ui/icons/QueryBuilderOutlined'; //clock
 import TransferWithinAStationIcon from '@material-ui/icons/TransferWithinAStation';
@@ -20,17 +22,17 @@ import "./css/fontawesome.css";
 import "./css/swiper.css";
 import "./css/magnific-popup.css";
 import "./css/styles.css";
+
 import Header from "../../components/Header/Header.js";
-import HeaderLinks from "../../components/Header/HeaderLinks.js";
+import Button from "../../components/CustomButtons/Button.js";
+import styles from '../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle'
+import Parallax from "../../components/Parallax/Parallax.js";
 
-// import sv1 from "./images/services-icon-1.svg"
-// import sv2 from "./images/services-icon-2.svg"
-// import sv3 from "./images/services-icon-3.svg"
 import feedback from "./images/feedback.svg";
+import { isAuthenticated, getTu } from '../../services/auth';
 
-// import logo from "../../assets/img/completa_fundo_escuro@4x.png";
-// import { isAuthenticated, getTu } from '../../services/auth'
-const dashboardRoutes = [];
+const useStyles = makeStyles(styles);
+
 
 let ps;
 
@@ -92,10 +94,11 @@ export default function LandingPage(props) {
     },
     [headerStyle]
   )
+  const classes = useStyles();
 
   return (
     <>
-      <Header
+      {/* <Header
         color="transparent"
         routes={dashboardRoutes}
         brand={slogan}
@@ -106,7 +109,63 @@ export default function LandingPage(props) {
           color: "white"
         }}
         {...rest}
-      />
+      /> */}
+      <Header
+            brand={slogan}
+            fixed
+            changeColorOnScroll={{
+              height: 400,
+              color: "white"
+            }}
+            rightLinks={<>
+              {/* <HeaderLinks/> */}
+              <List className={classes.list}>
+                {/* <ListItem className={classes.listItem}>
+                  <Button
+                    href="#header"
+                    className={classes.navLink}
+                    onClick={e => e.preventDefault()}
+                    color="transparent"
+                  >
+                    Contato
+                  </Button>
+                </ListItem> */}
+                {isAuthenticated() ?
+               ( <ListItem className={classes.listItem}>
+                  <Button
+                    href={getTu() === '897316929176464ebc9ad085f31e7284' ? "/customer" : "/retail"}
+                    className={classes.navLink}
+                    onClick={e => e.preventDefault()}
+                    color="transparent"
+                  >
+                    Seu Perfil
+                  </Button>
+                </ListItem>):
+                 (<ListItem className={classes.listItem}>
+                 <Button
+                   href="/login"
+                   className={classes.navLink}
+                   onClick={e => e.preventDefault()}
+                   color="transparent"
+                 >
+                   Área do cliente
+                 </Button>
+               </ListItem>)
+                }
+                <ListItem className={classes.listItem}>
+                  <Button
+                    href="/signup"
+                    className={classes.registerNavLink}
+                    onClick={e => e.preventDefault()}
+                    color="rose"
+                    round
+                  >
+                    Registre-se
+                  </Button>
+                </ListItem>
+              </List></>
+            }
+          />
       {/* <nav
         style={{ ...headerStyle }}
         className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" >
@@ -179,6 +238,8 @@ export default function LandingPage(props) {
 
       <header id="header" className="header" >
         <div className="header-content">
+      <Parallax >
+
           <div className="container">
             <div className="row">
               <div className="col-lg-6">
@@ -199,6 +260,7 @@ export default function LandingPage(props) {
               </div>
             </div>
           </div>
+    	</Parallax>
         </div>
       </header >
 

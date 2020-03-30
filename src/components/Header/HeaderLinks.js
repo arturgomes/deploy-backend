@@ -13,8 +13,6 @@ import ListItem from "@material-ui/core/ListItem";
 import Tooltip from "@material-ui/core/Tooltip";
 import { isAuthenticated, getTu } from '../../services/auth';
 
-// @material-ui/icons
-import { Apps, CloudDownload } from "@material-ui/icons";
 
 // core components
 import CustomDropdown from "../CustomDropdown/CustomDropdown.js";
@@ -29,22 +27,29 @@ export default function HeaderLinks(props) {
   return (
     <>
       <List className={classes.list}>
-        <ListItem className={classes.listItem}>
+        {/* <ListItem className={classes.listItem}>
           <AnchorLink className={classes.dropdownLink} href="#header">Inicio <span className="sr-only">(atual)</span></AnchorLink>
-          {/* <AnchorLink className={classes.dropdownLink} href="#header">Inicio <span className="sr-only">(atual)</span></AnchorLink> */}
         </ListItem>
         <ListItem className={classes.listItem}>
           <AnchorLink className={classes.dropdownLink} href="#services">Serviços</AnchorLink>
         </ListItem>
         <ListItem className={classes.listItem}>
           <AnchorLink className={classes.dropdownLink} href="#pricing">Preços</AnchorLink>
+        </ListItem> 
+        */}
+        {/* <ListItem className={classes.listItem}>
+          <AnchorLink className={classes.dropdownLink} href="#pricing">Preços</AnchorLink>
+        </ListItem>  */}
+        
+        <ListItem className={classes.listItem}>
+          <AnchorLink className="btn-solid-lg1" href="#contact">Contato</AnchorLink>
         </ListItem>
         {isAuthenticated() ?
           (<ListItem className={classes.listItem}>
-            <a className={classes.dropdownLink} href={getTu() === '897316929176464ebc9ad085f31e7284' ? "/customer" : "/retail"}>Seu perfil</a>
+            <a className="btn-solid-lg" href={getTu() === '897316929176464ebc9ad085f31e7284' ? "/customer" : "/retail"}>Ver seu perfil</a>
           </ListItem>) :
           (<ListItem className={classes.listItem}>
-            <a className={classes.dropdownLink} href="/login">Login</a>
+            <a className={classes.dropdownLinkD} href="/login">Área do cliente</a>
           </ListItem>)}
 
         {/* <ListItem className={classes.listItem}>
@@ -58,9 +63,6 @@ export default function HeaderLinks(props) {
                                 Privacidade</span></AnchorLink>
           </div>
         </ListItem> */}
-        <ListItem className={classes.listItem}>
-          <AnchorLink className={classes.dropdownLink} href="#contact">Contato</AnchorLink>
-        </ListItem>
         {/* 
         <ListItem className={classes.listItem}>
           <Tooltip

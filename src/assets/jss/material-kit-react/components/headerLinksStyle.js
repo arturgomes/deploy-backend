@@ -11,7 +11,7 @@ const headerLinksStyle = theme => ({
     listStyle: "none",
     paddingTop: "0",
     paddingBottom: "0",
-    color: "inherit"
+    color: "inherit",
   },
   listItem: {
     float: "left",
@@ -19,7 +19,7 @@ const headerLinksStyle = theme => ({
     position: "relative",
     display: "block",
     width: "auto",
-    margin: "0",
+    margin: "0 10px",
     padding: "0",
     [theme.breakpoints.down("sm")]: {
       width: "100%",
@@ -102,6 +102,17 @@ const headerLinksStyle = theme => ({
   },
   dropdownLink: {
     "&,&:hover,&:focus": {
+      color: "inherit",
+      textDecoration: "none",
+      display: "block",
+      padding: "10px 20px"
+    }
+  },
+
+  dropdownLinkD: {
+    "&,&:hover,&:focus": {
+      backgroundColor:"#2ecc71",
+      borderRadius:"20px",
       color: "inherit",
       textDecoration: "none",
       display: "block",

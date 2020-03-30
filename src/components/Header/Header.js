@@ -94,7 +94,8 @@ export default function Header(props) {
           anchor={"right"}
           open={mobileOpen}
           classes={{
-            paper: classes.drawerPaper
+            // root:{backgroundColor:"#fff"},
+            paper: classes.white
           }}
           onClose={handleDrawerToggle}
         >
