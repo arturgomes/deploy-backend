@@ -55,7 +55,7 @@ export default function AdminNavbarLinks(props) {
   };
 
   if (!isAuthenticated())
-    return (<Redirect to="/signin" />)
+    return (<Redirect to="/login" />)
 
   return (
 
