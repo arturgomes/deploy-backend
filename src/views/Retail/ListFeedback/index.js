@@ -10,6 +10,14 @@ import descontente from "../../../assets/img/descontente@4x.png";
 import imparcial from "../../../assets/img/imparcial@4x.png";
 import api from "../../../services/api";
 
+import GridItem from "../../../components/Grid/GridItem.js";
+import GridContainer from "../../../components/Grid/GridContainer.js";
+// import CustomInput from "../components/CustomInput/CustomInput.js";
+import Button from "../../../components/CustomButtons/Button.js";
+import Card from "../../../components/Card/Card.js";
+import CardHeader from "../../../components/Card/CardHeader.js";
+import CardFooter from "../../../components/Card/CardFooter.js";
+import CardBody from "../../../components/Card/CardBody.js";
 import {
   isAuthenticated,
   getId,
@@ -103,8 +111,36 @@ export default class ListFeedback extends Component {
     else {
       return (
         <>
-          <h6>Listando todos os feedbacks de {getName()}</h6>
+          <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="success">
+                <h4 style={{
+                  color: "rgba(255,255,255,1)",
+                  margin: "0",
+                  fontSize: "18px",
+                  marginTop: "0",
+                  marginBottom: "10px"
+                }}>Listar QR Codes</h4>
+                <p style={{
+                  color: "rgba(255,255,255,.62)",
+                  margin: "0",
+                  fontSize: "14px",
+                  marginTop: "0",
+                  marginBottom: "0"
+                }}>Listando todos os feedbacks de {getName()}</p>
+
+                {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
+              </CardHeader>
+              <CardBody>
           <List>{listItems}</List>
+
+          </CardBody>
+              <CardFooter>
+              </CardFooter>
+            </Card>
+        </GridItem>
+      </GridContainer>
         </>
       );
     }

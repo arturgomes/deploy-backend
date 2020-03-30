@@ -18,31 +18,40 @@ class Demo extends Component {
   }
 }
 
-
 export default class PrintQR extends Component {
 
   state = {
-    name: null,
-    id:null,
-    isLoading: true
+    name: '',
+    id:'',
+    retail_id:'',
+    isLoading: true,
+    url:''
   };
 
   async componentDidMount() {
     const qs = decodeURIComponent(this.props.match.params.id);
-    const response = await api.post(`/store/${qs}`);
+    const response = await api.post(`/shopsl`,{shop_id: qs});
     if (!response.error) {
-      const {name} = response.data;
-      // console.log(response)
+      const {retail_id,name} = response.data;
       this.setState({
         name,
-        id:qs
+        id:qs,
+        retail_id
       }, () => { });
-      // console.log("componentDidMount: ", this.state.questions);
 
     }
     else {
       this.setState({ error: "Loja não encontrada" })
     }
+    const res = await api.post(`/files/${this.state.retail_id}`);
+    if (!res.error) {
+      const {url} = res.data[0];
+      console.log();
+      this.setState({url})
+    }
+
+
+
   }
 
     componentWillUnmount() {
@@ -61,13 +70,13 @@ export default class PrintQR extends Component {
 
   render(){
     const { id } = this.props.match.params;
-    console.log(id);
     const link = `https://couponfeed.co/feed/${id}`
 
     return (
       <div className="main">
           <div className="logo-container">
-            <img src={cflogo} alt=""></img>
+            {console.log(this.state.url)}
+            <img src={this.state.url} alt=""></img>
           </div>
           <div className="title">
               Avalie e concorra!
@@ -90,12 +99,12 @@ export default class PrintQR extends Component {
           <div className="qr">
               <Demo link={link} />
           </div>
-          {/* <div className="txt-container">
+          <div className="txt-container">
             Não conseguiu acessar o QR code? Acesse https://couponfeed.co/f/{this.getrandom()}
-          </div> */}
+          </div>
           <footer>
-            <section class="ft-main">
-              <div class="ft-main-item">
+            <section className="ft-main">
+              <div className="ft-main-item">
                 <ul>
                   <li ><img src={cflogo} alt="" style={{width:'240px'}}/></li>
                   <li><FaHome/> https://couponfeed.co</li>

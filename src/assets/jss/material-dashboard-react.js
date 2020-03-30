@@ -70,10 +70,12 @@ const defaultFont = {
   lineHeight: "1.5em"
 };
 
+const cfColor = ["#9aca3c","#9aca3f","#8baa10","#8baa10"];
 const primaryColor = ["#9c27b0", "#ab47bc", "#8e24aa", "#af2cc5"];
 const warningColor = ["#ff9800", "#ffa726", "#fb8c00", "#ffa21a"];
 const dangerColor = ["#f44336", "#ef5350", "#e53935", "#f55a4e"];
-const successColor = ["#4caf50", "#66bb6a", "#43a047", "#5cb860"];
+const successColor = ["#9aca3c","#9aca3f","#8baa10","#8baa10"];
+// const successColor = ["#4caf50", "#66bb6a", "#43a047", "#5cb860"];
 const infoColor = ["#00acc1", "#26c6da", "#00acc1", "#00d3ee"];
 const roseColor = ["#e91e63", "#ec407a", "#d81b60", "#eb3573"];
 const grayColor = [
@@ -136,6 +138,15 @@ const warningBoxShadow = {
     hexToRgb(warningColor[0]) +
     ",.4)"
 };
+
+const cfBoxShadow = {
+  boxShadow:
+    "0 4px 20px 0 rgba(" +
+    hexToRgb(blackColor) +
+    ",.14), 0 7px 10px -5px rgba(" +
+    hexToRgb(cfColor[0]) +
+    ",.4)"
+};
 const dangerBoxShadow = {
   boxShadow:
     "0 4px 20px 0 rgba(" +
@@ -151,6 +162,12 @@ const roseBoxShadow = {
     ",.14), 0 7px 10px -5px rgba(" +
     hexToRgb(roseColor[0]) +
     ",.4)"
+};
+
+const cfCardHeader = {
+  background:
+    "linear-gradient(60deg, " + cfColor[1] + ", " + cfColor[2] + ")",
+  ...cfBoxShadow
 };
 
 const warningCardHeader = {
@@ -277,6 +294,7 @@ export {
   card,
   defaultFont,
   primaryColor,
+  cfColor,
   warningColor,
   dangerColor,
   successColor,
@@ -285,13 +303,15 @@ export {
   grayColor,
   blackColor,
   whiteColor,
+  cfBoxShadow,
   primaryBoxShadow,
   infoBoxShadow,
-  grayCardHeader,
   successBoxShadow,
   warningBoxShadow,
   dangerBoxShadow,
   roseBoxShadow,
+  cfCardHeader,
+  grayCardHeader,
   warningCardHeader,
   successCardHeader,
   dangerCardHeader,

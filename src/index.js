@@ -56,7 +56,7 @@ ReactDOM.render(
       <Route path="/signup" component={SignUp} />
       <Route path="/rsignup" component={SignUpRetail} />
       <Route path="/feed/:id" component={Feedback} />
-      <Route path="/f/:code" component={Shortner} />
+      <Route path="/f/:short_url" component={Shortner} />
       <Route path="/print-qr/:id" component={PrintQR} />
 
       <PrivateRoute path="/profile" component={Profile} />

@@ -39,7 +39,7 @@ const useStyles = theme => (styles);
 
 class Dashboard extends Component {
   state = {
-    isLoading: false,
+    isLoading: true,
     // isLoading: true,
     negFeedbacks: 0,
     posFeedbacks: 0,
@@ -71,7 +71,7 @@ class Dashboard extends Component {
           isLoading: false,
           dados
         })
-        // console.log(this.state)
+        console.log(this.state)
 
       })
       .catch(error => {

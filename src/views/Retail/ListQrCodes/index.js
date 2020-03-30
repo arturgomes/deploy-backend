@@ -1,6 +1,6 @@
 import React, { Component, } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Button } from "@material-ui/core";
+// import { Button } from "@material-ui/core";
 
 import ExpansionPanel from "@material-ui/core/ExpansionPanel";
 import ExpansionPanelSummary from "@material-ui/core/ExpansionPanelSummary";
@@ -10,6 +10,15 @@ import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
 import LinearProgress from '@material-ui/core/LinearProgress';
 import QrCode from "qrcode.react";
 import api from "../../../services/api";
+
+import GridItem from "../../../components/Grid/GridItem.js";
+import GridContainer from "../../../components/Grid/GridContainer.js";
+// import CustomInput from "../components/CustomInput/CustomInput.js";
+import Button from "../../../components/CustomButtons/Button.js";
+import Card from "../../../components/Card/Card.js";
+import CardHeader from "../../../components/Card/CardHeader.js";
+import CardFooter from "../../../components/Card/CardFooter.js";
+import CardBody from "../../../components/Card/CardBody.js";
 
 import {
   isAuthenticated,
@@ -137,8 +146,36 @@ export default class ListQrCodes extends Component {
     else {
       return (
         <>
-          <h6>Listando todos QR codes de {getName()}</h6>
+          <GridContainer>
+        <GridItem xs={12} sm={12} md={12}>
+            <Card>
+              <CardHeader color="success">
+                <h4 style={{
+                  color: "rgba(255,255,255,1)",
+                  margin: "0",
+                  fontSize: "18px",
+                  marginTop: "0",
+                  marginBottom: "10px"
+                }}>Listar QR Codes</h4>
+                <p style={{
+                  color: "rgba(255,255,255,.62)",
+                  margin: "0",
+                  fontSize: "14px",
+                  marginTop: "0",
+                  marginBottom: "0"
+                }}>Listando todos QR codes de {getName()}</p>
+
+                {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
+              </CardHeader>
+              <CardBody>
           {listShops}
+
+          </CardBody>
+              <CardFooter>
+              </CardFooter>
+            </Card>
+        </GridItem>
+      </GridContainer>
         </>
       );
     }

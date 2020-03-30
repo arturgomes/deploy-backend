@@ -1,4 +1,5 @@
 import {
+  cfCardHeader,
   warningCardHeader,
   successCardHeader,
   dangerCardHeader,
@@ -81,6 +82,12 @@ const cardHeaderStyle = {
       textAlign: "center",
       lineHeight: "33px",
       margin: "5px 4px 0px"
+    }
+  },
+  cfCardHeader: {
+    color: whiteColor,
+    "&:not($cardHeaderIcon)": {
+      ...cfCardHeader
     }
   },
   warningCardHeader: {

@@ -208,7 +208,7 @@ export default class SignIn extends Component {
                 type="submit"
                 fullWidth
                 variant="contained"
-                color="primary"
+                color="success"
               // className={useStyles.submit}
               >
                 Faça login

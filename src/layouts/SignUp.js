@@ -268,15 +268,12 @@ export default class SignUp extends Component {
                 <img src={logo} alt="" style={{ width: '300px', paddingBottom: '70px' }} />
               </Link>
 
-
               <GridContainer>
                 <GridItem xs={12} sm={12} md={12}>
                   <Card>
-                    <CardHeader color="primary">
+                    <CardHeader color="success">
                       <h4 className={useStyles.cardTitleWhite}>Cadastrar Consumidor</h4>
                       <p className={useStyles.cardCategoryWhite}>Olá, que bom ver você aqui. Vamos fazer um breve cadastro seu para começar a acumular os FeedCoins.</p>
-
-                      {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
                     </CardHeader>
                     <CardBody>
                       <form
@@ -397,39 +394,27 @@ export default class SignUp extends Component {
                             />
                           </GridItem>
                         </GridContainer>
-
-
                         <GridContainer>
-
                           <GridItem xs={12} sm={12} md={12}>
                             <Button
                               fullWidth
                               type="submit"
-
                               color="success">
                               Tudo pronto pra começar!</Button>
                           </GridItem>
                         </GridContainer>
                       </form>
-
                       <GridContainer>
                         <GridItem xs={12} sm={12} md={12}>
                           <Link href="/rsignup">
-
                             <Button
                               fullWidth
                               color="warning">
                               Sou Lojista e quero começar!</Button>
                           </Link>
-
                         </GridItem>
-                        {/* <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                </Link>
-                </Grid> */}
+                       
                         <GridItem xs={12} sm={12} md={12}>
-
                           <Link
                             href="/login" variant="body2">
                             {"Já é cadastrado? Faça já o seu login!"}

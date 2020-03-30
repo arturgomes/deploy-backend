@@ -134,7 +134,7 @@ export default class CreateShop extends Component {
             <Button
               fullWidth
               type="submit"
-              color="warning">
+              color="success">
               Cadastrar nova loja?</Button>
           </Link> */}
         </CardFooter>
@@ -151,7 +151,7 @@ export default class CreateShop extends Component {
               onSubmit={this.handleSubmit}
             >
               <Card>
-                <CardHeader color="warning">
+                <CardHeader color="success">
                   <h4 style={{
                     color: "rgba(255,255,255,1)",
                     margin: "0",
@@ -218,7 +218,7 @@ export default class CreateShop extends Component {
                   <Button
                     fullWidth
                     type="submit"
-                    color="warning">
+                    color="success">
                     Cadastrar!</Button>
                 </CardFooter>
               </Card>

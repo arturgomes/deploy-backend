@@ -106,7 +106,7 @@ export default function Retail({ ...rest }) {
         ) : (
             <div className={classes.map}>{switchRoutes}</div>
           )}
-        {getRoute() ? <Footer /> : null}
+        {/* {getRoute() ? <Footer /> : null} */}
         {/* <FixedPlugin
           handleImageClick={handleImageClick}
           handleColorClick={handleColorClick}

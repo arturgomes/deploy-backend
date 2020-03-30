@@ -42,7 +42,7 @@ export default class UserProfile extends Component {
               url:file.url,
             }))
           })
-        )
+        );
   }
   
   componentWillUnmount(){
@@ -139,7 +139,7 @@ processUpload = (uploadedFile) => {
         <GridContainer>
           <GridItem xs={12} sm={12} md={12}>
             <Card>
-              <CardHeader color="warning"> <h4 style={{
+              <CardHeader color="success"> <h4 style={{
                   color: "rgba(255,255,255,1)",
                   margin: "0",
                   fontSize: "18px",
@@ -159,7 +159,7 @@ processUpload = (uploadedFile) => {
               </CardBody>
             </Card>
             <Card>
-              <CardHeader color="warning">
+              <CardHeader color="success">
                 <h4 style={{
                   color: "rgba(255,255,255,1)",
                   margin: "0",
@@ -274,8 +274,8 @@ processUpload = (uploadedFile) => {
                   </GridItem>
                 </GridContainer> */}
               </CardBody>
-              <CardFooter>
-                <Button color="warning">Atualizar Pefil</Button>
+              <CardFooter>            
+                <Button fullWidth color="success">Atualizar Pefil</Button>
               </CardFooter>
             </Card>
           </GridItem>
