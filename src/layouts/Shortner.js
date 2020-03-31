@@ -10,7 +10,7 @@ import api from "../services/api";
 
 export default class SignIn extends Component {
   state = {
-    readyToRedirect: true,
+    readyToRedirect: false,
     shop_id:''
   }
   
