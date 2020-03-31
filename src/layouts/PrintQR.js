@@ -32,10 +32,11 @@ export default class PrintQR extends Component {
     const qs = decodeURIComponent(this.props.match.params.id);
     const response = await api.post(`/shopsl`,{shop_id: qs});
     if (!response.error) {
-      const {retail_id,name} = response.data;
+      const {retail_id,name,short_url} = response.data;
       this.setState({
         name,
         id:qs,
+        short_url,
         retail_id
       }, () => { });
 
@@ -49,9 +50,6 @@ export default class PrintQR extends Component {
       console.log();
       this.setState({url})
     }
-
-
-
   }
 
     componentWillUnmount() {
@@ -59,14 +57,6 @@ export default class PrintQR extends Component {
     }
 
 
-   getrandom = () => {
-      let text = "";
-      const possible = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  
-      for (let i = 0; i < 5; i++)
-          text += possible.charAt(Math.floor(Math.random() * possible.length));
-      return text;
-  }
 
   render(){
     const { id } = this.props.match.params;
@@ -100,7 +90,7 @@ export default class PrintQR extends Component {
               <Demo link={link} />
           </div>
           <div className="txt-container">
-            Não conseguiu acessar o QR code? Acesse https://couponfeed.co/f/{this.getrandom()}
+            Não conseguiu acessar o QR code? Acesse https://couponfeed.co/f/{this.state.short_url}
           </div>
           <footer>
             <section className="ft-main">

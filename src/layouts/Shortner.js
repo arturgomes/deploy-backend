@@ -16,9 +16,10 @@ export default class SignIn extends Component {
   
   async componentDidMount() {
     const short_url = decodeURIComponent(this.props.match.params.short_url);
-    const response = await api.post(`/surl/${short_url}f`);
+    const response = await api.post(`/surl/${short_url}`);
     if (!response.error) {
       const shop_id = response.data.id;
+      console.log(shop_id);
       this.setState({
         shop_id,
         readyToRedirect:true
