@@ -4,7 +4,10 @@ import { makeStyles } from "@material-ui/core/styles";
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import PerfectScrollbar from "perfect-scrollbar";
 
-import { FaQrcode, FaFacebook, FaInstagram, FaWhatsapp } from "react-icons/fa";
+import { FaQrcode, FaFacebook, FaInstagram, 
+          FaWhatsapp, FaChartBar, FaChartLine } from "react-icons/fa";
+import { TiDocumentText } from "react-icons/ti";
+import { IoIosStats } from "react-icons/io";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -293,8 +296,7 @@ export default function LandingPage(props) {
                 <FaQrcode style={{ fontSize: 120, paddingBottom: 20 }} />
                 <div className="card-body">
                   <h4 className="card-title">QR Code ao invés de totens</h4>
-                  <p>Our team of enthusiastic marketers will analyse and evaluate how your company stacks
-                                against the closest competitors</p>
+                  <p>Sem totens ou botões! Seu cliente irá dar seu feedback direto de seu celular, ainda dentro da loja</p>
                 </div>
               </div>
             </div>
@@ -302,27 +304,24 @@ export default function LandingPage(props) {
           <div className="row">
             <div className="col-lg-12">
               <div className="card">
-                <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20 }} />
+                <TiDocumentText style={{ fontSize: 120, paddingBottom: 20 }} />
                 <div className="card-body">
-                  <h4 className="card-title">Obtenha feedbacks 24/7</h4>
-                  <p>Our team of enthusiastic marketers will analyse and evaluate how your company stacks
-                                against the closest competitors</p>
+                  <h4 className="card-title">Relatórios</h4>
+                  <p>Os feebacks estarão disponíveis imediatamente no seu perfil CouponFeed</p>
                 </div>
               </div>
               <div className="card">
-                <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20 }} />
+                <FaChartBar style={{ fontSize: 120, paddingBottom: 20 }} />
                 <div className="card-body">
-                  <h4 className="card-title">Obtenha feedbacks 24/7</h4>
-                  <p>Our team of enthusiastic marketers will analyse and evaluate how your company stacks
-                                against the closest competitors</p>
+                  <h4 className="card-title">Estatísticas</h4>
+                  <p>Seu perfil conta com estatísticas e gráficos sobre os feedbacks, para um rápido monitoramento</p>
                 </div>
               </div>
               <div className="card">
-                <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20 }} />
+                <FaChartLine style={{ fontSize: 120, paddingBottom: 20 }} />
                 <div className="card-body">
-                  <h4 className="card-title">Obtenha feedbacks 24/7</h4>
-                  <p>Our team of enthusiastic marketers will analyse and evaluate how your company stacks
-                                against the closest competitors</p>
+                  <h4 className="card-title">Resultados</h4>
+                  <p>Auxilia na tomada de decisão para a melhoria na prestação de serviço.</p>
                 </div>
               </div>
             </div>
