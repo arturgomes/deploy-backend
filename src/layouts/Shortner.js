@@ -20,9 +20,10 @@ export default class SignIn extends Component {
     if (!response.error) {
       const shop_id = response.data.id;
       this.setState({
-        shop_id
+        shop_id,
+        readyToRedirect:true
       }, () => { });
-      this.openInNewTab(`/feed/${shop_id}`)
+      // this.openInNewTab(`/feed/${shop_id}`)
     }
     else {
       this.setState({ error: "Loja não encontrada" })
