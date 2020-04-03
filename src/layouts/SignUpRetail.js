@@ -202,7 +202,7 @@ export default class SignUp extends Component {
                 <GridItem xs={12} sm={12} md={12}>
                   <Card>
                     <CardHeader color="primary">
-                      <h4 className={useStyles.cardTitleWhite}>Cadastrar Lojista</h4>
+                      <h4 className={useStyles.cardTitleWhite}>Cadastrar Lojista - Teste grátis por 30 dias</h4>
                       <h5 className={useStyles.cardCategoryWhite}>Olá, obrigado por escolher a CouponFeed. Vamos começar nossa parceria com um breve cadastro da sua empresa.</h5>
 
                       {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}

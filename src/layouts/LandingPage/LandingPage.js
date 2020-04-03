@@ -1,11 +1,20 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
+import {Grid,Paper} from '@material-ui/core';
+
+
 
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import PerfectScrollbar from "perfect-scrollbar";
 
-import { FaQrcode, FaFacebook, FaInstagram, 
-          FaWhatsapp, FaChartBar, FaChartLine } from "react-icons/fa";
+import { FaQrcode, 
+          FaFacebook, 
+          FaInstagram, 
+          FaCheck, 
+          FaTimes,
+          FaWhatsapp, 
+          FaChartBar, 
+          FaChartLine } from "react-icons/fa";
 import { TiDocumentText } from "react-icons/ti";
 import { IoIosStats } from "react-icons/io";
 
@@ -30,7 +39,6 @@ import Header from "../../components/Header/Header.js";
 import Button from "../../components/CustomButtons/Button.js";
 import styles from '../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle'
 import Parallax from "../../components/Parallax/Parallax.js";
-
 import feedback from "./images/feedback.svg";
 import { isAuthenticated, getTu } from '../../services/auth';
 
@@ -41,6 +49,80 @@ let ps;
 
 export default function LandingPage(props) {
   const { ...rest } = props;
+
+  const [prices, setPrices] = useState([
+      {value:0, 
+        category:"Prata", 
+        type:"Ideal para MEI",
+        features:[
+          {valid:true,fmonth:"Relatório 60 feedbacks por mês"},
+          {valid:true,fmonth:"Registro de um QR code"},
+          {valid:false,fmonth:"60 feedbacks por mês"},
+          {valid:false,fmonth:"Acesso a um dashboard personalizado"},
+          {valid:false,fmonth:"Relatórios por e-mail"},
+        ],
+        prices:{
+          monthly : "29,90", 
+          trimestral : "90", 
+          anual : "320"
+        }
+      }, 
+      {
+        value:1, 
+        category:"Ouro",  
+        type:"Ideal quem está começando",
+        
+        features:[
+          {valid:true,fmonth:"Relatório 60 feedbacks por mês"},
+          {valid:true,fmonth:"Registro de um QR code"},
+          {valid:false,fmonth:"60 feedbacks por mês"},
+          {valid:false,fmonth:"Acesso a um dashboard personalizado"},
+          {valid:false,fmonth:"Relatórios por e-mail"},
+        ],
+        prices:{
+          monthly : "99",
+          trimestral : "270",
+          anual : "1100"
+        }
+        
+      }, 
+      {
+        value:2, 
+        category:"Diamante",
+        type:"Ideal quem está em expansão",
+        
+        features:[
+          {valid:true,fmonth:"Relatório 60 feedbacks por mês"},
+          {valid:true,fmonth:"Registro de um QR code"},
+          {valid:true,fmonth:"Feedbacks ilimitados"},
+          {valid:true,fmonth:"Acesso a um dashboard personalizado"},
+          {valid:true,fmonth:"Relatórios por e-mail"},
+        ],
+        prices:{
+          monthly : "199",
+          trimestral : "550",
+          anual : "2000"
+        }
+      }, 
+      {
+        value:3, 
+        category:"Platinum",
+        type:"Ideal quem tem filiais",
+        
+        features:[
+          {valid:true,fmonth:"Feedbacks ilimitados"},
+          {valid:true,fmonth:"Registro de cinco QR codes"},
+          {valid:true,fmonth:"60 feedbacks por mês"},
+          {valid:true,fmonth:"Acesso a um dashboard personalizado"},
+          {valid:true,fmonth:"Relatórios por e-mail"},
+        ],
+        prices:{
+          monthly : "299", 
+          trimestral : "900", 
+          anual : "3200"
+        }
+    }, 
+    ])
 
   // styles
   // const classes = useStyles();
@@ -101,18 +183,6 @@ export default function LandingPage(props) {
 
   return (
     <>
-      {/* <Header
-        color="transparent"
-        routes={dashboardRoutes}
-        brand={slogan}
-        rightLinks={<HeaderLinks />}
-        fixed
-        changeColorOnScroll={{
-          height: 400,
-          color: "white"
-        }}
-        {...rest}
-      /> */}
       <Header
             brand={slogan}
             fixed
@@ -123,16 +193,7 @@ export default function LandingPage(props) {
             rightLinks={<>
               {/* <HeaderLinks/> */}
               <List className={classes.list}>
-                {/* <ListItem className={classes.listItem}>
-                  <Button
-                    href="#header"
-                    className={classes.navLink}
-                    onClick={e => e.preventDefault()}
-                    color="transparent"
-                  >
-                    Contato
-                  </Button>
-                </ListItem> */}
+               
                 {isAuthenticated() ?
                ( <ListItem className={classes.listItem}>
                   <Button
@@ -169,75 +230,7 @@ export default function LandingPage(props) {
               </List></>
             }
           />
-      {/* <nav
-        style={{ ...headerStyle }}
-        className="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top" >
-
-
-        <AnchorLink
-          className="navbar-brand logo-image"
-          href="index.html">
-          <img
-            // width="200"
-            src={slogan}
-            alt="alternative" /></AnchorLink>
-
-
-        <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-          aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-          <span className="navbar-toggler-awesome fas fa-bars"></span>
-          <span className="navbar-toggler-awesome fas fa-times"></span>
-        </button>
-
-
-        <div className="collapse navbar-collapse" id="navbarsExampleDefault">
-          <ul
-
-            className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <AnchorLink className="nav-link page-scroll" href="#header">Inicio <span className="sr-only">(atual)</span></AnchorLink>
-            </li>
-            <li className="nav-item">
-              <AnchorLink className="nav-link page-scroll" href="#services">Serviços</AnchorLink>
-            </li>
-            <li className="nav-item">
-              <AnchorLink className="nav-link page-scroll" href="#pricing">Preços</AnchorLink>
-            </li>
-
-            <li className="nav-item dropdown">
-              <AnchorLink className="nav-link dropdown-toggle page-scroll" href="#about" id="navbarDropdown" role="button"
-                aria-haspopup="true" aria-expanded="false">Sobre</AnchorLink>
-              <div className="dropdown-menu" aria-labelledby="navbarDropdown">
-                <AnchorLink className="dropdown-item" href="terms-conditions.html"><span className="item-text">Condições
-                                contratuais</span></AnchorLink>
-                <div className="dropdown-items-divide-hr"></div>
-                <AnchorLink className="dropdown-item" href="privacy-policy.html"><span className="item-text">Política de
-                                Privacidade</span></AnchorLink>
-              </div>
-            </li>
-            <li className="nav-item">
-              <AnchorLink className="nav-link page-scroll" href="#contact">Contato</AnchorLink>
-            </li>
-          </ul>
-          <span className="nav-item social-icons">
-            <span className="fa-stack">
-              <AnchorLink href="http://fb.com/couponfeed">
-                <i className="fas fa-circle fa-stack-2x facebook"></i>
-                <i className="fab fa-facebook-f fa-stack-1x"></i>
-              </AnchorLink >
-            </span>
-            <span className="fa-stack">
-              <AnchorLink href="#your-link">
-                <i className="fas fa-circle fa-stack-2x twitter"></i>
-                <i className="fab fa-twitter fa-stack-1x"></i>
-              </AnchorLink >
-            </span>
-          </span>
-        </div>
-      </nav > */}
-
-
-
+      
 
       <header id="header" className="header" >
         <div className="header-content">
@@ -328,148 +321,79 @@ export default function LandingPage(props) {
           </div>
         </div>
       </div>
+      {/* value:2, 
+        category:"Diamante",
+        type:"Ideal lojistas em expansão",
+        fmonth:"feedbacks ilimitados", 
+        prices:[
+          {monthly:"199"},
+          {trimestral:"550"},
+          {anual:"2000"} */}
 
-
-
-      {/* 
+     
+      
 
       <div id="pricing" className="cards-2">
         <div className="container">
           <div className="row">
             <div className="col-lg-12">
-              <h2>Multiple Pricing Options</h2>
-              <p className="p-heading p-large">We've prepared pricing plans for all budgets so you can get started
-                        right away. They're great for small companies and large organizations</p>
+              <h2>ESCOLHA SEU PLANO</h2>
+              <p className="p-heading p-large">Planos pensados para atender os mais diferentes volumes de vendas mensais. </p>
             </div>
           </div>
-          <div className="row">
-            <div className="col-lg-12">
-              <div className="card">
-                <div className="card-body">
-                  <div className="card-title">STARTER</div>
-                  <div className="card-subtitle">Just to see what can be achieved</div>
-                  <hr className="cell-divide-hr" />
-                  <div className="price">
-                    <span className="currency">$</span><span className="value">199</span>
-                    <div className="frequency">monthly</div>
-                  </div>
-                  <hr className="cell-divide-hr" />
-                  <ul className="list-unstyled li-space-lg">
-                    <li className="media">
-                      <i className="fas fa-check"></i>
-                      <div className="media-body">Improve Your Email Marketing</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-check"></i>
-                      <div className="media-body">User And Admin Rights Control</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-times"></i>
-                      <div className="media-body">List Building And Cleaning</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-times"></i>
-                      <div className="media-body">Collected Data Management</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-times"></i>
-                      <div className="media-body">More Planning And Evaluation</div>
-                    </li>
-                  </ul>
-                  <div className="button-wrapper">
-                    <AnchorLink className="btn-solid-reg page-scroll" href="#request">REQUEST</AnchorLink >
-                  </div>
-                </div>
-              </div>
+          <div 
+          // className="row"
+          >
+            <div 
+            // className="col-lg-12"
+            >
+              {/* <Grid container className={classes.root} spacing={2}> */}
+                {/* <Grid item xs={12}> */}
+                  {/* <Grid container justify="center" spacing={2}> */}
+                    {prices.map((p) => (
+                      <div className="card">
+                        <div className="card-body">
+                            <div className="card-title">{p.category}</div>
+                            <div className="card-subtitle">{p.type}</div>
+                            <hr className="cell-divide-hr" />
+                            <ul className="list-unstyled li-space-lg">
+                              {p.features.map((feat) => (
+                                <li className="media">
+                                  {feat.valid ? (<FaCheck />):(<FaTimes/>)}
+                                  <div className="media-body">{feat.fmonth}</div>
+                              </li>
 
+                              ))
+                              }
 
-              <div className="card">
-                <div className="card-body">
-                  <div className="card-title">MEDIUM</div>
-                  <div className="card-subtitle">Very appropriate for the short term</div>
-                  <hr className="cell-divide-hr" />
-                  <div className="price">
-                    <span className="currency">$</span><span className="value">299</span>
-                    <div className="frequency">monthly</div>
-                  </div>
-                  <hr className="cell-divide-hr" />
-                  <ul className="list-unstyled li-space-lg">
-                    <li className="media">
-                      <i className="fas fa-check"></i>
-                      <div className="media-body">Improve Your Email Marketing</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-check"></i>
-                      <div className="media-body">User And Admin Rights Control</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-check"></i>
-                      <div className="media-body">List Building And Cleaning</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-check"></i>
-                      <div className="media-body">Collected Data Management</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-times"></i>
-                      <div className="media-body">More Planning And Evaluation</div>
-                    </li>
-                  </ul>
-                  <div className="button-wrapper">
-                    <AnchorLink className="btn-solid-reg page-scroll" href="#request">REQUEST</AnchorLink >
-                  </div>
-                </div>
-              </div>
-
-
-              <div className="card">
-                <div className="label">
-                  <p className="best-value">Best Value</p>
-                </div>
-                <div className="card-body">
-                  <div className="card-title">COMPLETE</div>
-                  <div className="card-subtitle">Must have for large companies</div>
-                  <hr className="cell-divide-hr" />
-                  <div className="price">
-                    <span className="currency">$</span><span className="value">399</span>
-                    <div className="frequency">monthly</div>
-                  </div>
-                  <hr className="cell-divide-hr" />
-                  <ul className="list-unstyled li-space-lg">
-                    <li className="media">
-                      <i className="fas fa-check"></i>
-                      <div className="media-body">Improve Your Email Marketing</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-check"></i>
-                      <div className="media-body">User And Admin Rights Control</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-check"></i>
-                      <div className="media-body">List Building And Cleaning</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-check"></i>
-                      <div className="media-body">Collected Data Management</div>
-                    </li>
-                    <li className="media">
-                      <i className="fas fa-check"></i>
-                      <div className="media-body">More Planning And Evaluation</div>
-                    </li>
-                  </ul>
-                  <div className="button-wrapper">
-                    <AnchorLink className="btn-solid-reg page-scroll" href="#request">REQUEST</AnchorLink >
-                  </div>
-                </div>
-              </div>
-
-
+                            </ul>
+                            <hr className="cell-divide-hr" />
+                            <div className="price">
+                              <span className="currency">R$ </span><span className="value">{p.prices.monthly}</span>
+                              <div className="frequency">mensal</div>
+                            </div>
+                            <hr className="cell-divide-hr" />
+                            <div className="price">
+                              <span className="currency">R$ </span><span className="value">{p.prices.trimestral}</span>
+                              <div className="frequency">trimestral</div>
+                            </div>
+                            <hr className="cell-divide-hr" />
+                            <div className="price">
+                              <span className="currency">R$ </span><span className="value">{p.prices.anual}</span>
+                              <div className="frequency">anual</div>
+                            </div>
+                            <div className="button-wrapper">
+                              <AnchorLink className="btn-solid-reg page-scroll" href="#request">REQUEST</AnchorLink >
+                            </div>
+                          </div>
+                      </div>
+                ))}
             </div>
           </div>
         </div>
       </div>
 
- */}
+
 
 
 

@@ -42,107 +42,11 @@ const useStyles = theme => (styles);
 class Dashboard extends Component {
   state = {
     isLoading: false,
-    // isLoading: true,
-    negFeedbacks: 0,
-    posFeedbacks: 0,
-    neutralFeedbacks: 0,
-    totalFeedbacks: 0,
-    fb: [
-      {
-        name: null,
-        f: []
-      }
-    ]
   };
   async componentDidMount() {
 
-    await api
-      .post("/list", { retail_id: getId() })
-      .then(response => {
-        // console.log(response.data);
-
-        this.setState({
-          fb: response.data,
-        })
-        let listItems, listShops;
-        // console.log(this.state.fb);
-
-        if (isAuthenticated()) {
-          // console.log(this.state.fb);
-          listItems = Object.keys(this.state.fb).map(key => {
-            const shop = this.state.fb[key];
-            const { f } = shop;
-            listShops = Object.keys(f).map(g => {
-              const { nps_value, date } = f[g];
-              let date1 = new Date(date).toLocaleDateString("pt-BR");
-              // date1 = date1.toLocaleDateString()
-              return { nps_value, date1 };
-            });
-            return listShops;
-          });
-
-          const items = listItems.flat(1)
-          let nf = items.filter(f => f.nps_value < 7);
-          let ne = items.filter(f => f.nps_value >= 7 && f.nps_value < 9);
-          let po = items.filter(f => f.nps_value >= 9);
-
-          console.log(nf, ne, po);
-
-
-          this.setState({
-            negFeedbacks: nf.lenght === 0 ? 0 : nf.lenght,
-            posFeedbacks: po.length === 0 ? 0 : po.length,
-            neutralFeedbacks: ne.length,
-            totalFeedbacks: items.length,
-            isLoading: false
-          });
-          console.log(this.state);
-
-        }
-
-
-      })
-      .catch(error => {
-        // Error 😨
-        if (error.response) {
-          /*
-           * The request was made and the server responded with a
-           * status code that falls out of the range of 2xx
-           */
-          // console.log(error.response.data);
-          this.setState({ err: error.response.data });
-        } else if (error.request) {
-          /*
-           * The request was made but no response was received, `error.request`
-           * is an instance of XMLHttpRequest in the browser and an instance
-           * of http.ClientRequest in Node.js
-           */
-          // console.log(error.request);
-        }
-      });
   }
 
-  handleTotalFeedback = () => {
-    return this.state.totalFeedbacks;
-  };
-
-  handleNegativeFeedback = () => {
-    return this.state.negFeedbacks;
-
-  };
-
-  handleNeutralFeedback = () => {
-    return this.state.neutralFeedbacks;
-
-  };
-
-  handlePositiveFeedback = () => {
-    return this.state.posFeedbacks;
-
-  };
-  handleNPS = () => {
-    return this.state.totalFeedbacks / 10;
-  };
   render() {
     // const { negFeedbacks,
     //   posFeedbacks,

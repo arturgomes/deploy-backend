@@ -10,6 +10,7 @@ import "./assets/css/material-dashboard-react.css?v=1.8.0";
 import Retail from "./layouts/Retail.js";
 import Customer from "./layouts/Customer.js";
 import Profile from "./layouts/Profile.js";
+import PrintQRThermal from "./layouts/PrintQRThermal.js";
 import PrintQR from "./layouts/PrintQR.js";
 import Shortner from "./layouts/Shortner.js";
 import Feedback from "./layouts/Feedback.js";
@@ -45,8 +46,8 @@ Sentry.init({
 
 const styleLink = document.createElement("link");
 styleLink.rel = "stylesheet";
-styleLink.href =
-  "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
+// styleLink.href =
+//   "https://cdn.jsdelivr.net/npm/semantic-ui/dist/semantic.min.css";
 document.head.appendChild(styleLink);
 ReactDOM.render(
   <BrowserRouter>
@@ -57,6 +58,7 @@ ReactDOM.render(
       <Route path="/rsignup" component={SignUpRetail} />
       <Route path="/feed/:id" component={Feedback} />
       <Route path="/f/:short_url" component={Shortner} />
+      <Route path="/print-thermal/:id" component={PrintQRThermal} />
       <Route path="/print-qr/:id" component={PrintQR} />
 
       <PrivateRoute path="/profile" component={Profile} />

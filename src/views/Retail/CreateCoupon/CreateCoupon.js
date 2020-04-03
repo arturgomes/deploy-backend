@@ -50,11 +50,27 @@ const useStyles = makeStyles(theme => ({
 
 export default class CreateCoupon extends Component {
   state = {
+    name:'',
+    description:'',
+    discount:'',
+    expireDate:'',
     done: false,
     error: null,
     sid: null,
-    finished: false
+    finished: false,
+    couponList:[]
   }
+  async componentDidMount(){
+    await api.post(`/coupons-l`, {retail_id: getId() })
+    .then(response => {
+      this.setState({ done: true, couponList: response.data.coupons })
+    })
+    .catch(error => {
+      this.setState({ error: error });
+    });
+    console.log(this.state.couponList);
+  }
+
   handleSubmit = async event => {
     event.preventDefault();
 
@@ -167,7 +183,7 @@ export default class CreateCoupon extends Component {
                   }}>Vamos lá, preencha aqui os dados sobre a novo cupom a ser cadastrado.</p>
                 </CardHeader>
                 <CardBody>
-                  {error ? <div className="divError">{error}</div> : ``}
+                  {/* {error ? <div className="divError">{error}</div> : ``} */}
                   <GridContainer>
                     <GridItem xs={12} sm={12} md={12}>
                       <TextField

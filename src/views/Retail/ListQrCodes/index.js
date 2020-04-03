@@ -70,7 +70,7 @@ export default class ListQrCodes extends Component {
       .post("/qr", { retail_id: getId() })
       .then(response => {
         if (this._isMounted) {
-
+          console.log(response)
           this.setState({ qr: response.data, isLoading: false });
         }
       })
@@ -130,7 +130,8 @@ export default class ListQrCodes extends Component {
               <ExpansionPanelDetails>
                 <Demo link={link} />
                 <div>
-                <Button onClick={() => this.openInNewTab(`/print-qr/${id}`)}>Imprimir Código</Button>
+                <Button onClick={() => this.openInNewTab(`/print-qr/${id}`)}>Imprimir Código A4</Button>
+                <Button onClick={() => this.openInNewTab(`/print-thermal/${id}`)}>Imprimir código para impressora térmica</Button>
                 </div>
                 
               </ExpansionPanelDetails>
