@@ -17,4 +17,5 @@ export const logout = () => {
   localStorage.removeItem("usr");
   localStorage.removeItem("ui");
   localStorage.removeItem("tu");
+  localStorage.clear()
 };
