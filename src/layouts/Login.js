@@ -46,22 +46,11 @@ function Copyright() {
   );
 }
 
-export default class SignIn extends Component {
-  // styles
-  // const classes = useStyles();
-  // ref to help us initialize PerfectScrollbar on windows devices
-  // const mainPanel = React.createRef();
-  // states and functions
-  // const [image] = React.useState(bgImage);
-  // const [color] = React.useState("blue");
-  // const [mobileOpen, setMobileOpen] = React.useState(false);
-  // state = {
-  //   email: "",
-  //   password: "",
-  //   error: null
-  // };
+export default class Login extends Component {
+
   handleSignIn = async e => {
     e.preventDefault();
+    // const fid = decodeURIComponent(this.props.match.params.fid);
 
     const { email, password } = this.state;
     if (!email || !password) {
@@ -75,6 +64,21 @@ export default class SignIn extends Component {
           if (response.data.login !== null) {
             const { name, id, tu } = response.data.login;
             login(response.data.token, name, id, tu);
+
+
+            api.post(`/users/i`, {
+              fid:decodeURIComponent(this.props.match.params.fid),
+              user_id: id
+            })
+              .then(response => {
+                this.setState({ done: true }, () => { console.log(this.state.done) })
+              })
+              .catch(err => { console.error(err.response.data.error); this.setState({ error: err.response.data.error }) })
+
+
+
+
+
 
             getTu() === '897316929176464ebc9ad085f31e7284' ? this.props.history.push("/customer") : this.props.history.push("/retail");
           } else {

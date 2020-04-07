@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import {Grid,Paper} from '@material-ui/core';
 
 
 
@@ -16,7 +15,6 @@ import { FaQrcode,
           FaChartBar, 
           FaChartLine } from "react-icons/fa";
 import { TiDocumentText } from "react-icons/ti";
-import { IoIosStats } from "react-icons/io";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -48,9 +46,9 @@ const useStyles = makeStyles(styles);
 let ps;
 
 export default function LandingPage(props) {
-  const { ...rest } = props;
+  // const { ...rest } = props;
 
-  const [prices, setPrices] = useState([
+  const [prices] = useState([
       {value:0, 
         category:"Prata", 
         type:"Ideal para MEI",

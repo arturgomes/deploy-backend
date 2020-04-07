@@ -14,7 +14,7 @@ import PrintQRThermal from "./layouts/PrintQRThermal.js";
 import PrintQR from "./layouts/PrintQR.js";
 import Shortner from "./layouts/Shortner.js";
 import Feedback from "./layouts/Feedback.js";
-import SignIn from "./layouts/SignIn.js";
+import Login from "./layouts/Login.js";
 import SignUp from "./layouts/SignUp.js";
 import SignUpRetail from "./layouts/SignUpRetail.js";
 import LandingPage from "./layouts/LandingPage/LandingPage.js";
@@ -30,7 +30,7 @@ const PrivateRoute = ({ component: Component, ...rest }) => (
       ) : (
           <Redirect
             to={{
-              pathname: "/signin",
+              pathname: "/login",
               state: { from: props.location }
             }}
           />
@@ -53,8 +53,10 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={LandingPage} />
-      <Route path="/login" component={SignIn} />
-      <Route path="/signup" component={SignUp} />
+      <Route path="/login/:fid" component={Login} />
+      {/* <Route path="/login/:fid" component={Login} /> */}
+      {/* <Route path="/signup" component={SignUp} /> */}
+      <Route path="/signup/:fid" component={SignUp} />
       <Route path="/rsignup" component={SignUpRetail} />
       <Route path="/feed/:id" component={Feedback} />
       <Route path="/f/:short_url" component={Shortner} />

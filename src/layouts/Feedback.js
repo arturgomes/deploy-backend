@@ -79,7 +79,7 @@ export default class SignIn extends Component {
     }, () => { })
 
     const qs = decodeURIComponent(this.props.match.params.id);
-    console.log(qs);
+    // console.log(qs);
     await api.post(`/feed/${qs}/c`, {
       answers: {
         nps: this.state.nps,
@@ -107,7 +107,7 @@ export default class SignIn extends Component {
         questions: quest,
         opening: ope
       }, () => { });
-      console.log("componentDidMount: ", this.state.questions);
+      // console.log("componentDidMount: ", this.state.questions);
 
     }
     else {

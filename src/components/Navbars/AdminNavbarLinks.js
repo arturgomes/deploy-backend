@@ -51,7 +51,9 @@ export default function AdminNavbarLinks(props) {
   const handleCloseProfile = e => {
     e.preventDefault();
     logout();
-    window.location.href = '/'
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = '/login'
   };
 
   if (!isAuthenticated())

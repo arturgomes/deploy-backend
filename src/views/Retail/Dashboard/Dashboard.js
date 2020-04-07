@@ -46,9 +46,11 @@ class Dashboard extends Component {
     neutralFeedbacks: 0,
     totalFeedbacks: 0,
     average: 0,
-    dados:[]
+    dados: []
   };
   async componentDidMount() {
+    // this.setState({isLoading:false})
+    console.log("tá carregando")
     await api
       .post("/dashboardData", { retail_id: getId() })
       .then(response => {

@@ -109,7 +109,7 @@ a:hover {
 .ft-main-item li {
   /* width:100%; */
   font-size: 24px;
- margin:0 10px;
+  margin:0 10px;
 }
 /* @media only screen and (min-width: 29.8125rem ) {
   .ft-main {

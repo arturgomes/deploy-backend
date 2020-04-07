@@ -1,5 +1,6 @@
 import {
-  primaryColor,
+  cfColor,
+  // primaryColor,
   whiteColor,
   primaryBoxShadow,
   defaultFont,
@@ -114,7 +115,7 @@ const dropdownStyle = theme => ({
     height: "unset",
     minHeight: "unset",
     "&:hover": {
-      backgroundColor: primaryColor[0],
+      backgroundColor: cfColor[0],
       color: whiteColor,
       ...primaryBoxShadow
     }

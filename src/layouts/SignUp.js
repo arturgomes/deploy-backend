@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -56,46 +57,45 @@ const useStyles = makeStyles(theme => ({
 
 export default class SignUp extends Component {
   state = {
-    email: null,
-    cpf: null,
-    name: null,
-    phone: null,
-    passw: null,
+    email: '',
+    cpf: '',
+    name: '',
+    phone: '',
+    passw: '',
     done: false,
-    error: null
+    error: '',
+    fid: '',
+  }
+
+  componentDidMount() {
+    const afid = decodeURIComponent(this.props.match.params.fid);
+    console.log("SignUp.72 - fid: ", afid);
+    this.setState({ fid: 1000});
+    console.log("SignUp.74 - this.state.fid: ", this.state.fid);
+
   }
   handleSubmit = async event => {
     event.preventDefault();
     // const fid = decodeURIComponent(this.props.match.params.fid) || null;
-    console.log({
-      name: this.state.name,
-      email: this.state.email,
-      phone: this.state.phone,
-      password: this.state.passw,
-      cpf: this.state.cpf
-      // ,
-      // fid
-    })
+
     await api.post(`/users`, {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
       password: this.state.passw,
-      cpf: this.state.cpf
-      // ,
-      // fid
+      cpf: this.state.cpf,
+      fid: decodeURIComponent(this.props.match.params.fid)
     })
       .then(response => {
-        this.setState({ fid: response.data.fid, done: true }, () => { console.log(this.state.fid) })
+        this.setState({ done: true }, () => { console.log(this.state.done) })
 
       })
-      .catch(err => { console.error(err.response.data.error); this.setState({ error: err.response.data.error }) })
+      .catch(err => { this.setState({ error: err }) })
 
-    // console.log(this.state, fid);
 
   }
   handleNameInput = event => {
-    console.log(event.target.value);
+    // console.log(event.target.value);
     this.setState({
       name: event.target.value
     })
@@ -139,7 +139,7 @@ export default class SignUp extends Component {
     });
   }
   render() {
-
+   
     if (this.state.done) {
       if (this.state.fid) {
         return (
@@ -243,7 +243,6 @@ export default class SignUp extends Component {
         </>
       );
     }
-    const { error } = this.state;
     return (
       <>
         <div
@@ -281,7 +280,7 @@ export default class SignUp extends Component {
                         noValidate
                         onSubmit={this.handleSubmit}
                       >
-                        {error ? <div className="divError">{error}</div> : ``}
+                        {/* {error ? <div className="divError">{error}</div> : ``} */}
 
                         <GridContainer>
                           <GridItem xs={12} sm={12} md={12}>
@@ -297,7 +296,7 @@ export default class SignUp extends Component {
                               label="Nome"
                               autoFocus
                             />
-                           
+
                           </GridItem>
 
                         </GridContainer>
@@ -312,7 +311,7 @@ export default class SignUp extends Component {
                               value={this.state.cpf}
                               autoComplete="fname"
                             />
-                           
+
                           </GridItem>
                           <GridItem xs={12} sm={12} md={6}>
                             <TextField
@@ -326,7 +325,7 @@ export default class SignUp extends Component {
                               name="phone"
                               autoComplete="phone"
                             />
-                            
+
                           </GridItem>
                         </GridContainer>
                         <GridContainer>
@@ -340,7 +339,7 @@ export default class SignUp extends Component {
                               value={this.state.email}
                               autoComplete="fname"
                             />
-                           
+
                           </GridItem>
                           <GridItem xs={12} sm={12} md={6}>
                             <TextField
@@ -375,7 +374,7 @@ export default class SignUp extends Component {
                               Sou Lojista e quero começar!</Button>
                           </Link>
                         </GridItem>
-                       
+
                         <GridItem xs={12} sm={12} md={12}>
                           <Link
                             href="/login" variant="body2">

@@ -21,12 +21,11 @@ import contente from "../../../assets/img/contente_branco@4x.png";
 import descontente from "../../../assets/img/descontente_branco@4x.png";
 import imparcial from "../../../assets/img/imparcial_branco@4x.png";
 
-import api from "../../../services/api";
-import {
-  isAuthenticated,
-  getId,
-} from "../../../services/auth";
-// import { bugs, website, server } from "variables/general.js";
+// import api from "../../../services/api";
+// import {
+//   isAuthenticated,
+//   getId,
+// } from "../../../services/auth";
 
 import {
   feedbacksPorDia,

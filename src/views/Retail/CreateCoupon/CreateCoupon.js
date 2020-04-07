@@ -122,7 +122,7 @@ export default class CreateCoupon extends Component {
 
 
   render() {
-    const { error } = this.state;
+    // const { error } = this.state;
 
     if (this.state.done) {
       return (<Card>
