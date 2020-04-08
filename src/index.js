@@ -53,6 +53,7 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={LandingPage} />
+      <Route path="/login/" exact component={Login} />
       <Route path="/login/:fid" component={Login} />
       {/* <Route path="/login/:fid" component={Login} /> */}
       {/* <Route path="/signup" component={SignUp} /> */}
