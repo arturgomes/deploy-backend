@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import { List } from "@material-ui/core";
 // import { Feed, Icon, Item } from "semantic-ui-react";
 import LinearProgress from '@material-ui/core/LinearProgress';
-import {format,parseISO} from "date-fns";
-import pt from 'date-fns/locale/pt';
 
 import { FeedItem } from "./FeedbackItem";
 // import '../../App.css';
@@ -29,7 +27,7 @@ import {
 // import Main from './DemoPages/Main';
 // import styles from "../../../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 
-export default class ListFeedback extends Component {
+export default class ListCoupons extends Component {
 
   state = {
     isLoading: true,
@@ -90,8 +88,7 @@ export default class ListFeedback extends Component {
         listShops = Object.keys(f).map(g => {
           const { nps_value, date, comment_optional } = f[g];
           let avatar = this.getAssets(nps_value);
-          let date1 = format(parseISO(date), "dd ' de ' MMMM  ' de '  y", { locale: pt })
-          //new Date(date).toLocaleDateString("pt-BR");
+          let date1 = new Date(date).toLocaleDateString("pt-BR");
           // date1 = date1.toLocaleDateString()
           return (
             <FeedItem
@@ -115,7 +112,7 @@ export default class ListFeedback extends Component {
         <>
           <GridContainer>
         <GridItem xs={12} sm={12} md={12}>
-            <Card plain>
+            <Card>
               <CardHeader color="success">
                 <h4 style={{
                   color: "rgba(255,255,255,1)",

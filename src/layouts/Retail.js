@@ -10,7 +10,7 @@ import Navbar from "../components/Navbars/Navbar.js";
 import Sidebar from "../components/Sidebar/Sidebar.js";
 // import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
-import dashboardRoutes from "../routes/routes.js";
+import dashboardRoutes from "../routes/RetailRoutes.js";
 
 import styles from "../assets/jss/material-dashboard-react/layouts/adminStyle.js";
 

@@ -62,7 +62,7 @@ class Dashboard extends Component {
           totalFeedbacks,
           average,
           dados
-        } = response.data
+        } = response.data;
         // console.log(dados)
         this.setState({
           posFeedbacks,
@@ -70,8 +70,7 @@ class Dashboard extends Component {
           neutralFeedbacks,
           totalFeedbacks,
           average,
-          isLoading: false,
-          dados
+          dados,
         })
         console.log(this.state)
 
@@ -94,6 +93,7 @@ class Dashboard extends Component {
           // console.log(error.request);
         }
       });
+      this.setState({isLoading: false });
   }
   handleDataGraph = () => {
     // const data = {

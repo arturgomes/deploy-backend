@@ -4,7 +4,7 @@ export const getToken = () => localStorage.getItem(TOKEN_KEY);
 export const getName = () => localStorage.getItem("usr");
 export const getId = () => localStorage.getItem("ui");
 export const getTu = () => localStorage.getItem("tu");
-
+export const getUser = () => localStorage.getItem("tu") === '897316929176464ebc9ad085f31e7284' ? "customer" : "retail"
 export const login = (token, name, id, tu) => {
   localStorage.setItem(TOKEN_KEY, token);
   localStorage.setItem("usr", name);

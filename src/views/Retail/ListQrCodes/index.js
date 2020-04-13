@@ -24,6 +24,7 @@ import {
   isAuthenticated,
   getId,
   getName,
+  getUser
 } from "../../../services/auth";
 
 
@@ -108,10 +109,8 @@ export default class ListQrCodes extends Component {
   
   
   render() {
-    let listShops;
-    if (isAuthenticated()) {
-
-
+    if (isAuthenticated() && getUser()==="retail") {
+      let listShops;
       listShops = Object.keys(this.state.qr).map(key => {
         const { name, id } = this.state.qr[key];
         const link = `https://couponfeed.co/feed/${id}`;
@@ -140,7 +139,7 @@ export default class ListQrCodes extends Component {
         );
       });
 
-    }
+    
     if (this.state.isLoading) {
       return <LinearProgress />
     }
@@ -148,37 +147,38 @@ export default class ListQrCodes extends Component {
       return (
         <>
           <GridContainer>
-        <GridItem xs={12} sm={12} md={12}>
-            <Card>
-              <CardHeader color="success">
-                <h4 style={{
-                  color: "rgba(255,255,255,1)",
-                  margin: "0",
-                  fontSize: "18px",
-                  marginTop: "0",
-                  marginBottom: "10px"
-                }}>Listar QR Codes</h4>
-                <p style={{
-                  color: "rgba(255,255,255,.62)",
-                  margin: "0",
-                  fontSize: "14px",
-                  marginTop: "0",
-                  marginBottom: "0"
-                }}>Listando todos QR codes de {getName()}</p>
+            <GridItem xs={12} sm={12} md={12}>
+                <Card>
+                  <CardHeader color="success">
+                    <h4 style={{
+                      color: "rgba(255,255,255,1)",
+                      margin: "0",
+                      fontSize: "18px",
+                      marginTop: "0",
+                      marginBottom: "10px"
+                    }}>Listar QR Codes</h4>
+                    <p style={{
+                      color: "rgba(255,255,255,.62)",
+                      margin: "0",
+                      fontSize: "14px",
+                      marginTop: "0",
+                      marginBottom: "0"
+                    }}>Listando todos QR codes de {getName()}</p>
 
-                {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
-              </CardHeader>
-              <CardBody>
-          {listShops}
+                    {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
+                  </CardHeader>
+                  <CardBody>
+              {listShops}
 
-          </CardBody>
-              <CardFooter>
-              </CardFooter>
-            </Card>
-        </GridItem>
-      </GridContainer>
-        </>
-      );
+              </CardBody>
+                  <CardFooter>
+                  </CardFooter>
+                </Card>
+            </GridItem>
+          </GridContainer>
+            </>
+          );
+        }
+      }
     }
-  }
 }

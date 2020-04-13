@@ -14,6 +14,7 @@ import PrintQRThermal from "./layouts/PrintQRThermal.js";
 import PrintQR from "./layouts/PrintQR.js";
 import Shortner from "./layouts/Shortner.js";
 import Feedback from "./layouts/Feedback.js";
+import Logout from "./layouts/Logout.js";
 import Login from "./layouts/Login.js";
 import SignUp from "./layouts/SignUp.js";
 import SignUpRetail from "./layouts/SignUpRetail.js";
@@ -53,10 +54,10 @@ ReactDOM.render(
   <BrowserRouter>
     <Switch>
       <Route path="/" exact component={LandingPage} />
+      <Route path="/logout" exact component={Logout} />
       <Route path="/login/" exact component={Login} />
       <Route path="/login/:fid" component={Login} />
-      {/* <Route path="/login/:fid" component={Login} /> */}
-      {/* <Route path="/signup" component={SignUp} /> */}
+      
       <Route path="/signup/:fid" component={SignUp} />
       <Route path="/rsignup" component={SignUpRetail} />
       <Route path="/feed/:id" component={Feedback} />
@@ -67,10 +68,7 @@ ReactDOM.render(
       <PrivateRoute path="/profile" component={Profile} />
       <PrivateRoute path="/customer" component={Customer} />
       <PrivateRoute path="/retail" component={Retail} />
-      {/* <PrivateRoute path="/customer" component={Customer} /> */}
-
-      {/* <Route path="/rtl" component={RTL} /> */}
-      {/* <Redirect from="/" to="/" /> */}
+      
     </Switch>
   </BrowserRouter>,
   document.getElementById("root")

@@ -60,9 +60,9 @@ export default function LandingPage(props) {
           {valid:false,fmonth:"Relatórios por e-mail"},
         ],
         prices:{
-          monthly : "29,90", 
-          trimestral : "90", 
-          anual : "320"
+          monthly : "34.90", 
+          trimestral : "89.70", 
+          anual : "298.80"
         }
       }, 
       {
@@ -80,7 +80,7 @@ export default function LandingPage(props) {
         prices:{
           monthly : "99",
           trimestral : "270",
-          anual : "1100"
+          anual : "1020"
         }
         
       }, 
@@ -98,8 +98,8 @@ export default function LandingPage(props) {
         ],
         prices:{
           monthly : "199",
-          trimestral : "550",
-          anual : "2000"
+          trimestral : "540",
+          anual : "1980"
         }
       }, 
       {
@@ -108,16 +108,16 @@ export default function LandingPage(props) {
         type:"Ideal quem tem filiais",
         
         features:[
+          {valid:true,fmonth:"Relatório ilimitados"},
           {valid:true,fmonth:"Feedbacks ilimitados"},
           {valid:true,fmonth:"Registro de cinco QR codes"},
-          {valid:true,fmonth:"60 feedbacks por mês"},
           {valid:true,fmonth:"Acesso a um dashboard personalizado"},
           {valid:true,fmonth:"Relatórios por e-mail"},
         ],
         prices:{
-          monthly : "299", 
-          trimestral : "900", 
-          anual : "3200"
+          monthly : "359", 
+          trimestral : "897", 
+          anual : "3180"
         }
     }, 
     ])
@@ -372,13 +372,13 @@ export default function LandingPage(props) {
                             </div>
                             <hr className="cell-divide-hr" />
                             <div className="price">
-                              <span className="currency">R$ </span><span className="value">{p.prices.trimestral}</span>
-                              <div className="frequency">trimestral</div>
+                              <span className="currency">R$ </span><span className="value">{(p.prices.trimestral/3).toFixed(2)}</span>
+                              <div className="frequency">Total: R$ {p.prices.trimestral} para assinatura trimestral</div>
                             </div>
                             <hr className="cell-divide-hr" />
                             <div className="price">
-                              <span className="currency">R$ </span><span className="value">{p.prices.anual}</span>
-                              <div className="frequency">anual</div>
+                              <span className="currency">R$ </span><span className="value">{(p.prices.anual/12).toFixed(2)}</span>
+                              <div className="frequency">Total: R$ {p.prices.anual} para assinatura anual</div>
                             </div>
                             <div className="button-wrapper">
                               <AnchorLink className="btn-solid-reg page-scroll" href="#request">REQUEST</AnchorLink >

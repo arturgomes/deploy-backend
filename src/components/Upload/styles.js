@@ -6,7 +6,7 @@ const dragReject = css`
   `;
 
   const dragActive = css`
-  border-color:#78e5d5
+  border-color:#1DB954
 `;
   
 export const DropContainer = styled.div.attrs({className:"dropzone"})`
@@ -23,7 +23,7 @@ export const DropContainer = styled.div.attrs({className:"dropzone"})`
 const messageColors={
   default:'#999',
   error:'#e57878',
-  success:'#78e5d5'
+  success:'#1DB954'
 }
 
 export const UploadMessage = styled.p`
