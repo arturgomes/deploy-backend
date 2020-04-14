@@ -182,6 +182,7 @@
     "extends": "react-app"
   },
   "name": "frontend",
+  "proxy":"https://cors-anywhere.herokuapp.com/",
   "private": true,
   "scripts": {
     "build": "react-scripts build",

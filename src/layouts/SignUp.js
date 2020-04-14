@@ -67,13 +67,6 @@ export default class SignUp extends Component {
     fid: '',
   }
 
-  componentDidMount() {
-    const afid = decodeURIComponent(this.props.match.params.fid);
-    console.log("SignUp.72 - fid: ", afid);
-    this.setState({ fid: 1000});
-    console.log("SignUp.74 - this.state.fid: ", this.state.fid);
-
-  }
   handleSubmit = async event => {
     event.preventDefault();
     // const fid = decodeURIComponent(this.props.match.params.fid) || null;
