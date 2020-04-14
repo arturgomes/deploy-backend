@@ -1,16 +1,18 @@
 import React, { Component } from "react";
+
+// import { Avatar, ListItem } from 'react-elements';
+import Flag from "react-world-flags";
+import Avatar from '@material-ui/core/Avatar';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/styles';
+import { withStyles, makeStyles } from '@material-ui/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 import { MdContentCopy } from "react-icons/md";
+import GaugeChart from 'react-gauge-chart'
 
-// react plugin for creating charts
 import ChartistGraph from "react-chartist";
-// @material-ui/core
 import Icon from "@material-ui/core/Icon";
-// import SpeedIcon from "@material-ui/icons/Speed";
-
 // core components
+import Table from "../../../components/Table/Table.js";
 import GridItem from "../../../components/Grid/GridItem.js";
 import GridContainer from "../../../components/Grid/GridContainer.js";
 import Card from "../../../components/Card/Card.js";
@@ -20,12 +22,17 @@ import CardBody from "../../../components/Card/CardBody.js";
 import contente from "../../../assets/img/contente_branco@4x.png";
 import descontente from "../../../assets/img/descontente_branco@4x.png";
 import imparcial from "../../../assets/img/imparcial_branco@4x.png";
+import {
+  successColor,
+  whiteColor,
+  grayColor,
+  hexToRgb
+} from "../../../assets/jss/material-dashboard-react.js"
 
-// import api from "../../../services/api";
-// import {
-//   isAuthenticated,
-//   getId,
-// } from "../../../services/auth";
+import api from "../../../services/api";
+import {
+  getId,
+} from "../../../services/auth";
 
 import {
   feedbacksPorDia,
@@ -36,284 +43,204 @@ import {
 import styles from "../../../assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 const useStyles = theme => (styles);
+const classes = makeStyles((theme) => ({
+  root: {
+    display: 'flex',
+    '& > *': {
+      margin: theme.spacing(1),
+    },
+  },
+  headSt: {
+    color: successColor[0],
 
+    margin: "15 15px"
+  },
+  successText: {
+    color: successColor[0],
+  }
+}));
 
 class Dashboard extends Component {
   state = {
-    isLoading: false,
+    isLoading: true,
+    // isLoading: true,
+    negFeedbacks: 0,
+    posFeedbacks: 0,
+    neutralFeedbacks: 0,
+    totalFeedbacks: 0,
+    average: 0,
+    dados: []
   };
   async componentDidMount() {
+    // this.setState({isLoading:false})
+    // console.log("tá carregando")
+    await api
+      .post("/dashboardData", { retail_id: getId() })
+      .then(response => {
+        // console.log(response.data);
+        const {
+          posFeedbacks,
+          negFeedbacks,
+          neutralFeedbacks,
+          totalFeedbacks,
+          average,
+          dados
+        } = response.data;
+        // console.log(dados)
+        this.setState({
+          posFeedbacks,
+          negFeedbacks,
+          neutralFeedbacks,
+          totalFeedbacks,
+          average,
+          dados,
+        })
+        console.log(this.state)
 
+      })
+      .catch(error => {
+        // Error 😨
+        if (error.response) {
+          /*
+           * The request was made and the server responded with a
+           * status code that falls out of the range of 2xx
+           */
+          // console.log(error.response.data);
+          this.setState({ err: error.response.data });
+        } else if (error.request) {
+          /*
+           * The request was made but no response was received, `error.request`
+           * is an instance of XMLHttpRequest in the browser and an instance
+           * of http.ClientRequest in Node.js
+           */
+          // console.log(error.request);
+        }
+      });
+    this.setState({ isLoading: false });
   }
 
+  handleTotalFeedback = () => {
+    return this.state.totalFeedbacks;
+  };
+
+  getInitials = (string) => {
+    var names = string.split(' '),
+      initials = names[0].substring(0, 1).toUpperCase();
+
+    if (names.length > 1) {
+      initials += names[names.length - 1].substring(0, 1).toUpperCase();
+    }
+    return initials;
+  };
+
   render() {
-    // const { negFeedbacks,
-    //   posFeedbacks,
-    //   neutralFeedbacks,
-    //   totalFeedbacks } = this.state;
+    // this.genFeedbackPorDia();
+    const name = "Artur Oliveira Gomes"
+    const cpf = "065.161.024-90"
+    const { average } = this.state;
     const { classes } = this.props;
-    if (this.state.isLoading) {
-      return <LinearProgress />
-    }
-    else {
-      return (
-        <div>
-          <GridContainer>
-            <GridItem xs={12} sm={6} md={3}>
-              <Card>
-                <CardHeader color="info" stats icon>
-                  <CardIcon color="info">
-                    <MdContentCopy />
-                  </CardIcon>
-                  <p className={classes.cardCategory}>Total de Feedbacks</p>
-                  <h3 className={classes.cardTitle}>
-                    {this.handleTotalFeedback()}
-                  </h3>
-                </CardHeader>
+    // if (this.state.isLoading) {
+    //   return <LinearProgress />
+    // }
+    // else {
+    return (
+      <div>
+        <GridContainer>
+          <GridItem xs={12} sm={3} md={3}>
+            <Card>
+              <CardHeader color="primary" stats icon>
+                <CardIcon color="primary">
+                  <Icon classes={{ root: classes.iconRoot }}>
+                    <Avatar alt={name} className={classes.orange}>
+                      {this.getInitials(name)}
+                    </Avatar>
+                  </Icon>
+                </CardIcon>
+                <p style={{ margin: "15px 5px", fontSize: "20px" }}>
+                  {/* <p><Flag code="br" height="16" /></p> */}
+                  {name}
+                </p>
+                <p style={{ margin: "15px 5px", fontSize: "15px", color:"#aaa" }}>
+                  {/* <p><Flag code="br" height="16" /></p> */}
+                  {cpf}
+                </p>
+              </CardHeader>
+              <CardBody>
+                <p className={useStyles.cardCategory}>Total de Feedcoins: <span className={classes.successText}>30</span></p>
+                <p className={useStyles.cardCategory}>Ultimo Feedback: <span className={classes.successText}>12/04/2020</span></p>
+                <p className={useStyles.cardCategory}>Membro desde <span className={classes.successText}>02/02/2020</span></p>
+                {/* <Avatar alt={name} className={classes.orange}>
+                  {this.getInitials(name)}
+                </Avatar> */}
 
-              </Card>
-            </GridItem>
-            <GridItem xs={12} sm={6} md={3}>
-              <Card>
-                <CardHeader color="danger" stats icon>
-                  <CardIcon color="danger">
-                    <Icon classes={{ root: classes.iconRoot }}>
-                      <img
-                        style={{ height: "50px", marginTop: "-40px" }}
-                        src={descontente} alt="" />
-                    </Icon>
-                  </CardIcon>
-                  <p className={classes.cardCategory}>Feedbacks Negativos</p>
-                  <h3 className={classes.cardTitle}>{this.handleNegativeFeedback()}</h3>
-                </CardHeader>
+              </CardBody>
+            </Card>
+          </GridItem>
+          <GridItem xs={12} sm={3} md={9}>
+            <Card >
+              <CardHeader color="success" stats>
+                <h4 style={{
+                  color: "rgba(255,255,255,1)",
+                  margin: "0",
+                  fontSize: "18px",
+                  marginTop: "0",
+                  marginBottom: "10px"
+                }}>Minhas Fidelidades</h4>
+                {/* <p style={{
+                  color: "rgba(255,255,255,.62)",
+                  margin: "0",
+                  fontSize: "14px",
+                  marginTop: "0",
+                  marginBottom: "0"
+                }}>Vamos lá, preencha aqui os dados sobre a nova loja a ser cadastrada.</p> */}
+              </CardHeader>
+              <CardHeader color="info" stats icon>
+              </CardHeader>
+              <CardBody>
+                <Table
+                  tableHeaderColor="primary"
+                  tableHead={["Nome", "Gerente", "Telefone", " "]}
+                  tableData={
+                    [
+                      ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
+                      ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
+                      ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
+                      ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
+                      ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
+                      ["Mason Porter", "Chile", "Gloucester", "$78,615"]
 
-              </Card>
-            </GridItem>
-            <GridItem xs={12} sm={6} md={3}>
-              <Card>
-                <CardHeader color="warning" stats icon>
-                  <CardIcon color="warning">
-                    <Icon classes={{ root: classes.iconRoot }}>
-                      <img
-                        style={{ height: "50px", marginTop: "-40px" }}
-                        src={imparcial} alt="" />
-                    </Icon>
-                  </CardIcon>
-                  <p className={classes.cardCategory}>Feedbacks Neutros</p>
-                  <h3 className={classes.cardTitle}>{this.handleNeutralFeedback()}</h3>
-                </CardHeader>
+                    ]
 
-              </Card>
-            </GridItem>
-            <GridItem xs={12} sm={3} md={3}>
-              <Card>
-                <CardHeader color="success" stats icon>
-                  <CardIcon color="success">
-                    <Icon classes={{ root: classes.iconRoot }}>
-                      <img
-                        style={{ height: "50px", marginTop: "-40px" }}
-                        src={contente} alt="" />
-                    </Icon>
-                  </CardIcon>
-                  <p className={classes.cardCategory}>Feedbacks Positivos</p>
-                  <h3 className={classes.cardTitle}>{this.handlePositiveFeedback()}</h3>
-                </CardHeader>
+                    // props.list.map(item => [`${item.name}`, `${item.manager}`, `${item.phone}`, 
+                    //       <><Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><IoMdPrint/></Button>
+                    //         {/* <Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><FaEdit/></Button> */}
+                    //         {/* <Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><MdDeleteForever/></Button> */}
+                    //       </>])
+                  }
+                />
+              </CardBody>
+              {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae lectus nec ipsum maximus vulputate at in ante. Sed varius arcu quis faucibus iaculis. Aenean quis cursus mi. Sed et purus leo. Vestibulum blandit orci et massa hendrerit, ac elementum risus auctor. Fusce turpis augue, varius tempus pretium sed, tempor at massa. Fusce lobortis aliquet odio, porta venenatis sem molestie vel. Integer lobortis turpis vel malesuada varius. Aliquam rutrum ligula magna, in suscipit velit eleifend sit amet. Fusce semper dictum pretium. Fusce accumsan lectus sit amet dignissim eleifend. Morbi eget nulla ut est consequat interdum. */}
+            </Card>
+          </GridItem>
 
-              </Card>
-            </GridItem>
-          </GridContainer>
 
-          <GridContainer>
-            {/* <GridItem xs={12} sm={3} md={3}>
-              <Card chart>
-                <CardHeader color="info">
-                  <GaugeChart
-                    id="gauge-chart5"
-                    nrOfLevels={420}
-                    arcsLength={[0.69, 0.1, 0.21]}
-                    colors={["#EA4228", "#F5CD19", "#5BE12C"]}
-                    percent={this.handleNPS}
-                    hideText={true}
-                    needleBaseColor={"#EA4228"}
-                    arcPadding={0.01}
-                  />
-                </CardHeader>
-                <CardBody>
-                  <p className={classes.cardCategory}>Pontos NPS</p>
-                  <h3 className={classes.cardTitle}>{this.handleNPS * 10}</h3>
-                </CardBody>
-              </Card>
-            </GridItem> */}
+          {/* <Card >Oi</Card> */}
+        </GridContainer>
+        <GridContainer>
+          <GridItem xs={12} sm={3} md={6}>
+            <Card plain>Oi</Card>
+          </GridItem>
+          <GridItem xs={12} sm={3} md={6}>
+            <Card plain>Oi</Card>
+          </GridItem>
 
-            <GridItem xs={12} sm={3} md={3}>
-              <Card chart>
-                <CardHeader color="success">
-                  <ChartistGraph
-                    className="ct-chart"
-                    // data={feedbacksPorDia.data}
-                    type="Line"
-                    options={feedbacksPorDia.options}
-                    listener={feedbacksPorDia.animation}
-                  />
-                </CardHeader>
-                <CardBody>
-                  <h4 className={classes.cardTitle}>Feedbacks por dia</h4>
+        </GridContainer>
+        <GridContainer>
 
-                </CardBody>
-
-              </Card>
-            </GridItem>
-
-            <GridItem xs={12} sm={3} md={3}>
-              <Card chart>
-                <CardHeader color="success">
-                  <ChartistGraph
-                    className="ct-chart"
-                    // data={feedbacksPorSemana.data}
-                    type="Line"
-                    options={feedbacksPorSemana.options}
-                    listener={feedbacksPorSemana.animation}
-                  />
-                </CardHeader>
-                <CardBody>
-                  <h4 className={classes.cardTitle}>Feedbacks por semana</h4>
-
-                </CardBody>
-
-              </Card>
-            </GridItem>
-            <GridItem xs={12} sm={3} md={3}>
-              <Card chart>
-                <CardHeader color="success">
-                  <ChartistGraph
-                    className="ct-chart"
-                    // data={feedbacksPorMes.data}
-                    type="Line"
-                    options={feedbacksPorMes.options}
-                    listener={feedbacksPorMes.animation}
-                  />
-                </CardHeader>
-                <CardBody>
-                  <h4 className={classes.cardTitle}>Feedbacks por mês</h4>
-
-                </CardBody>
-
-              </Card>
-            </GridItem>
-            {/* <GridItem xs={12} sm={12} md={4}>
-          <Card chart>
-            <CardHeader color="warning">
-              <ChartistGraph
-                className="ct-chart"
-                data={emailsSubscriptionChart.data}
-                type="Bar"
-                options={emailsSubscriptionChart.options}
-                responsiveOptions={emailsSubscriptionChart.responsiveOptions}
-                listener={emailsSubscriptionChart.animation}
-              />
-            </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>Email Subscriptions</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
-            </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> campaign sent 2 days ago
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem>
-        <GridItem xs={12} sm={12} md={4}>
-          <Card chart>
-            <CardHeader color="danger">
-              <ChartistGraph
-                className="ct-chart"
-                data={completedTasksChart.data}
-                type="Line"
-                options={completedTasksChart.options}
-                listener={completedTasksChart.animation}
-              />
-            </CardHeader>
-            <CardBody>
-              <h4 className={classes.cardTitle}>Completed Tasks</h4>
-              <p className={classes.cardCategory}>Last Campaign Performance</p>
-            </CardBody>
-            <CardFooter chart>
-              <div className={classes.stats}>
-                <AccessTime /> campaign sent 2 days ago
-              </div>
-            </CardFooter>
-          </Card>
-        </GridItem> */}
-          </GridContainer>
-          <GridContainer>
-            {/* <GridItem xs={12} sm={12} md={6}>
-          <CustomTabs
-            title="Tasks:"
-            headerColor="primary"
-            tabs={[
-              {
-                tabName: "Bugs",
-                tabIcon: BugReport,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0, 3]}
-                    tasksIndexes={[0, 1, 2, 3]}
-                    tasks={bugs}
-                  />
-                )
-              },
-              {
-                tabName: "Website",
-                tabIcon: Code,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[0]}
-                    tasksIndexes={[0, 1]}
-                    tasks={website}
-                  />
-                )
-              },
-              {
-                tabName: "Server",
-                tabIcon: Cloud,
-                tabContent: (
-                  <Tasks
-                    checkedIndexes={[1]}
-                    tasksIndexes={[0, 1, 2]}
-                    tasks={server}
-                  />
-                )
-              }
-            ]}
-          />
-        </GridItem>
-        <GridItem xs={12} sm={12} md={6}>
-          <Card>
-            <CardHeader color="warning">
-              <h4 className={classes.cardTitleWhite}>Employees Stats</h4>
-              <p className={classes.cardCategoryWhite}>
-                New employees on 15th September, 2016
-              </p>
-            </CardHeader>
-            <CardBody>
-              <Table
-                tableHeaderColor="warning"
-                tableHead={["ID", "Name", "Salary", "Country"]}
-                tableData={[
-                  ["1", "Dakota Rice", "$36,738", "Niger"],
-                  ["2", "Minerva Hooper", "$23,789", "Curaçao"],
-                  ["3", "Sage Rodriguez", "$56,142", "Netherlands"],
-                  ["4", "Philip Chaney", "$38,735", "Korea, South"]
-                ]}
-              />
-            </CardBody>
-          </Card>
-        </GridItem> */}
-          </GridContainer>
-        </div >
-      );
-    }
+        </GridContainer>
+      </div >
+    );
+    // }
   }
 }
 

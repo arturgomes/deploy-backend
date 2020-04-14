@@ -17,7 +17,7 @@ import Grid from '@material-ui/core/Grid';
 
 import api from "../services/api";
 
-import { login, getTu, isAuthenticated } from "../services/auth";
+import { login, getUser, getId, isAuthenticated } from "../services/auth";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -47,7 +47,37 @@ function Copyright() {
 }
 
 export default class Login extends Component {
-
+  async componentDidMount(){
+    if(isAuthenticated() && (getUser() === 'customer')){
+      const fid = decodeURIComponent(this.props.match.params.fid);
+      if(fid){
+        console.log("tem fid");
+        api.post(`/users/i`, {
+          fid,
+          user_id: getId()
+        })
+          .then(response => {
+            this.props.history.push("/customer");
+          })
+          .catch(err => {this.setState({ error: err.response.data.error }) })
+      }
+      
+    }
+    if(isAuthenticated() && (getUser() === 'retail')){
+      const fid = decodeURIComponent(this.props.match.params.fid);
+      if(fid){
+        console.log("tem fid");
+        api.post(`/users/i`, {
+          fid,
+          user_id: getId()
+        })
+          .then(response => {
+            this.props.history.push("/retail");
+          })
+          .catch(err => {this.setState({ error: err.response.data.error }) })
+      }
+    }
+  }
   handleSignIn = async e => {
     e.preventDefault();
     // const fid = decodeURIComponent(this.props.match.params.fid);
@@ -65,7 +95,7 @@ export default class Login extends Component {
             const { name, id, tu } = response.data.login;
             login(response.data.token, name, id, tu);
 
-
+            
             api.post(`/users/i`, {
               fid:decodeURIComponent(this.props.match.params.fid),
               user_id: id
@@ -73,14 +103,14 @@ export default class Login extends Component {
               .then(response => {
                 this.setState({ done: true }, () => { console.log(this.state.done) })
               })
-              .catch(err => { console.error(err.response.data.error); this.setState({ error: err.response.data.error }) })
+              .catch(err => {this.setState({ error: err.response.data.error }) })
 
 
 
 
 
 
-            getTu() === '897316929176464ebc9ad085f31e7284' ? this.props.history.push("/customer") : this.props.history.push("/retail");
+            getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
           } else {
             this.setState({ err: "Usuario ou senha inválidos" });
           }
@@ -143,11 +173,11 @@ export default class Login extends Component {
   //   };
   // }, [mainPanel]);
   render() {
-    if (isAuthenticated()) {
-      (getTu() !== "897316929176464ebc9ad085f31e7284") ?
-        this.props.history.push("/retail")
-        : this.props.history.push("/customer")
-    }
+    // if (isAuthenticated()) {
+    //   (getTu() !== "897316929176464ebc9ad085f31e7284") ?
+    //     this.props.history.push("/retail")
+    //     : this.props.history.push("/customer")
+    // }
 
     return (
       <div

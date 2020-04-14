@@ -50,7 +50,7 @@ class Dashboard extends Component {
   };
   async componentDidMount() {
     // this.setState({isLoading:false})
-    console.log("tá carregando")
+    // console.log("tá carregando")
     await api
       .post("/dashboardData", { retail_id: getId() })
       .then(response => {
