@@ -5,6 +5,10 @@ import { getToken } from "./auth";
 const api = axios.create({
   // baseURL: 'http://localhost:3000',
   baseURL: 'https://api.couponfeed.co',
+  headers: {
+    'Content-Type': 'application/json;charset=utf-8',
+    'Access-Control-Allow-Origin': '*',
+  },
 });
 
 
