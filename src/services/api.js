@@ -7,8 +7,9 @@ const api = axios.create({
   baseURL: 'https://api.couponfeed.co',
   headers: {
     'Content-Type': 'application/json;charset=utf-8',
-    'Access-Control-Allow-Origin': '*',
+    'Access-Control-Allow-Origin': 'https://couponfeed.co',
   },
+
 });
 
 
