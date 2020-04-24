@@ -1,4 +1,7 @@
 import React, { Component } from "react";
+import cep from 'cep-promise';
+import { isCPF, formatToCPF, isCEP, formatToCEP, isCNPJ, formatToCNPJ } from 'brazilian-values';
+
 import Link from "@material-ui/core/Link";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
@@ -22,7 +25,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://couponfeed.co">
+      <Link color="inherit" href="process.env.BASE_URL">
         CouponFeed
       </Link>{" "}
       {new Date().getFullYear()}
@@ -52,35 +55,75 @@ const useStyles = makeStyles(theme => ({
 }));
 
 
-export default class SignUp extends Component {
+export default class SignUpRetail extends Component {
   state = {
-    email: null,
-    cnpj: null,
-    name: null,
-    phone: null,
-    passw: null,
+    email: "",
+    cnpj: "",
+    tmp_cnpj: "",
+    name: "",
+    phone: "",
+    passw: "",
+    address_street: "",
+    address_number: "",
+    address_comp: "",
+    address_neighb: "",
+    address_city: "",
+    address_state: "",
+    address_zip: "",
+    address_country: "",
     done: false,
-    error: null,
+    error: "",
   }
   handleSubmit = async event => {
     event.preventDefault();
-    console.log(this.state);
+    // console.log(this.state);
     await api.post(`/retails`, {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
       password: this.state.passw,
       cnpj: this.state.cnpj,
+      address_street: this.state.address_street,
+      address_number: this.state.address_number,
+      address_city: this.state.address_city,
+      address_state: this.state.address_state,
+      address_zip: this.state.address_zip,
+      address_neighb: this.state.address_neighb,
+      address_comp: this.state.address_comp,
+      // address_country: this.state.address_country
     })
-      .then(response => { console.log(response); this.setState({ id: response.id }) })
-      .catch(error => { console.log(error) });
-    // console.log("Foi");
-    // console.log(this.state, fid);
-    this.setState({ done: true });
-    // this.props.history.push("/");
+      .then(response => { this.setState({ id: response.id }) })
+      .catch(e => { this.setState({error:e.error})});
+      this.setState({ done: true });
+  }
 
-    // console.log(this.state, fid);
+  handleAddressNumber = event => {
+    this.setState({
+      address_number: event.target.value
+    })
+  }
+  handleAddressZip = event => {
+    this.setState({ address_zip: event.target.value })
+    if (event.target.value.length === 8) {
+    cep(event.target.value).then(response => {
+      this.setState({
+        address_street: response.street,
+        address_neighb: response.neighborhood,
+        address_city: response.city,
+        address_state: response.state,
+        address_zip: formatToCEP(event.target.value)
+      })
+    })
+      .catch(err => this.setState({ error: err.message }))
 
+    }
+  }
+
+  handleAddressCountry = event => {
+    // console.log(event.target.value);
+    this.setState({
+      address_country: event.target.value
+    })
   }
   handleNameInput = event => {
     // console.log(event.target.value);
@@ -95,16 +138,12 @@ export default class SignUp extends Component {
     })
   }
   handleCNPJInput = event => {
-    // const cnpj = event.target.value;
-    // if (!Joi.validate(cnpj, cnpjSchema)) {
-    // console.log("cnpj invalido")
-    // this.setState({ error: "CNPJ inválido" })
-    // }
-    // else {
-    this.setState({
-      cnpj: event.target.value
-    })
-    // }
+    this.setState({ tmp_cnpj: formatToCNPJ(event.target.value) })
+    if (isCNPJ(event.target.value)) {
+      this.setState({
+        cnpj: formatToCNPJ(event.target.value),
+      })
+    }
   }
   handleEmailInput = event => {
     this.setState({
@@ -118,7 +157,7 @@ export default class SignUp extends Component {
     });
   }
   render() {
-    // const err = this.state.error;
+    const err = this.state.error;
 
     if (this.state.done && !this.state.error) {
       return (
@@ -131,13 +170,11 @@ export default class SignUp extends Component {
               transform: 'translate(-50%, -50%)',
             }}
           >
-            {/* <Paper className={useStyles.paper}> */}
             <Grid container
               spacing={0}
               align="center"
               justify="center"
               direction="column"
-            // style={{ backgroundColor: 'teal' }}
             >
               <div className={useStyles.content}>
                 <img src={logo} alt="" style={{ width: '300px', paddingBottom: '70px' }} />
@@ -145,17 +182,23 @@ export default class SignUp extends Component {
 
                 <GridContainer>
                   <GridItem xs={12} sm={12} md={12}>
-                    {/* <Card> */}
-                    <CardHeader color="success">
-                      <h4 className={useStyles.cardTitleWhite}>Cadastro realizado com sucesso!</h4>
-                      <p className={useStyles.cardCategoryWhite}>Obrigado, {this.state.name}, pelo seu cadastro! Entraremos em contato para começar a nossa parceria! Até já!</p>
+                    <Card>
+                      <CardHeader color="success">
+                        <h4 className={useStyles.cardTitleWhite}>Cadastro realizado com sucesso!</h4>
+                        <p className={useStyles.cardCategoryWhite}>Obrigado, {this.state.name}, pelo seu cadastro! Vamos começar fazendo login?</p>
 
-                      {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
-                    </CardHeader>
-                    {/* <CardBody>
-                        
-                        </CardBody> */}
-                    {/* </Card> */}
+                        {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
+                      </CardHeader>
+                      <CardBody>
+                        <Link to={`/login`}>
+                          <Button type="submit"
+                            style={{ marginBottom: 16 }}
+                            fullWidth
+                            // variant="contained"
+                            color="primary"> Fazer login</Button>
+                        </Link>
+                      </CardBody>
+                    </Card>
 
                   </GridItem>
                 </GridContainer>
@@ -203,11 +246,12 @@ export default class SignUp extends Component {
                   <Card>
                     <CardHeader color="primary">
                       <h4 className={useStyles.cardTitleWhite}>Cadastrar Lojista - Teste grátis por 30 dias</h4>
-                      <h5 className={useStyles.cardCategoryWhite}>Olá, obrigado por escolher a CouponFeed. Vamos começar nossa parceria com um breve cadastro da sua empresa.</h5>
+                      <h5 className={useStyles.cardCategoryWhite}></h5>
 
                       {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
                     </CardHeader>
                     <CardBody>
+                      Olá, obrigado por escolher a CouponFeed. Vamos começar nossa parceria com um breve cadastro da sua empresa.
                       <form
                         className={useStyles.form}
                         noValidate
@@ -251,18 +295,10 @@ export default class SignUp extends Component {
                               // style={{ marginBottom: 16 }}
                               label="CNPJ"
                               onChange={this.handleCNPJInput}
-                              value={this.state.cnpj}
+                              value={this.state.tmp_cnpj}
                               autoComplete="fname"
                             />
-                            {/* <CustomInput
-                              labelText="CPF"
-                              id="cpf"
-                              onChange={this.handleCPFInput}
-                              value={this.state.cpf}
-                              formControlProps={{
-                                fullWidth: true
-                              }}
-                            /> */}
+                            
                           </GridItem>
                           <GridItem xs={12} sm={12} md={6}>
                             <TextField
@@ -277,16 +313,6 @@ export default class SignUp extends Component {
                               name="phone"
                               autoComplete="phone"
                             />
-                            {/* <CustomInput
-                              labelText="Telefone"
-                              placeholder="(__) __________"
-                              onChange={this.handlePhoneInput}
-                              value={this.state.phone}
-                              id="email-address"
-                              formControlProps={{
-                                fullWidth: true
-                              }}
-                            /> */}
                           </GridItem>
                         </GridContainer>
                         <GridContainer>
@@ -300,7 +326,7 @@ export default class SignUp extends Component {
                               label="Endereço de Email"
                               onChange={this.handleEmailInput}
                               value={this.state.email}
-                              autoComplete="fname"
+                            // autoComplete="fname"
                             />
                             {/* <CustomInput
                               labelText="Endereço de Email"
@@ -322,11 +348,106 @@ export default class SignUp extends Component {
                               type="password"
                               onChange={this.handlePasswInput}
                               value={this.state.passw}
+                            // autoComplete="fname"
+                            />
+                          </GridItem>
+                        </GridContainer>
+                        <GridContainer>
+                          <GridItem xs={12} sm={12} md={6}>
+                            <TextField
+                              // variant="outlined"
+                              required
+                              fullWidth
+                              name="address_zip"
+                              style={{ marginBottom: 16 }}
+                              label="CEP"
+                              onChange={this.handleAddressZip}
+                              value={this.state.address_zip}
+                              autoComplete="fname"
+                            />
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={3}>
+                            <TextField
+                              required
+                              // disabled
+                              fullWidth
+                              name="address_number"
+                              // style={{ marginBottom: 16 }}
+                              label="Número"
+                              onChange={this.handleAddressNumber}
+                              value={this.state.address_number}
                               autoComplete="fname"
                             />
                           </GridItem>
                         </GridContainer>
-
+                        <GridContainer>
+                          <GridItem xs={12} sm={12} md={12}>
+                            <TextField
+                              disabled
+                              // variant="outlined"
+                              // required
+                              fullWidth
+                              name="address_street"
+                              style={{ marginBottom: 16 }}
+                              label="Logradouro"
+                              // onChange={this.handleAddressStreet}
+                              value={this.state.address_street}
+                              autoComplete="fname"
+                            />
+                          </GridItem>
+                        </GridContainer>
+                        <GridContainer>
+                          <GridItem xs={12} sm={12} md={12}>
+                            <TextField
+                              // required
+                              fullWidth
+                              name="address_comp"
+                              style={{ marginBottom: 16 }}
+                              label="Complemento"
+                              onChange={this.handleAddressComp}
+                              value={this.state.address_comp}
+                              autoComplete="fname"
+                            />
+                          </GridItem>
+                        </GridContainer>
+                        <GridContainer>
+                          <GridItem xs={12} sm={12} md={4}>
+                            <TextField
+                              disabled
+                              fullWidth
+                              name="address_neighb"
+                              // style={{ marginBottom: 16 }}
+                              label="Bairro"
+                              // onChange={this.handleAddressNeighb}
+                              value={this.state.address_neighb}
+                              autoComplete="fname"
+                            />
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={6}>
+                            <TextField
+                              disabled
+                              fullWidth
+                              name="address_city"
+                              // style={{ marginBottom: 16 }}
+                              label="Cidade"
+                              // onChange={this.handleAddressNeighb}
+                              value={this.state.address_city}
+                              autoComplete="fname"
+                            />
+                          </GridItem>
+                          <GridItem xs={12} sm={12} md={2}>
+                            <TextField
+                              disabled
+                              fullWidth
+                              name="address_state"
+                              // style={{ marginBottom: 16 }}
+                              label="Estado"
+                              // onChange={this.handleAddressNeighb}
+                              value={this.state.address_state}
+                              autoComplete="fname"
+                            />
+                          </GridItem>
+                        </GridContainer>
 
                         <GridContainer>
 

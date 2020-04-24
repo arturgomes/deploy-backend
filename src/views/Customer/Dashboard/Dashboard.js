@@ -1,15 +1,19 @@
 import React, { Component } from "react";
 
 // import { Avatar, ListItem } from 'react-elements';
-import Flag from "react-world-flags";
 import Avatar from '@material-ui/core/Avatar';
+import moment from 'moment';
 import PropTypes from 'prop-types';
-import { withStyles, makeStyles } from '@material-ui/styles';
+import {
+  withStyles,
+  // makeStyles 
+} from '@material-ui/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
-import { MdContentCopy } from "react-icons/md";
-import GaugeChart from 'react-gauge-chart'
+import { IoMdPrint } from "react-icons/io";
+import { format, parseISO } from "date-fns";
+import pt from 'date-fns/locale/pt';
 
-import ChartistGraph from "react-chartist";
+
 import Icon from "@material-ui/core/Icon";
 // core components
 import Table from "../../../components/Table/Table.js";
@@ -19,81 +23,62 @@ import Card from "../../../components/Card/Card.js";
 import CardHeader from "../../../components/Card/CardHeader.js";
 import CardIcon from "../../../components/Card/CardIcon.js";
 import CardBody from "../../../components/Card/CardBody.js";
-import contente from "../../../assets/img/contente_branco@4x.png";
-import descontente from "../../../assets/img/descontente_branco@4x.png";
-import imparcial from "../../../assets/img/imparcial_branco@4x.png";
-import {
-  successColor,
-  whiteColor,
-  grayColor,
-  hexToRgb
-} from "../../../assets/jss/material-dashboard-react.js"
+import Button from "../../../components/CustomButtons/Button.js";
+
+// import {
+//   successColor,
+// } from "../../../assets/jss/material-dashboard-react.js"
 
 import api from "../../../services/api";
 import {
   getId,
 } from "../../../services/auth";
 
-import {
-  feedbacksPorDia,
-  feedbacksPorMes,
-  feedbacksPorSemana
-} from "../../../variables/charts.js";
 
 import styles from "../../../assets/jss/material-dashboard-react/views/dashboardStyle.js";
 
 const useStyles = theme => (styles);
-const classes = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    '& > *': {
-      margin: theme.spacing(1),
-    },
-  },
-  headSt: {
-    color: successColor[0],
 
-    margin: "15 15px"
-  },
-  successText: {
-    color: successColor[0],
-  }
-}));
 
+function openInNewTab(url) {
+  var win = window.open(url, '_blank');
+  win.focus();
+}
 class Dashboard extends Component {
   state = {
     isLoading: true,
-    // isLoading: true,
-    negFeedbacks: 0,
-    posFeedbacks: 0,
-    neutralFeedbacks: 0,
-    totalFeedbacks: 0,
-    average: 0,
-    dados: []
+    user_name: '',
+    cpf: '',
+    member_since: '',
+    loyalties: [],
+    last_feedback: '',
+    total_feedbacks: 0,
+    fb: [],
   };
   async componentDidMount() {
+
     // this.setState({isLoading:false})
     // console.log("tá carregando")
     await api
-      .post("/dashboardData", { retail_id: getId() })
+      .post("/dashboardDataC", { user_id: getId() })
       .then(response => {
-        // console.log(response.data);
-        const {
-          posFeedbacks,
-          negFeedbacks,
-          neutralFeedbacks,
-          totalFeedbacks,
-          average,
-          dados
-        } = response.data;
+        console.log(response.data);
+        const { fb,
+          last_feedback,
+          loyalties,
+          total_feedbacks,
+          user } = response.data;
         // console.log(dados)
+        const newfb = this.makeLoyaltyList(fb, loyalties);
+        console.log(newfb);
         this.setState({
-          posFeedbacks,
-          negFeedbacks,
-          neutralFeedbacks,
-          totalFeedbacks,
-          average,
-          dados,
+          user_name: user.name,
+          cpf: user.cpf,
+          member_since: user.createdAt,
+          loyalties,
+          last_feedback: last_feedback.createdAt,
+          total_feedbacks,
+          fb: newfb
         })
         console.log(this.state)
 
@@ -118,7 +103,22 @@ class Dashboard extends Component {
       });
     this.setState({ isLoading: false });
   }
+  findFeedcoins = (retail_id, loyalties) => {
+    // console.log(retail_id,loyalties);
 
+    const result = loyalties.filter(l => (l.retail_id === retail_id))
+    // console.log(result);
+    return result
+  }
+  makeLoyaltyList = (fb, loyalties) => {
+    return fb.map(f => {
+      const { retail_id, feedbacks_count } = f
+      const retail_name = f.Retail.retail_name;
+      const fc = this.findFeedcoins(retail_id, loyalties);
+      // console.log({ retail_id, feedbacks_count, fc, retail_name })
+      return { retail_id, feedbacks_count, fc, retail_name }
+    })
+  }
   handleTotalFeedback = () => {
     return this.state.totalFeedbacks;
   };
@@ -134,14 +134,19 @@ class Dashboard extends Component {
   };
 
   render() {
-    // this.genFeedbackPorDia();
-    const name = "Artur Oliveira Gomes"
-    const cpf = "065.161.024-90"
-    const { average } = this.state;
+    const {
+      user_name,
+      member_since,
+      last_feedback,
+      total_feedbacks,
+      fb,
+      cpf,
+      loyalties
+    } = this.state;
     const { classes } = this.props;
-    // if (this.state.isLoading) {
-    //   return <LinearProgress />
-    // }
+    if (this.state.isLoading) {
+      return <LinearProgress />
+    }
     // else {
     return (
       <div>
@@ -151,24 +156,28 @@ class Dashboard extends Component {
               <CardHeader color="primary" stats icon>
                 <CardIcon color="primary">
                   <Icon classes={{ root: classes.iconRoot }}>
-                    <Avatar alt={name} className={classes.orange}>
-                      {this.getInitials(name)}
+                    <Avatar alt={user_name} className={classes.orange}>
+                      {this.getInitials(user_name)}
                     </Avatar>
                   </Icon>
                 </CardIcon>
                 <p style={{ margin: "15px 5px", fontSize: "20px" }}>
                   {/* <p><Flag code="br" height="16" /></p> */}
-                  {name}
+                  {user_name}
                 </p>
-                <p style={{ margin: "15px 5px", fontSize: "15px", color:"#aaa" }}>
+                <p style={{ margin: "15px 5px", fontSize: "15px", color: "#aaa" }}>
                   {/* <p><Flag code="br" height="16" /></p> */}
                   {cpf}
                 </p>
               </CardHeader>
               <CardBody>
-                <p className={useStyles.cardCategory}>Total de Feedcoins: <span className={classes.successText}>30</span></p>
-                <p className={useStyles.cardCategory}>Ultimo Feedback: <span className={classes.successText}>12/04/2020</span></p>
-                <p className={useStyles.cardCategory}>Membro desde <span className={classes.successText}>02/02/2020</span></p>
+                <p className={useStyles.cardCategory}>Total de Feedcoins: <span className={classes.successText}>{total_feedbacks}</span></p>
+
+                <p className={useStyles.cardCategory}>Ultimo Feedback: <span className={classes.successText}>{last_feedback && format(parseISO(last_feedback), "dd ' de ' MMMM  ' de '  y", { locale: pt })}</span></p>
+                {/* <p className={useStyles.cardCategory}>Ultimo Feedback: <span className={classes.successText}>{format(parseISO(last_feedback), "dd ' de ' MMMM  ' de '  y", { locale: pt })}</span></p> */}
+                {/* <p className={useStyles.cardCategory}>Ultimo Feedback: <span className={classes.successText}>{last_feedback}</span></p> */}
+                <p className={useStyles.cardCategory}>Membro desde <span className={classes.successText}>{member_since && format(parseISO(member_since), "dd ' de ' MMMM  ' de '  y", { locale: pt })}</span></p>
+                {/* <p className={useStyles.cardCategory}>Membro desde <span className={classes.successText}>{member_since}</span></p> */}
                 {/* <Avatar alt={name} className={classes.orange}>
                   {this.getInitials(name)}
                 </Avatar> */}
@@ -194,32 +203,21 @@ class Dashboard extends Component {
                   marginBottom: "0"
                 }}>Vamos lá, preencha aqui os dados sobre a nova loja a ser cadastrada.</p> */}
               </CardHeader>
-              <CardHeader color="info" stats icon>
-              </CardHeader>
+              {/* <CardHeader color="info" stats icon>
+              </CardHeader> */}
               <CardBody>
                 <Table
                   tableHeaderColor="primary"
-                  tableHead={["Nome", "Gerente", "Telefone", " "]}
+                  tableHead={["Loja", "Seus pontos", "Meta", ""]}
                   tableData={
-                    [
-                      ["Dakota Rice", "Niger", "Oud-Turnhout", "$36,738"],
-                      ["Minerva Hooper", "Curaçao", "Sinaai-Waas", "$23,789"],
-                      ["Sage Rodriguez", "Netherlands", "Baileux", "$56,142"],
-                      ["Philip Chaney", "Korea, South", "Overland Park", "$38,735"],
-                      ["Doris Greene", "Malawi", "Feldkirchen in Kärnten", "$63,542"],
-                      ["Mason Porter", "Chile", "Gloucester", "$78,615"]
-
-                    ]
-
-                    // props.list.map(item => [`${item.name}`, `${item.manager}`, `${item.phone}`, 
-                    //       <><Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><IoMdPrint/></Button>
-                    //         {/* <Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><FaEdit/></Button> */}
-                    //         {/* <Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><MdDeleteForever/></Button> */}
-                    //       </>])
+                    fb.map(item => item.fc[0] ? [`${item.retail_name}`, `${item.feedbacks_count}`, `${item.fc[0].feedcoins}`,
+                    item.feedbacks_count >= item.fc[0].feedcoins ? <><Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><IoMdPrint /></Button>
+                      {/* <Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><FaEdit/></Button> */}
+                      {/* <Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><MdDeleteForever/></Button> */}
+                    </>:<></>] : [])
                   }
                 />
               </CardBody>
-              {/* Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum vitae lectus nec ipsum maximus vulputate at in ante. Sed varius arcu quis faucibus iaculis. Aenean quis cursus mi. Sed et purus leo. Vestibulum blandit orci et massa hendrerit, ac elementum risus auctor. Fusce turpis augue, varius tempus pretium sed, tempor at massa. Fusce lobortis aliquet odio, porta venenatis sem molestie vel. Integer lobortis turpis vel malesuada varius. Aliquam rutrum ligula magna, in suscipit velit eleifend sit amet. Fusce semper dictum pretium. Fusce accumsan lectus sit amet dignissim eleifend. Morbi eget nulla ut est consequat interdum. */}
             </Card>
           </GridItem>
 
@@ -227,11 +225,37 @@ class Dashboard extends Component {
           {/* <Card >Oi</Card> */}
         </GridContainer>
         <GridContainer>
-          <GridItem xs={12} sm={3} md={6}>
-            <Card plain>Oi</Card>
+          <GridItem xs={12} sm={3} md={12}>
+            <Card >
+            <CardHeader color="success" stats>
+                <h4 style={{
+                  color: "rgba(255,255,255,1)",
+                  margin: "0",
+                  fontSize: "18px",
+                  marginTop: "0",
+                  marginBottom: "10px"
+                }}>Promoções das lojas que já dei feedback</h4>
+                {/* <p style={{
+                  color: "rgba(255,255,255,.62)",
+                  margin: "0",
+                  fontSize: "14px",
+                  marginTop: "0",
+                  marginBottom: "0"
+                }}>Vamos lá, preencha aqui os dados sobre a nova loja a ser cadastrada.</p> */}
+              </CardHeader>
+              <CardBody>
+                {loyalties===null ? <p>Você ainda não deu nenhum feedback</p> : (<Table
+                  tableHeaderColor="primary"
+                  tableHead={["Loja", "Promoção", "Descrição", "Premio","Pontos Necessários"]}
+                  tableData={
+                    loyalties.map(item => [`${item.Retail.retail_name}`, `${item.name}`,`${item.description}`, `${item.discount}`, `${item.feedcoins}`] )
+                  }
+                />)}
+              </CardBody>
+              </Card>
           </GridItem>
           <GridItem xs={12} sm={3} md={6}>
-            <Card plain>Oi</Card>
+            {/* <Card plain>Oi</Card> */}
           </GridItem>
 
         </GridContainer>

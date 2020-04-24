@@ -6,7 +6,7 @@ class Logout extends Component {
   render() {
     logout();
     return (
-      <Redirect to="/" push={true}/>
+      <Redirect to="process.env.BASE_URL" push={true}/>
     );
   }
 }

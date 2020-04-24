@@ -60,7 +60,7 @@ export default class PrintQR extends Component {
 
   render() {
     const { id } = this.props.match.params;
-    const link = `https://couponfeed.co/feed/${id}`
+    const link = `process.env.BASE_URL/feed/${id}`
 
     return (
       <div className="main">
@@ -90,14 +90,14 @@ export default class PrintQR extends Component {
           <Demo link={link} />
         </div>
         <div className="txt-container">
-          Não conseguiu acessar o QR code? Acesse https://couponfeed.co/f/{this.state.short_url}
+          Não conseguiu acessar o QR code? Acesse process.env.BASE_URL/f/{this.state.short_url}
         </div>
         <footer>
           <section className="ft-main">
             <div className="ft-main-item">
               <ul>
                 <li ><img src={cflogo} alt="" style={{ width: '240px' }} /></li>
-                <li><FaHome /> https://couponfeed.co</li>
+                <li><FaHome /> process.env.BASE_URL</li>
                 <li><FaFacebook /> https://fb.com/couponfeed</li>
                 <li><FaInstagram /> https://instagram.com/couponfeed</li>
               </ul>

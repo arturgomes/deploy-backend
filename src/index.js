@@ -58,6 +58,7 @@ ReactDOM.render(
       <Route path="/login/" exact component={Login} />
       <Route path="/login/:fid" component={Login} />
       
+      <Route path="/signup" exact component={SignUp} />
       <Route path="/signup/:fid" component={SignUp} />
       <Route path="/rsignup" component={SignUpRetail} />
       <Route path="/feed/:id" component={Feedback} />

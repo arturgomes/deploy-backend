@@ -37,7 +37,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="https://couponfeed.co">
+      <Link color="inherit" href="process.env.BASE_URL">
         CouponFeed
       </Link>{" "}
       {new Date().getFullYear()}
@@ -51,7 +51,7 @@ export default class Login extends Component {
     if(isAuthenticated() && (getUser() === 'customer')){
       const fid = decodeURIComponent(this.props.match.params.fid);
       if(fid){
-        console.log("tem fid");
+        // console.log("tem fid");
         api.post(`/users/i`, {
           fid,
           user_id: getId()
@@ -66,7 +66,7 @@ export default class Login extends Component {
     if(isAuthenticated() && (getUser() === 'retail')){
       const fid = decodeURIComponent(this.props.match.params.fid);
       if(fid){
-        console.log("tem fid");
+        // console.log("tem fid");
         api.post(`/users/i`, {
           fid,
           user_id: getId()
@@ -96,19 +96,14 @@ export default class Login extends Component {
             login(response.data.token, name, id, tu);
 
             
-            api.post(`/users/i`, {
-              fid:decodeURIComponent(this.props.match.params.fid),
-              user_id: id
-            })
-              .then(response => {
-                this.setState({ done: true }, () => { console.log(this.state.done) })
-              })
-              .catch(err => {this.setState({ error: err.response.data.error }) })
-
-
-
-
-
+            // api.post(`/users/i`, {
+            //   fid:decodeURIComponent(this.props.match.params.fid),
+            //   user_id: id
+            // })
+            //   .then(response => {
+            //     this.setState({ done: true }, () => { console.log(this.state.done) })
+            //   })
+            //   .catch(err => {this.setState({ error: err.response.data.error }) })
 
             getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
           } else {

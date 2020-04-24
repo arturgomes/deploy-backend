@@ -195,7 +195,7 @@ export default function LandingPage(props) {
                 {isAuthenticated() ?
                ( <ListItem className={classes.listItem}>
                   <Button
-                    href={getTu() === '897316929176464ebc9ad085f31e7284' ? "https://couponfeed.co/customer" : "https://couponfeed.co/retail"}
+                    href={getTu() === '897316929176464ebc9ad085f31e7284' ? "/customer" : "/retail"}
                     className={classes.navLink}
                     // onClick={e => e.preventDefault()}
                     color="transparent"
@@ -205,7 +205,7 @@ export default function LandingPage(props) {
                 </ListItem>):
                  (<ListItem className={classes.listItem}>
                  <Button
-                   href="https://couponfeed.co/login"
+                   href="/login"
                    className={classes.navLink}
                   //  onClick={e => e.preventDefault()}
                    color="transparent"
@@ -216,7 +216,7 @@ export default function LandingPage(props) {
                 }
                 <ListItem className={classes.listItem}>
                   <Button
-                    href="https://couponfeed.co/signup"
+                    href="/signup"
                     className={classes.registerNavLink}
                     // onClick={e => e.preventDefault()}
                     color="rose"

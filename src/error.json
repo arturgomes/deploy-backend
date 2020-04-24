@@ -1,0 +1,40 @@
+{
+  "error": {
+    "message": "nps_value is not defined",
+    "name": "ReferenceError",
+    "frames": [
+      {
+        "file": "src/app/controllers/CustomerDashboardController.js",
+        "filePath": "/Users/artur/Dropbox/Workspace/couponfeed/backend/src/app/controllers/CustomerDashboardController.js",
+        "method": "loyalties.map.f",
+        "line": 49,
+        "column": 9,
+        "context": {
+          "start": 44,
+          "pre": "    });\n    console.log(\"loyalty_set: \",loyalties)\n    const my_loyalty_set = loyalties.map(f => {\n      const local_total = feedbacks.filter(g => (g.retail_id === f.retail_id) && g.feedcoins)\n      return {",
+          "line": "        nps_value,",
+          "post": "        shop_id,\n        retail_id,\n        local_total}\n    })\n    console.log(\"my_loyalty_set: \",my_loyalty_set)"
+        },
+        "isModule": false,
+        "isNative": false,
+        "isApp": true
+      },
+      {
+        "file": "src/app/controllers/CustomerDashboardController.js",
+        "filePath": "/Users/artur/Dropbox/Workspace/couponfeed/backend/src/app/controllers/CustomerDashboardController.js",
+        "method": "index",
+        "line": 46,
+        "column": 38,
+        "context": {
+          "start": 41,
+          "pre": "      },\n      include: [{ attributes: [['name', 'retail_name']], model: Retail }],\n\n    });\n    console.log(\"loyalty_set: \",loyalties)",
+          "line": "    const my_loyalty_set = loyalties.map(f => {",
+          "post": "      const local_total = feedbacks.filter(g => (g.retail_id === f.retail_id) && g.feedcoins)\n      return {\n        nps_value,\n        shop_id,\n        retail_id,"
+        },
+        "isModule": false,
+        "isNative": false,
+        "isApp": true
+      }
+    ]
+  }
+}

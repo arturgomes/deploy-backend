@@ -7,7 +7,7 @@ export default class Upload extends Component {
   renderDragMessage = (isDragActive,isDragReject) => {
     
     if(!isDragActive){
-      return <UploadMessage>Arraste sua logomarca aqui</UploadMessage>
+      return <UploadMessage>Arraste sua imagem aqui</UploadMessage>
     }
     
     if(isDragReject){
