@@ -13,7 +13,7 @@ import { FaQrcode,
           FaTimes,
           FaWhatsapp, 
           FaChartBar, 
-          FaChartLine } from "react-icons/fa";
+          FaHandsHelping } from "react-icons/fa";
 import { TiDocumentText } from "react-icons/ti";
 
 import List from "@material-ui/core/List";
@@ -53,9 +53,9 @@ export default function LandingPage(props) {
         category:"Prata", 
         type:"Ideal para MEI",
         features:[
+          {valid:false,fmonth:"60 feedbacks por mês"},
           {valid:true,fmonth:"Relatório 60 feedbacks por mês"},
           {valid:true,fmonth:"Registro de um QR code"},
-          {valid:false,fmonth:"60 feedbacks por mês"},
           {valid:false,fmonth:"Acesso a um dashboard personalizado"},
           {valid:false,fmonth:"Relatórios por e-mail"},
         ],
@@ -71,9 +71,9 @@ export default function LandingPage(props) {
         type:"Ideal quem está começando",
         
         features:[
+          {valid:false,fmonth:"60 feedbacks por mês"},
           {valid:true,fmonth:"Relatório 60 feedbacks por mês"},
           {valid:true,fmonth:"Registro de um QR code"},
-          {valid:false,fmonth:"60 feedbacks por mês"},
           {valid:false,fmonth:"Acesso a um dashboard personalizado"},
           {valid:false,fmonth:"Relatórios por e-mail"},
         ],
@@ -90,9 +90,9 @@ export default function LandingPage(props) {
         type:"Ideal quem está em expansão",
         
         features:[
+          {valid:true,fmonth:"Feedbacks ilimitados"},
           {valid:true,fmonth:"Relatório 60 feedbacks por mês"},
           {valid:true,fmonth:"Registro de um QR code"},
-          {valid:true,fmonth:"Feedbacks ilimitados"},
           {valid:true,fmonth:"Acesso a um dashboard personalizado"},
           {valid:true,fmonth:"Relatórios por e-mail"},
         ],
@@ -108,8 +108,8 @@ export default function LandingPage(props) {
         type:"Ideal quem tem filiais",
         
         features:[
-          {valid:true,fmonth:"Relatório ilimitados"},
           {valid:true,fmonth:"Feedbacks ilimitados"},
+          {valid:true,fmonth:"Relatório ilimitados"},
           {valid:true,fmonth:"Registro de cinco QR codes"},
           {valid:true,fmonth:"Acesso a um dashboard personalizado"},
           {valid:true,fmonth:"Relatórios por e-mail"},
@@ -222,7 +222,7 @@ export default function LandingPage(props) {
                     color="rose"
                     round
                   >
-                    Registre-se
+                    Experimente por 30 dias!
                   </Button>
                 </ListItem>
               </List></>
@@ -305,14 +305,14 @@ export default function LandingPage(props) {
                 <FaChartBar style={{ fontSize: 120, paddingBottom: 20 }} />
                 <div className="card-body">
                   <h4 className="card-title">Estatísticas</h4>
-                  <p>Seu perfil conta com estatísticas e gráficos sobre os feedbacks, para um rápido monitoramento</p>
+                  <p>Seu perfil conta com estatísticas e gráficos sobre os feedbacks, para um rápido monitoramento. Auxilia na tomada de decisão para a melhoria na prestação de serviço.</p>
                 </div>
               </div>
               <div className="card">
-                <FaChartLine style={{ fontSize: 120, paddingBottom: 20 }} />
+                <FaHandsHelping style={{ fontSize: 120, paddingBottom: 20 }} />
                 <div className="card-body">
-                  <h4 className="card-title">Resultados</h4>
-                  <p>Auxilia na tomada de decisão para a melhoria na prestação de serviço.</p>
+                  <h4 className="card-title">Fidelidade</h4>
+                  <p>Faça campanhas de fidelização de seus clientes.</p>
                 </div>
               </div>
             </div>
@@ -360,7 +360,6 @@ export default function LandingPage(props) {
                                   {feat.valid ? (<FaCheck />):(<FaTimes/>)}
                                   <div className="media-body">{feat.fmonth}</div>
                               </li>
-
                               ))
                               }
 
@@ -373,15 +372,15 @@ export default function LandingPage(props) {
                             <hr className="cell-divide-hr" />
                             <div className="price">
                               <span className="currency">R$ </span><span className="value">{(p.prices.trimestral/3).toFixed(2)}</span>
-                              <div className="frequency">Total: R$ {p.prices.trimestral} para assinatura trimestral</div>
+                              <div className="frequency"><p>Assinatura trimestral</p>Total: R$ {p.prices.trimestral} </div>
                             </div>
                             <hr className="cell-divide-hr" />
                             <div className="price">
                               <span className="currency">R$ </span><span className="value">{(p.prices.anual/12).toFixed(2)}</span>
-                              <div className="frequency">Total: R$ {p.prices.anual} para assinatura anual</div>
+                              <div className="frequency"> <p>Assinatura anual</p>Total: R$ {p.prices.anual}</div>
                             </div>
                             <div className="button-wrapper">
-                              <AnchorLink className="btn-solid-reg page-scroll" href="#request">REQUEST</AnchorLink >
+                              <AnchorLink className="btn-solid-reg page-scroll" href="#request">Grátis por 30 dias</AnchorLink >
                             </div>
                           </div>
                       </div>
@@ -390,11 +389,6 @@ export default function LandingPage(props) {
           </div>
         </div>
       </div>
-
-
-
-
-
 
 
 

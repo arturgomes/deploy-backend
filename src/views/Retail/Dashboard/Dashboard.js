@@ -206,6 +206,9 @@ class Dashboard extends Component {
             <GridItem xs={12} sm={3} md={3}>
               <Card chart>
                 <CardHeader color="info">
+                  
+                </CardHeader>
+                <CardBody>
                   <GaugeChart
                     id="gauge-chart5"
                     nrOfLevels={420}
@@ -216,8 +219,6 @@ class Dashboard extends Component {
                     needleBaseColor={"#EA4228"}
                     arcPadding={0.01}
                   />
-                </CardHeader>
-                <CardBody>
                   <p className={classes.cardCategory}>Pontos NPS</p>
                   <h3 className={classes.cardTitle}>{this.handleNPS()}</h3>
                 </CardBody>
