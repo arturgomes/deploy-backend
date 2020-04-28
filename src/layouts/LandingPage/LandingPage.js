@@ -232,7 +232,7 @@ export default function LandingPage(props) {
 
       <header id="header" className="header" >
         <div className="header-content">
-      <Parallax >
+      {/* <Parallax > */}
 
           <div className="container">
             <div className="row">
@@ -244,7 +244,9 @@ export default function LandingPage(props) {
                       o varejista na coleta de feedbacks das experiências de seu cliente. E em troca, o
                       cliente acumula pontos que podem ser convertidos em descontos em produtos e também
                                 participa de promoções exclusivas.</p>
-                  <AnchorLink className="btn-solid-lg1" href="#services">DECOLE AGORA MESMO</AnchorLink >
+                               
+                  <AnchorLink className="btn-solid-lg1" style={{marginRight:'20px'}}href="#services">DECOLE AGORA MESMO</AnchorLink >
+                  <AnchorLink className="btn-solid-lg" href="/rsignup">TESTE GRATIS POR 30 DIAS</AnchorLink >
                 </div>
               </div>
               <div className="col-lg-6">
@@ -254,7 +256,7 @@ export default function LandingPage(props) {
               </div>
             </div>
           </div>
-    	</Parallax>
+    	{/* </Parallax> */}
         </div>
       </header >
 

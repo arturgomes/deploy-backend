@@ -132,11 +132,12 @@ export default class SignUp extends Component {
           submit={this.handleSubmit}
           handleAddressNumber={this.handleAddressNumber}
           handleAddressZip={this.handleAddressZip}
-          handleAddressCountry={this.handleAddressZip}
-          handlePhoneInput={this.handleAddressZip}
-          handleCPFInput={this.handleAddressZip}
-          handleEmailInput={this.handleAddressZip}
-          handlePasswInput={this.handleAddressZip}
+          handleAddressCountry={this.handleAddressCountry}
+          handlePhoneInput={this.handlePhoneInput}
+          handleCNPJInput={this.handleCNPJInput}
+          handleEmailInput={this.handleEmailInput}
+          handlePasswInput={this.handlePasswInput}
+          handleNameInput={this.handleNameInput}
         />
       </BasicLayout>)
     }
