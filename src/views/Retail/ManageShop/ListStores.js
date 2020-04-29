@@ -3,7 +3,7 @@ import React from "react";
 // core components
 
 import { IoMdPrint } from "react-icons/io";
-// import { MdDeleteForever } from "react-icons/md";
+import { RiEBike2Line } from "react-icons/ri";
 // import { FaEdit } from "react-icons/fa";
 
 import GridItem from "../../../components/Grid/GridItem.js";
@@ -60,7 +60,7 @@ export default function ListStores(props) {
               
               props.list.map(item => [`${item.name}`, `${item.manager}`, `${item.phone}`, 
                     <><Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><IoMdPrint/></Button>
-                      {/* <Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><FaEdit/></Button> */}
+                      <Button onClick={() => openInNewTab(`/print-thermal/${item.id}`)}><RiEBike2Line/></Button>
                       {/* <Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><MdDeleteForever/></Button> */}
                     </>])
             }

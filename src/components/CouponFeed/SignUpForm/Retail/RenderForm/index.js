@@ -46,12 +46,12 @@ export default function RenderForm(props) {
         </CardHeader>
         <CardBody>
           Olá, obrigado por escolher a CouponFeed. Vamos começar nossa parceria com um breve cadastro da sua empresa.
+          {props.error ? <div className="divError">{props.error}</div> : ``}
           <form
             className={useStyles.form}
             noValidate
             onSubmit={props.handleSubmit}
           >
-            {props.error ? <div className="divError">{props.error}</div> : ``}
 
             <GridContainer>
               <GridItem xs={12} sm={12} md={12}>

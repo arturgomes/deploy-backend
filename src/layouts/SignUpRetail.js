@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import cep from 'cep-promise';
-import { formatToCEP, isCPF, formatToCPF } from 'brazilian-values';
+import { formatToCEP, isCNPJ, formatToCNPJ } from 'brazilian-values';
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -15,8 +15,8 @@ import api from "../services/api"
 export default class SignUp extends Component {
   state = {
     email: "",
-    cpf: "",
-    tmp_cpf: "",
+    cnpj: "",
+    tmp_cnpj: "",
     name: "",
     phone: "",
     passw: "",
@@ -33,12 +33,12 @@ export default class SignUp extends Component {
   }
   handleSubmit = async event => {
     event.preventDefault();
-    await api.post(`/users`, {
+    await api.post(`/retails`, {
       name: this.state.name,
       email: this.state.email,
       phone: this.state.phone,
       password: this.state.passw,
-      cpf: this.state.cpf,
+      cnpj: this.state.cnpj,
       address_street: this.state.address_street,
       address_number: this.state.address_number,
       address_city: this.state.address_city,
@@ -48,9 +48,9 @@ export default class SignUp extends Component {
       address_comp: this.state.address_comp,
       // address_country: this.state.address_country
     })
-      .then(response => { this.setState({ id: response.id }) })
+      .then(response => { console.log(response);this.setState({ id: response.id, done: true  }) })
       .catch(e => { this.setState({ error: e.error }) });
-    this.setState({ done: true });
+    this.setState({ });
     console.log(this.state);
   }
 
@@ -95,11 +95,11 @@ export default class SignUp extends Component {
       phone: event.target.value
     })
   }
-  handleCPFInput = event => {
-    this.setState({ tmp_cpf: formatToCPF(event.target.value) })
-    if (isCPF(event.target.value)) {
+  handleCNPJInput = event => {
+    this.setState({ tmp_cnpj: formatToCNPJ(event.target.value) })
+    if (isCNPJ(event.target.value)) {
       this.setState({
-        cpf: formatToCPF(event.target.value),
+        cnpj: formatToCNPJ(event.target.value),
       })
     }
   }
@@ -118,10 +118,10 @@ export default class SignUp extends Component {
 
   render() {
     const { error, done } = this.state;
-
+    console.log(this.state)
     if (done && !error) {
      return ( <BasicLayout>
-        <RenderConclusion error={error} />
+        <RenderConclusion state={this.state} error={error} />
       </BasicLayout>)
     }
     else {
@@ -129,7 +129,7 @@ export default class SignUp extends Component {
         <RenderForm
           error={error}
           state={this.state}
-          submit={this.handleSubmit}
+          handleSubmit={this.handleSubmit}
           handleAddressNumber={this.handleAddressNumber}
           handleAddressZip={this.handleAddressZip}
           handleAddressCountry={this.handleAddressCountry}

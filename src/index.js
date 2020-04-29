@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 
 import ReactDOM from "react-dom";
 
-import "./index.css";
+// import "./index.css";
 // import App from "./App";
 import * as Sentry from "@sentry/browser";
 import "./assets/css/material-dashboard-react.css?v=1.8.0";
@@ -21,6 +21,10 @@ import SignUpRetail from "./layouts/SignUpRetail.js";
 import LandingPage from "./layouts/LandingPage/LandingPage.js";
 
 import { isAuthenticated } from "./services/auth";
+
+
+// require('dotenv').config()
+
 
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
@@ -63,9 +67,9 @@ ReactDOM.render(
       <Route path="/rsignup" component={SignUpRetail} />
       <Route path="/feed/:id" component={Feedback} />
       <Route path="/f/:short_url" component={Shortner} />
-      <Route path="/print-thermal/:id" component={PrintQRThermal} />
-      <Route path="/print-qr/:id" component={PrintQR} />
 
+      <PrivateRoute path="/print-thermal/:id" component={PrintQRThermal} />
+      <PrivateRoute path="/print-qr/:id" component={PrintQR} />
       <PrivateRoute path="/profile" component={Profile} />
       <PrivateRoute path="/customer" component={Customer} />
       <PrivateRoute path="/retail" component={Retail} />

@@ -24,7 +24,7 @@ function Copyright() {
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {"Copyright © "}
-      <Link color="inherit" href="process.env.BASE_URL">
+      <Link color="inherit" href="https://couponfeed.co">
         CouponFeed
       </Link>{" "}
       {new Date().getFullYear()}

@@ -1,18 +1,17 @@
 import React,{Component} from 'react';
-// import '../assets/css/print-qr-thermal.css';
+import '../assets/css/print-th.css';
 import QrCode from "qrcode.react";
 import { FaHome, FaFacebook, FaInstagram } from "react-icons/fa";
 
 import cflogo from "../assets/img/completa_monocromatica@4x.png"
 import api from "../services/api";
 
-
 class Demo extends Component {
 
   render() {
     return (
       <div>
-        <QrCode size={500} renderAs='svg' value={this.props.link} />
+        <QrCode size={200} renderAs='svg' value={this.props.link} />
       </div>
     );
   }
@@ -59,12 +58,11 @@ export default class PrintQRThermal extends Component {
 
   render(){
     const { id } = this.props.match.params;
-    const link = `process.env.BASE_URL/feed/${id}`
+    const link = `https://couponfeed.co/feed/${id}`
 
     return (
-      <div className="main">
+      <div className="mainTH" >
           <div className="logo-container">
-            {console.log(this.state.url)}
             <img src={this.state.url} alt=""></img>
           </div>
           <div className="title">
@@ -72,37 +70,37 @@ export default class PrintQRThermal extends Component {
           </div>
           <div className="steps">
               <div className="step">
-                  <span>1</span>
+                  1. 
                   Aponte sua câmera para o QR code abaixo
               </div>
               <div className="step">
-                  <span>2</span>
+                  2.
                   Faça uma avaliação em 30 segundos
               </div>
               <div className="step">
-                  <span>3</span>
+                  3.
                   Nos ajude a melhorar e acumule pontos para trocar por produtos ou descontos
               </div>
              
           </div>
-          <div className="qr">
+          <div className="qr" style={{paddingLeft:'-5px'}}>
               <Demo link={link} />
           </div>
           <div className="txt-container">
-            Não conseguiu acessar o QR code? Acesse process.env.BASE_URL/f/{this.state.short_url}
+            Não conseguiu acessar o QR code? Acesse <spam>https://couponfeed.co/f/{this.state.short_url}</spam>
+            
+                    <p><img src={cflogo} alt="" style={{width:'240px'}}/></p>
+                  <p><FaHome/> https://couponfeed.co</p>
+                  <p><FaFacebook/> https://fb.com/couponfeed</p>
+                  <p><FaInstagram/> https://instagram.com/couponfeed</p>
           </div>
-          <footer>
-            <section className="ft-main">
-              <div className="ft-main-item">
-                <ul>
-                  <li ><img src={cflogo} alt="" style={{width:'240px'}}/></li>
-                  <li><FaHome/> process.env.BASE_URL</li>
-                  <li><FaFacebook/> https://fb.com/couponfeed</li>
-                  <li><FaInstagram/> https://instagram.com/couponfeed</li>
-                </ul>
-              </div>
-            </section>
-          </footer>
+          {/* <div className="footer"> */}
+            {/* <section className="ft-main"> */}
+              {/* <div className="ft-main-item"> */}
+                
+              {/* </div> */}
+            {/* </section> */}
+          {/* </div> */}
         </div>
     );
   }
