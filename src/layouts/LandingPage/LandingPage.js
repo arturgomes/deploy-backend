@@ -331,7 +331,7 @@ export default function LandingPage(props) {
           {anual:"2000"} */}
 
      
-      
+{/*       
 
       <div id="pricing" className="cards-2">
         <div className="container">
@@ -342,14 +342,9 @@ export default function LandingPage(props) {
             </div>
           </div>
           <div 
-          // className="row"
           >
             <div 
-            // className="col-lg-12"
             >
-              {/* <Grid container className={classes.root} spacing={2}> */}
-                {/* <Grid item xs={12}> */}
-                  {/* <Grid container justify="center" spacing={2}> */}
                     {prices.map((p) => (
                       <div className="card">
                         <div className="card-body">
@@ -390,7 +385,7 @@ export default function LandingPage(props) {
             </div>
           </div>
         </div>
-      </div>
+      </div> */}
 
 
 
