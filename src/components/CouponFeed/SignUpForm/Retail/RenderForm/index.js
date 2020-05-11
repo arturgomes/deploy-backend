@@ -39,7 +39,7 @@ export default function RenderForm(props) {
     <GridItem xs={12} sm={12} md={12}>
       <Card>
         <CardHeader color="primary">
-          <h4 className={useStyles.cardTitleWhite}>Cadastrar Lojista - Teste grátis por 30 dias</h4>
+          <h4 className={useStyles.cardTitleWhite}>Cadastrar Lojista</h4>
           <h5 className={useStyles.cardCategoryWhite}></h5>
 
           {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
@@ -156,7 +156,7 @@ export default function RenderForm(props) {
                   style={{ marginBottom: 16 }}
                   label="CEP"
                   onChange={props.handleAddressZip}
-                  value={props.state.address_zip}
+                  value={props.state.address_zip_tmp}
                   autoComplete="fname"
                 />
               </GridItem>

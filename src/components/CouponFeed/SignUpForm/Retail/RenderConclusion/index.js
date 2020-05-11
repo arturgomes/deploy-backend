@@ -36,18 +36,22 @@ export default function RenderConclusion(props) {
       <Card>
         <CardHeader color="success">
           <h4 className={useStyles.cardTitleWhite}>Cadastro realizado com sucesso!</h4>
-          <p className={useStyles.cardCategoryWhite}>Obrigado, {props.state.name}, pelo seu cadastro! Vamos começar fazendo login?</p>
-
+          
+          
           {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
         </CardHeader>
         <CardBody>
-          <Link to={`/login`}>
+        <p className={useStyles.cardCategoryWhite}>Obrigado, {props.state.name}, pelo seu cadastro! </p>
+        <p>Por gentileza, efetue o pagamento utilizando o link do PagSeguro abaixo.</p>
+          <p><a href="https://pag.ae/7V_xDP3B9/button" target="_blank" title="Pagar com PagSeguro"><img src="//assets.pagseguro.com.br/ps-integration-assets/botoes/pagamentos/205x30-pagar-laranja.gif" alt="Pague com PagSeguro - é rápido, grátis e seguro!" /></a></p>
+          <p className={useStyles.cardCategoryWhite}>Seu cadastro será ativado assim que recebermos o seu pagamento. Por favor, aguarde nosso contato. Até breve!</p>
+          {/* <Link to={`/login`}>
             <Button type="submit"
               style={{ marginBottom: 16 }}
               fullWidth
               // variant="contained"
               color="primary"> Fazer login</Button>
-          </Link>
+          </Link> */}
         </CardBody>
       </Card>
 

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import cep from 'cep-promise';
-import { formatToCEP, isCNPJ, formatToCNPJ } from 'brazilian-values';
+import { formatToCEP, isCNPJ, formatToCNPJ,isCEP } from 'brazilian-values';
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -27,6 +27,7 @@ export default class SignUp extends Component {
     address_city: "",
     address_state: "",
     address_zip: "",
+    address_zip_tmp: "",
     address_country: "",
     done: false,
     error: "",
@@ -61,8 +62,8 @@ export default class SignUp extends Component {
   }
   handleAddressZip = event => {
     event.persist()
-    this.setState({ address_zip: event.target.value })
-    if (event.target.value.length === 8) {
+    this.setState({ address_zip_tmp: formatToCEP(event.target.value) })
+    if (isCEP(event.target.value)) {
       cep(event.target.value).then(response => {
         this.setState({
           address_street: response.street,

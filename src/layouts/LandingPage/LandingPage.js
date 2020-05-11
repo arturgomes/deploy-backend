@@ -1,19 +1,21 @@
 import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-
+import { Link } from "react-router-dom"
 
 
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
 import PerfectScrollbar from "perfect-scrollbar";
 
-import { FaQrcode, 
-          FaFacebook, 
-          FaInstagram, 
-          FaCheck, 
-          FaTimes,
-          FaWhatsapp, 
-          FaChartBar, 
-          FaHandsHelping } from "react-icons/fa";
+import {
+  FaQrcode,
+  FaFacebook,
+  FaInstagram,
+  FaCheck,
+  FaTimes,
+  FaWhatsapp,
+  FaChartBar,
+  FaHandsHelping
+} from "react-icons/fa";
 import { TiDocumentText } from "react-icons/ti";
 
 import List from "@material-ui/core/List";
@@ -49,78 +51,79 @@ export default function LandingPage(props) {
   // const { ...rest } = props;
 
   const [prices] = useState([
-      {value:0, 
-        category:"Prata", 
-        type:"Ideal para MEI",
-        features:[
-          {valid:false,fmonth:"60 feedbacks por mês"},
-          {valid:true,fmonth:"Relatório 60 feedbacks por mês"},
-          {valid:true,fmonth:"Registro de um QR code"},
-          {valid:false,fmonth:"Acesso a um dashboard personalizado"},
-          {valid:false,fmonth:"Relatórios por e-mail"},
-        ],
-        prices:{
-          monthly : "34.90", 
-          trimestral : "89.70", 
-          anual : "298.80"
-        }
-      }, 
-      {
-        value:1, 
-        category:"Ouro",  
-        type:"Ideal quem está começando",
-        
-        features:[
-          {valid:false,fmonth:"60 feedbacks por mês"},
-          {valid:true,fmonth:"Relatório 60 feedbacks por mês"},
-          {valid:true,fmonth:"Registro de um QR code"},
-          {valid:false,fmonth:"Acesso a um dashboard personalizado"},
-          {valid:false,fmonth:"Relatórios por e-mail"},
-        ],
-        prices:{
-          monthly : "99",
-          trimestral : "270",
-          anual : "1020"
-        }
-        
-      }, 
-      {
-        value:2, 
-        category:"Diamante",
-        type:"Ideal quem está em expansão",
-        
-        features:[
-          {valid:true,fmonth:"Feedbacks ilimitados"},
-          {valid:true,fmonth:"Relatório 60 feedbacks por mês"},
-          {valid:true,fmonth:"Registro de um QR code"},
-          {valid:true,fmonth:"Acesso a um dashboard personalizado"},
-          {valid:true,fmonth:"Relatórios por e-mail"},
-        ],
-        prices:{
-          monthly : "199",
-          trimestral : "540",
-          anual : "1980"
-        }
-      }, 
-      {
-        value:3, 
-        category:"Platinum",
-        type:"Ideal quem tem filiais",
-        
-        features:[
-          {valid:true,fmonth:"Feedbacks ilimitados"},
-          {valid:true,fmonth:"Relatório ilimitados"},
-          {valid:true,fmonth:"Registro de cinco QR codes"},
-          {valid:true,fmonth:"Acesso a um dashboard personalizado"},
-          {valid:true,fmonth:"Relatórios por e-mail"},
-        ],
-        prices:{
-          monthly : "359", 
-          trimestral : "897", 
-          anual : "3180"
-        }
-    }, 
-    ])
+    {
+      value: 0,
+      category: "Prata",
+      type: "Ideal para MEI",
+      features: [
+        { valid: false, fmonth: "60 feedbacks por mês" },
+        { valid: true, fmonth: "Relatório 60 feedbacks por mês" },
+        { valid: true, fmonth: "Registro de um QR code" },
+        { valid: false, fmonth: "Acesso a um dashboard personalizado" },
+        { valid: false, fmonth: "Relatórios por e-mail" },
+      ],
+      prices: {
+        monthly: "34.90",
+        trimestral: "89.70",
+        anual: "298.80"
+      }
+    },
+    {
+      value: 1,
+      category: "Ouro",
+      type: "Ideal quem está começando",
+
+      features: [
+        { valid: false, fmonth: "60 feedbacks por mês" },
+        { valid: true, fmonth: "Relatório 60 feedbacks por mês" },
+        { valid: true, fmonth: "Registro de um QR code" },
+        { valid: false, fmonth: "Acesso a um dashboard personalizado" },
+        { valid: false, fmonth: "Relatórios por e-mail" },
+      ],
+      prices: {
+        monthly: "99",
+        trimestral: "270",
+        anual: "1020"
+      }
+
+    },
+    {
+      value: 2,
+      category: "Diamante",
+      type: "Ideal quem está em expansão",
+
+      features: [
+        { valid: true, fmonth: "Feedbacks ilimitados" },
+        { valid: true, fmonth: "Relatório 60 feedbacks por mês" },
+        { valid: true, fmonth: "Registro de um QR code" },
+        { valid: true, fmonth: "Acesso a um dashboard personalizado" },
+        { valid: true, fmonth: "Relatórios por e-mail" },
+      ],
+      prices: {
+        monthly: "199",
+        trimestral: "540",
+        anual: "1980"
+      }
+    },
+    {
+      value: 3,
+      category: "Platinum",
+      type: "Ideal quem tem filiais",
+
+      features: [
+        { valid: true, fmonth: "Feedbacks ilimitados" },
+        { valid: true, fmonth: "Relatório ilimitados" },
+        { valid: true, fmonth: "Registro de cinco QR codes" },
+        { valid: true, fmonth: "Acesso a um dashboard personalizado" },
+        { valid: true, fmonth: "Relatórios por e-mail" },
+      ],
+      prices: {
+        monthly: "359",
+        trimestral: "897",
+        anual: "3180"
+      }
+    },
+  ])
 
   // styles
   // const classes = useStyles();
@@ -182,81 +185,116 @@ export default function LandingPage(props) {
   return (
     <>
       <Header
-            brand={slogan}
-            fixed
-            changeColorOnScroll={{
-              height: 400,
-              color: "white"
-            }}
-            rightLinks={<>
-              {/* <HeaderLinks/> */}
-              <List className={classes.list}>
-               
-                {isAuthenticated() ?
-               ( <ListItem className={classes.listItem}>
-                  <Button
-                    href={getTu() === '897316929176464ebc9ad085f31e7284' ? "/customer" : "/retail"}
-                    className={classes.navLink}
-                    // onClick={e => e.preventDefault()}
-                    color="transparent"
-                  >
-                    Seu Perfil
+        brand={slogan}
+        fixed
+        changeColorOnScroll={{
+          height: 400,
+          color: "white"
+        }}
+        rightLinks={<>
+          {/* <HeaderLinks/> */}
+          <List className={classes.list}>
+
+            {isAuthenticated() ?
+              (<ListItem className={classes.listItem}>
+                <Button
+                  href={getTu() === '897316929176464ebc9ad085f31e7284' ? "/customer" : "/retail"}
+                  className={classes.navLink}
+                  // onClick={e => e.preventDefault()}
+                  color="transparent"
+                >
+                  Seu Perfil
                   </Button>
-                </ListItem>):
-                 (<ListItem className={classes.listItem}>
-                 <Button
-                   href="/login"
-                   className={classes.navLink}
+              </ListItem>) :
+              (<ListItem className={classes.listItem}>
+                <Button
+                  href="/login"
+                  className={classes.navLink}
                   //  onClick={e => e.preventDefault()}
-                   color="transparent"
-                 >
-                   Área do cliente
+                  color="transparent"
+                >
+                  Área do cliente
                  </Button>
-               </ListItem>)
-                }
-                <ListItem className={classes.listItem}>
-                  <Button
-                    href="/signup"
-                    className={classes.registerNavLink}
-                    // onClick={e => e.preventDefault()}
-                    color="rose"
-                    round
-                  >
-                    Experimente por 30 dias!
-                  </Button>
-                </ListItem>
-              </List></>
+              </ListItem>)
             }
-          />
-      
+            <ListItem className={classes.listItem}>
+              <Button
+                href="/rsignup"
+                className={useStyles.registerNavLink}
+                style={{ fontSize: "14px" }}
+                // onClick={e => e.preventDefault()}
+                color="rose"
+                round
+              >
+                Quero ouvir meus clientes agora!
+                  </Button>
+            </ListItem>
+          </List></>
+        }
+      />
+
 
       <header id="header" className="header" >
         <div className="header-content">
-      {/* <Parallax > */}
+          {/* <Parallax > */}
 
           <div className="container">
             <div className="row">
-              <div className="col-lg-6">
+              <div className="col-lg-8">
                 <div className="text-container">
                   <h1><span className="turquoise">Dê Feedbacks</span> <br />Concorra a prêmios
                   </h1>
                   <p className="p-large">Quem não gosta de um desconto ou brinde? A CouponFeed veio para auxiliar
-                      o varejista na coleta de feedbacks das experiências de seu cliente. E em troca, o
-                      cliente acumula pontos que podem ser convertidos em descontos em produtos e também
+                  o varejista na coleta de feedbacks das experiências de seu cliente. E em troca, o
+                  cliente acumula pontos que podem ser convertidos em descontos em produtos e também
                                 participa de promoções exclusivas.</p>
-                               
-                  <AnchorLink className="btn-solid-lg1" style={{marginRight:'20px'}}href="#services">DECOLE AGORA MESMO</AnchorLink >
-                  <AnchorLink className="btn-solid-lg" href="/rsignup">TESTE GRATIS POR 30 DIAS</AnchorLink >
+
+
+                  {/* <AnchorLink className="btn-solid-lg" href="/rsignup">TESTE GRATIS POR 30 DIAS</AnchorLink > */}
+                </div>
+                {/* <div className="row"> */}
+                <div className="iWant">
+                  <div className="cta-group" style={{ textAlign: 'center' }}>
+                    <ul>
+                      <li>
+                        <span>EU QUERO...</span>
+                      </li>
+                      <li>
+                        <Button className="btn-solid-lg1" component={Link} to="/signup">DAR FEEDBACKS</Button >
+                      </li>
+                      <li>
+                        <p><i>Escolha essa se você é consumidor e quer ganhar prêmios em troca de seus feedbacks.</i></p>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className="cta-middle" style={{ textAlign: 'center' }}><span>OU</span></div>
+                  <div className="cta-group" style={{ textAlign: 'center' }}>
+                    <ul>
+                      <li>
+                        <span>EU QUERO...</span>
+                      </li>
+                      <li>
+                        <Button className="btn-solid-lg2" component={Link} to="/rsignup">OUVIR MEUS CLIENTES</Button >
+                      </li>
+                      <li>
+                        <p><i>Escolha essa se você é varejista ou presta serviços para clientes</i></p>
+                      </li>
+                    </ul>
+                  </div>
+                  {/* </div> */}
                 </div>
               </div>
-              <div className="col-lg-6">
-                <div className="image-container">
-                  <img className="img-fluid" src={feedback} alt="alternative" />
+              <div className="iHide">
+                <div className="col-lg-4">
+                  <div className="image-container">
+                    <img className="img-fluid" src={feedback} alt="alternative" />
+                  </div>
                 </div>
               </div>
             </div>
+
           </div>
-    	{/* </Parallax> */}
+          {/* </Parallax> */}
         </div>
       </header >
 
@@ -270,13 +308,12 @@ export default function LandingPage(props) {
             </div>
           </div>
           <div className="row">
-            <div className="col-lg-12">
+
+            <div className="col-lg-6">
               <div className="card">
                 <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20 }} />
-                <div className="card-body">
-                  <h4 className="card-title">Obtenha feedbacks 24/7</h4>
-                  <p>Obtenha feedbacks dos clientes a qualquer hora, enqunato que seu estabelecimento estiver aberto.</p>
-                </div>
+                <h4 className="card-title">Obtenha feedbacks 24/7</h4>
+                <p>Obtenha feedbacks dos clientes a qualquer hora, enqunato que seu estabelecimento estiver aberto.</p>
               </div>
               <div className="card">
                 <TransferWithinAStationIcon style={{ fontSize: 120, paddingBottom: 20 }} />
@@ -330,8 +367,8 @@ export default function LandingPage(props) {
           {trimestral:"550"},
           {anual:"2000"} */}
 
-     
-{/*       
+
+      {/*       
 
       <div id="pricing" className="cards-2">
         <div className="container">
@@ -399,7 +436,7 @@ export default function LandingPage(props) {
 
                 <li>Olga <FaWhatsapp className="turquoise" style={{ fontSize: 20 }} /> <AnchorLink className="turquoise"
                   href="https://wa.me/5567992432095">+55 67
-                                9243-2095</AnchorLink >
+                                99243-2095</AnchorLink >
                 </li>
                 <li>Artur <FaWhatsapp className="turquoise" style={{ fontSize: 20 }} /> <AnchorLink className="turquoise"
                   href="https://wa.me/5567993021141">+55
@@ -423,7 +460,7 @@ export default function LandingPage(props) {
             <div className="col-md-6">
               <div className="footer-col">
                 <h4>Sobre a CouponFeed</h4>
-                <p>Somos fascinados em oferecer um dos mais atrativos serviços de coleta de ifnormações sobre a
+                <p>Somos fascinados em oferecer um dos mais atrativos serviços de coleta de informações sobre a
                             experiência dos clientes.</p>
               </div>
             </div>
@@ -441,9 +478,6 @@ export default function LandingPage(props) {
         </div>
       </div>
 
-
-
-
       <div className="copyright">
         <div className="container">
           <div className="row">
@@ -454,9 +488,6 @@ export default function LandingPage(props) {
           </div>
         </div>
       </div>
-
-
-
     </>
   );
 }
