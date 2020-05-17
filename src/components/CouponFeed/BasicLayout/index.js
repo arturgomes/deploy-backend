@@ -1,5 +1,5 @@
 import React from "react";
-
+import { Link } from "react-router-dom"
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
 import { makeStyles } from "@material-ui/core/styles";
@@ -35,7 +35,7 @@ export default function BasicLayout(props) {
           position: 'absolute',
           left: '50%',
           top: '50%',
-          transform: 'translate(-50%, -50%)',
+          transform: 'translate(-50%, -40%)'
         }}
       >
         <Grid container
@@ -45,7 +45,8 @@ export default function BasicLayout(props) {
           direction="column"
         >
           <div className={useStyles.content}>
-            <img src={logo} alt="" style={{ width: '300px', paddingBottom: '70px' }} />
+
+            <Link href="/"><img src={logo} alt="" style={{ width: '300px', paddingBottom: '30px' }} /></Link>
 
             {props.children}
             {/* {this.renderConclusion(error)} */}

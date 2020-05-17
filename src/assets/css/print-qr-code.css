@@ -98,7 +98,7 @@ a:hover {
 }
 .ft-main-item {
   /* width:100%; */
-  padding: 1.25rem;
+  padding: 0.25rem;
   min-width: 12.5rem; /* 200px; */
 }
 .ft-main-item li {
@@ -146,3 +146,9 @@ a:hover {
 .ft-legal-list li:nth-last-child(2) {
   flex: 1;       /* same as flex-grow: 1; */
 }
+
+@page {
+  size: A4 portrait;
+  margin:1cm;
+  overflow: hidden;
+ }

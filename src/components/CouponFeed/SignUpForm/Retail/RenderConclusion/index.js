@@ -1,10 +1,8 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 
-import Link from "@material-ui/core/Link";
 import GridItem from "../../../../../components/Grid/GridItem.js";
 import GridContainer from "../../../../../components/Grid/GridContainer.js";
-import Button from "../../../../../components/CustomButtons/Button.js";
 import Card from "../../../../../components/Card/Card.js";
 import CardBody from "../../../../../components/Card/CardBody.js";
 import CardHeader from "../../../../../components/Card/CardHeader.js";
@@ -43,7 +41,7 @@ export default function RenderConclusion(props) {
         <CardBody>
         <p className={useStyles.cardCategoryWhite}>Obrigado, {props.state.name}, pelo seu cadastro! </p>
         <p>Por gentileza, efetue o pagamento utilizando o link do PagSeguro abaixo.</p>
-          <p><a href="https://pag.ae/7V_xDP3B9/button" target="_blank" title="Pagar com PagSeguro"><img src="//assets.pagseguro.com.br/ps-integration-assets/botoes/pagamentos/205x30-pagar-laranja.gif" alt="Pague com PagSeguro - é rápido, grátis e seguro!" /></a></p>
+          <p><a href="https://pag.ae/7V_xDP3B9/button" title="Pagar com PagSeguro"><img src="//assets.pagseguro.com.br/ps-integration-assets/botoes/pagamentos/205x30-pagar-laranja.gif" alt="Pague com PagSeguro - é rápido, grátis e seguro!" /></a></p>
           <p className={useStyles.cardCategoryWhite}>Seu cadastro será ativado assim que recebermos o seu pagamento. Por favor, aguarde nosso contato. Até breve!</p>
           {/* <Link to={`/login`}>
             <Button type="submit"

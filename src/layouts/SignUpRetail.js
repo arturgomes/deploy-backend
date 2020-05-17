@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import cep from 'cep-promise';
 import { formatToCEP, isCNPJ, formatToCNPJ,isCEP } from 'brazilian-values';
 
-import { makeStyles } from "@material-ui/core/styles";
 
 import BasicLayout from "../components/CouponFeed/BasicLayout";
 import RenderConclusion from "../components/CouponFeed/SignUpForm/Retail/RenderConclusion";

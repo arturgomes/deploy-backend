@@ -2,8 +2,6 @@ import React, { Component } from "react";
 import cep from 'cep-promise';
 import { isCEP, formatToCEP, isCPF, formatToCPF } from 'brazilian-values';
 
-import { makeStyles } from "@material-ui/core/styles";
-
 import BasicLayout from "../components/CouponFeed/BasicLayout";
 import RenderConclusion from "../components/CouponFeed/SignUpForm/Customer/RenderConclusion";
 import RenderForm from "../components/CouponFeed/SignUpForm/Customer/RenderForm";
@@ -61,7 +59,7 @@ export default class SignUp extends Component {
   handleAddressZip = event => {
     event.persist()
     this.setState({ address_zip: event.target.value })
-    if (event.target.value.length === 8) {
+    if (isCEP(event.target.value)) {
       cep(event.target.value).then(response => {
         this.setState({
           address_street: response.street,

@@ -9,11 +9,10 @@ import Button from "../components/CustomButtons/Button.js";
 // import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
 import Link from "@material-ui/core/Link";
-import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-import logo from "../assets/img/completa_fundo_claro@4x.png";
 import Grid from '@material-ui/core/Grid';
+import BasicLayout from "../components/CouponFeed/BasicLayout";
 
 import api from "../services/api";
 
@@ -32,25 +31,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {"Copyright © "}
-      <Link color="inherit" href="https://couponfeed.co">
-        CouponFeed
-      </Link>{" "}
-      {new Date().getFullYear()}
-      {"."}
-    </Typography>
-  );
-}
-
 export default class Login extends Component {
-  async componentDidMount(){
-    if(isAuthenticated() && (getUser() === 'customer')){
+  async componentDidMount() {
+    if (isAuthenticated() && (getUser() === 'customer')) {
       const fid = decodeURIComponent(this.props.match.params.fid);
-      if(fid){
+      if (fid) {
         // console.log("tem fid");
         api.post(`/users/i`, {
           fid,
@@ -59,13 +44,13 @@ export default class Login extends Component {
           .then(response => {
             this.props.history.push("/customer");
           })
-          .catch(err => {this.setState({ error: err.response.data.error }) })
+          .catch(err => { this.setState({ error: err.response.data.error }) })
       }
-      
+
     }
-    if(isAuthenticated() && (getUser() === 'retail')){
+    if (isAuthenticated() && (getUser() === 'retail')) {
       const fid = decodeURIComponent(this.props.match.params.fid);
-      if(fid){
+      if (fid) {
         // console.log("tem fid");
         api.post(`/users/i`, {
           fid,
@@ -74,7 +59,7 @@ export default class Login extends Component {
           .then(response => {
             this.props.history.push("/retail");
           })
-          .catch(err => {this.setState({ error: err.response.data.error }) })
+          .catch(err => { this.setState({ error: err }) })
       }
     }
   }
@@ -95,23 +80,10 @@ export default class Login extends Component {
             const { name, id, tu } = response.data.login;
             login(response.data.token, name, id, tu);
 
-            
-            // api.post(`/users/i`, {
-            //   fid:decodeURIComponent(this.props.match.params.fid),
-            //   user_id: id
-            // })
-            //   .then(response => {
-            //     this.setState({ done: true }, () => { console.log(this.state.done) })
-            //   })
-            //   .catch(err => {this.setState({ error: err.response.data.error }) })
-
             getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
           } else {
             this.setState({ err: "Usuario ou senha inválidos" });
           }
-          //parei aqui, tenho que fazer if para o tipo de autenticaçao
-          //se eh usuario final ou se é retail, pra mudar os dashboards.
-          // ver linha 79 
 
         })
         .catch(error => {
@@ -138,133 +110,75 @@ export default class Login extends Component {
     }
   };
 
-  // handleDrawerToggle = () => {
-  //   setMobileOpen(!mobileOpen);
-  // };
-  // getRoute = () => {
-  //   return window.location.pathname !== "/retail/maps";
-  // };
-  // resizeFunction = () => {
-  //   if (window.innerWidth >= 960) {
-  //     setMobileOpen(false);
-  //   }
-  // };
-  // // initialize and destroy the PerfectScrollbar plugin
-  // React.useEffect(() => {
-  //   if (navigator.platform.indexOf("Win") > -1) {
-  //     ps = new PerfectScrollbar(mainPanel.current, {
-  //       suppressScrollX: true,
-  //       suppressScrollY: false
-  //     });
-  //     document.body.style.overflow = "hidden";
-  //   }
-  //   window.addEventListener("resize", resizeFunction);
-  //   // Specify how to clean up after this effect:
-  //   return function cleanup() {
-  //     if (navigator.platform.indexOf("Win") > -1) {
-  //       ps.destroy();
-  //     }
-  //     window.removeEventListener("resize", resizeFunction);
-  //   };
-  // }, [mainPanel]);
   render() {
-    // if (isAuthenticated()) {
-    //   (getTu() !== "897316929176464ebc9ad085f31e7284") ?
-    //     this.props.history.push("/retail")
-    //     : this.props.history.push("/customer")
-    // }
 
     return (
-      <div
-        style={{
-          position: 'absolute',
-          left: '50%',
-          top: '50%',
-          transform: 'translate(-50%, -50%)',
-        }}
-      >
-        {/* <Paper className={classes.paper}> */}
-        <Grid container
-          spacing={0}
-          align="center"
-          justify="center"
-          direction="column"
-        // style={{ backgroundColor: 'teal' }}
-        >
-          <div className={useStyles.content}>
-            <img src={logo} style={{ width: '300px', paddingBottom: '70px' }} alt="" />
-            <Avatar className={useStyles.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Fazer Login
+
+      <BasicLayout>
+        <Avatar className={useStyles.avatar}>
+          <LockOutlinedIcon />
+        </Avatar>
+        <Typography component="h1" variant="h5">
+          Fazer Login
           </Typography>
-            <form
-              className={useStyles.form}
-              noValidate
-              onSubmit={this.handleSignIn}
-            >
-              <TextField
-                // variant="outlined"
-                margin="normal"
-                required
-                fullWidth
-                id="email"
-                label="Endereço de e-mail"
-                name="email"
-                autoComplete="email"
-                autoFocus
-                onChange={e => this.setState({ email: e.target.value })}
-              />
-              <TextField
-                // variant="outlined"
-                style={{ marginBottom: '30px' }}
-                margin="normal"
-                required
-                fullWidth
-                name="password"
-                label="Senha"
-                type="password"
-                id="password"
-                autoComplete="current-password"
-                onChange={e => this.setState({ password: e.target.value })}
-              />
-              {/* <FormControlLabel
+        <form
+          className={useStyles.form}
+          noValidate
+          onSubmit={this.handleSignIn}
+        >
+          <TextField
+            // variant="outlined"
+            margin="normal"
+            required
+            fullWidth
+            id="email"
+            label="Endereço de e-mail"
+            name="email"
+            autoComplete="email"
+            autoFocus
+            onChange={e => this.setState({ email: e.target.value })}
+          />
+          <TextField
+            // variant="outlined"
+            style={{ marginBottom: '30px' }}
+            margin="normal"
+            required
+            fullWidth
+            name="password"
+            label="Senha"
+            type="password"
+            id="password"
+            autoComplete="current-password"
+            onChange={e => this.setState({ password: e.target.value })}
+          />
+          {/* <FormControlLabel
                 control={<Checkbox value="remember" color="primary" />}
                 label="Remember me"
               /> */}
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="success"
-              // className={useStyles.submit}
-              >
-                Faça login
+          <Button
+            type="submit"
+            fullWidth
+            variant="contained"
+            color="success"
+          // className={useStyles.submit}
+          >
+            Faça login
             </Button>
-              <Grid container>
-                {/* <Grid item xs>
+          <Grid container>
+            {/* <Grid item xs>
                   <Link href="#" variant="body2">
                     Forgot password?
                 </Link>
                 </Grid> */}
-                <Grid item>
-                  <Link
-                    href="/signup" variant="body2">
-                    {"Ainda não se cadastrou? Faça já o seu!"}
-                  </Link>
-                </Grid>
-              </Grid>
-            </form>
-          </div>
-          <Box mt={8}>
-            <Copyright />
-          </Box>
-          {/* </Container> */}
-        </Grid >
-        {/* </Paper> */}
-
-      </div >
+            <Grid item>
+              <Link
+                href="/signup" variant="body2">
+                {"Ainda não se cadastrou? Faça já o seu!"}
+              </Link>
+            </Grid>
+          </Grid>
+        </form>
+      </BasicLayout>
     );
   }
 }

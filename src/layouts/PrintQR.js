@@ -13,7 +13,7 @@ class Demo extends Component {
   render() {
     return (
       <div>
-        <QrCode size={500} renderAs='svg' value={this.props.link} />
+        <QrCode size={400} renderAs='svg' value={this.props.link} />
       </div>
     );
   }
@@ -102,7 +102,7 @@ export default class PrintQR extends Component {
             <section className="ft-main">
               <div className="ft-main-item">
                 <ul>
-                  <li ><img src={cflogo} alt="" style={{ width: '240px' }} /></li>
+                  <li ><img src={cflogo} alt="" style={{ width: '200px' }} /></li>
                   <li><FaHome /> {base_url}</li>
                   <li><FaFacebook /> https://fb.com/couponfeed</li>
                   <li><FaInstagram /> https://instagram.com/couponfeed</li>

@@ -1,6 +1,6 @@
 
 
-import React, { Component } from "react";
+import React from "react";
 
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
@@ -41,7 +41,6 @@ export default function RenderForm(props) {
       <Card>
         <CardHeader color="primary">
           <h4 className={useStyles.cardTitleWhite}>Cadastrar Usuário</h4>
-          <h5 className={useStyles.cardCategoryWhite}></h5>
 
           {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
         </CardHeader>

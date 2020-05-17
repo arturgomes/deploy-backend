@@ -73,6 +73,44 @@ export default class ManageShop extends Component {
         console.log(error);
         this.setState({ error: error });
       });
+
+      await api.post(`/allshops`, { retail_id: getId() })
+      .then(response => {
+        // console.log(response);
+        this.setState({
+          list: response.data,
+        })
+      })
+      .catch(error => {
+        // console.log(error);
+        this.setState({ error: error });
+      });
+    await api
+      .post("/qr", { retail_id: getId() })
+      .then(response => {
+        if (this._isMounted) {
+          console.log(response)
+          this.setState({ qr: response.data, isLoading: false });
+        }
+      })
+      .catch(error => {
+        // Error 😨
+        if (error.response) {
+          /*
+           * The request was made and the server responded with a
+           * status code that falls out of the range of 2xx
+           */
+          // console.log(error.response.data);
+          this.setState({ err: error.response.data });
+        } else if (error.request) {
+          /*
+           * The request was made but no response was received, `error.request`
+           * is an instance of XMLHttpRequest in the browser and an instance
+           * of http.ClientRequest in Node.js
+           */
+          // console.log(error.request);
+        }
+      });
   }
   handleNameInput = event => {
     this.setState({

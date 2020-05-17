@@ -10,8 +10,8 @@ import {
   FaQrcode,
   FaFacebook,
   FaInstagram,
-  FaCheck,
-  FaTimes,
+  // FaCheck,
+  // FaTimes,
   FaWhatsapp,
   FaChartBar,
   FaHandsHelping
@@ -38,7 +38,7 @@ import "./css/styles.css";
 import Header from "../../components/Header/Header.js";
 import Button from "../../components/CustomButtons/Button.js";
 import styles from '../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle'
-import Parallax from "../../components/Parallax/Parallax.js";
+// import Parallax from "../../components/Parallax/Parallax.js";
 import feedback from "./images/feedback.svg";
 import { isAuthenticated, getTu } from '../../services/auth';
 
@@ -50,80 +50,80 @@ let ps;
 export default function LandingPage(props) {
   // const { ...rest } = props;
 
-  const [prices] = useState([
-    {
-      value: 0,
-      category: "Prata",
-      type: "Ideal para MEI",
-      features: [
-        { valid: false, fmonth: "60 feedbacks por mês" },
-        { valid: true, fmonth: "Relatório 60 feedbacks por mês" },
-        { valid: true, fmonth: "Registro de um QR code" },
-        { valid: false, fmonth: "Acesso a um dashboard personalizado" },
-        { valid: false, fmonth: "Relatórios por e-mail" },
-      ],
-      prices: {
-        monthly: "34.90",
-        trimestral: "89.70",
-        anual: "298.80"
-      }
-    },
-    {
-      value: 1,
-      category: "Ouro",
-      type: "Ideal quem está começando",
+  // const [prices] = useState([
+  //   {
+  //     value: 0,
+  //     category: "Prata",
+  //     type: "Ideal para MEI",
+  //     features: [
+  //       { valid: false, fmonth: "60 feedbacks por mês" },
+  //       { valid: true, fmonth: "Relatório 60 feedbacks por mês" },
+  //       { valid: true, fmonth: "Registro de um QR code" },
+  //       { valid: false, fmonth: "Acesso a um dashboard personalizado" },
+  //       { valid: false, fmonth: "Relatórios por e-mail" },
+  //     ],
+  //     prices: {
+  //       monthly: "34.90",
+  //       trimestral: "89.70",
+  //       anual: "298.80"
+  //     }
+  //   },
+  //   {
+  //     value: 1,
+  //     category: "Ouro",
+  //     type: "Ideal quem está começando",
 
-      features: [
-        { valid: false, fmonth: "60 feedbacks por mês" },
-        { valid: true, fmonth: "Relatório 60 feedbacks por mês" },
-        { valid: true, fmonth: "Registro de um QR code" },
-        { valid: false, fmonth: "Acesso a um dashboard personalizado" },
-        { valid: false, fmonth: "Relatórios por e-mail" },
-      ],
-      prices: {
-        monthly: "99",
-        trimestral: "270",
-        anual: "1020"
-      }
+  //     features: [
+  //       { valid: false, fmonth: "60 feedbacks por mês" },
+  //       { valid: true, fmonth: "Relatório 60 feedbacks por mês" },
+  //       { valid: true, fmonth: "Registro de um QR code" },
+  //       { valid: false, fmonth: "Acesso a um dashboard personalizado" },
+  //       { valid: false, fmonth: "Relatórios por e-mail" },
+  //     ],
+  //     prices: {
+  //       monthly: "99",
+  //       trimestral: "270",
+  //       anual: "1020"
+  //     }
 
-    },
-    {
-      value: 2,
-      category: "Diamante",
-      type: "Ideal quem está em expansão",
+  //   },
+  //   {
+  //     value: 2,
+  //     category: "Diamante",
+  //     type: "Ideal quem está em expansão",
 
-      features: [
-        { valid: true, fmonth: "Feedbacks ilimitados" },
-        { valid: true, fmonth: "Relatório 60 feedbacks por mês" },
-        { valid: true, fmonth: "Registro de um QR code" },
-        { valid: true, fmonth: "Acesso a um dashboard personalizado" },
-        { valid: true, fmonth: "Relatórios por e-mail" },
-      ],
-      prices: {
-        monthly: "199",
-        trimestral: "540",
-        anual: "1980"
-      }
-    },
-    {
-      value: 3,
-      category: "Platinum",
-      type: "Ideal quem tem filiais",
+  //     features: [
+  //       { valid: true, fmonth: "Feedbacks ilimitados" },
+  //       { valid: true, fmonth: "Relatório 60 feedbacks por mês" },
+  //       { valid: true, fmonth: "Registro de um QR code" },
+  //       { valid: true, fmonth: "Acesso a um dashboard personalizado" },
+  //       { valid: true, fmonth: "Relatórios por e-mail" },
+  //     ],
+  //     prices: {
+  //       monthly: "199",
+  //       trimestral: "540",
+  //       anual: "1980"
+  //     }
+  //   },
+  //   {
+  //     value: 3,
+  //     category: "Platinum",
+  //     type: "Ideal quem tem filiais",
 
-      features: [
-        { valid: true, fmonth: "Feedbacks ilimitados" },
-        { valid: true, fmonth: "Relatório ilimitados" },
-        { valid: true, fmonth: "Registro de cinco QR codes" },
-        { valid: true, fmonth: "Acesso a um dashboard personalizado" },
-        { valid: true, fmonth: "Relatórios por e-mail" },
-      ],
-      prices: {
-        monthly: "359",
-        trimestral: "897",
-        anual: "3180"
-      }
-    },
-  ])
+  //     features: [
+  //       { valid: true, fmonth: "Feedbacks ilimitados" },
+  //       { valid: true, fmonth: "Relatório ilimitados" },
+  //       { valid: true, fmonth: "Registro de cinco QR codes" },
+  //       { valid: true, fmonth: "Acesso a um dashboard personalizado" },
+  //       { valid: true, fmonth: "Relatórios por e-mail" },
+  //     ],
+  //     prices: {
+  //       monthly: "359",
+  //       trimestral: "897",
+  //       anual: "3180"
+  //     }
+  //   },
+  // ])
 
   // styles
   // const classes = useStyles();
@@ -309,7 +309,7 @@ export default function LandingPage(props) {
           </div>
           <div className="row">
 
-            <div className="col-lg-6">
+            <div className="col-lg-12">
               <div className="card">
                 <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20 }} />
                 <h4 className="card-title">Obtenha feedbacks 24/7</h4>

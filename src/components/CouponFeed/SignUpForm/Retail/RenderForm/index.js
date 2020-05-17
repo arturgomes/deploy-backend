@@ -1,6 +1,6 @@
 
 
-import React, { Component } from "react";
+import React from "react";
 
 import Link from "@material-ui/core/Link";
 import { makeStyles } from "@material-ui/core/styles";
@@ -40,12 +40,16 @@ export default function RenderForm(props) {
       <Card>
         <CardHeader color="primary">
           <h4 className={useStyles.cardTitleWhite}>Cadastrar Lojista</h4>
-          <h5 className={useStyles.cardCategoryWhite}></h5>
+          {/* <h5 className={useStyles.cardCategoryWhite}></h5> */}
 
           {/* <p className={useStyles.cardCategoryWhite}>Complete seu perfil</p> */}
         </CardHeader>
         <CardBody>
-          Olá, obrigado por escolher a CouponFeed. Vamos começar nossa parceria com um breve cadastro da sua empresa.
+          <p>Olá, obrigado por escolher a CouponFeed. Vamos começar nossa parceria com um breve cadastro da sua empresa.
+          </p>
+          <p>
+            O valor mensal para ter acesso à CouponFeed é de R$29,90.
+          </p>
           {props.error ? <div className="divError">{props.error}</div> : ``}
           <form
             className={useStyles.form}

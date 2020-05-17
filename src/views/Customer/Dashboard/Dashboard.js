@@ -2,7 +2,6 @@ import React, { Component } from "react";
 
 // import { Avatar, ListItem } from 'react-elements';
 import Avatar from '@material-ui/core/Avatar';
-import moment from 'moment';
 import PropTypes from 'prop-types';
 import {
   withStyles,
