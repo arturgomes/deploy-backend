@@ -158,7 +158,7 @@ processUpload = (uploadedFile) => {
                 </GridContainer>
               </CardBody>
             </Card>
-            <Card>
+            {/* <Card>
               <CardHeader color="success">
                 <h4 style={{
                   color: "rgba(255,255,255,1)",
@@ -257,27 +257,12 @@ processUpload = (uploadedFile) => {
                     />
                   </GridItem>
                 </GridContainer>
-                {/* <GridContainer>
-                  <GridItem xs={12} sm={12} md={12}>
-                    <InputLabel style={{ color: "#AAAAAA" }}>About me</InputLabel>
-                    <CustomInput
-                      labelText="Lamborghini Mercy, Your chick she so thirsty, I'm in that two seat Lambo."
-                      id="about-me"
-                      formControlProps={{
-                        fullWidth: true
-                      }}
-                      inputProps={{
-                        multiline: true,
-                        rows: 5
-                      }}
-                    />
-                  </GridItem>
-                </GridContainer> */}
+               
               </CardBody>
               <CardFooter>            
                 <Button fullWidth color="success">Atualizar Pefil</Button>
               </CardFooter>
-            </Card>
+            </Card> */}
           </GridItem>
           {/* <GridItem xs={12} sm={12} md={4}>
             <Card profile>
