@@ -13,7 +13,7 @@ class Demo extends Component {
   render() {
     return (
       <div>
-        <QrCode size={400} renderAs='svg' value={this.props.link} />
+        <QrCode size={300} renderAs='svg' value={this.props.link} />
       </div>
     );
   }

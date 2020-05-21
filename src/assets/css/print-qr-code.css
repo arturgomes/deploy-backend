@@ -33,7 +33,7 @@ html {
 .main .steps {
     /* background-color: #000; */
     /* padding: 20px 0; */
-    margin: 40px;
+    margin: 30px;
     width: 100%;
     text-align: center;
     
@@ -62,13 +62,13 @@ html {
 }
 
 .main .qr {
-  margin:40px;
+  margin:30px;
 }
 
 
 footer {
   /* position: fixed; */
-  margin-top:50px;
+  margin-top:40px;
   display: flex;
   flex-direction: row;
   justify-content: center;
