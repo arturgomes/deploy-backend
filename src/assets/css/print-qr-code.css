@@ -1,7 +1,13 @@
 html {
   -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+::-webkit-scrollbar { 
+  width: 0 !important;
+    display: none;
+}
 .main {
+  -ms-overflow-style: none;
+
   background-color: #fff;
   display: flex;
   flex-direction: column;
@@ -152,6 +158,6 @@ a:hover {
 @page {
   size: A4 portrait;
   margin:1cm;
-  overflow: hidden;
+  overflow: auto;
  }
  
