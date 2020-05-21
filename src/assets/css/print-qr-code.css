@@ -1,4 +1,6 @@
-
+html {
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
 .main {
   background-color: #fff;
   display: flex;
@@ -152,3 +154,4 @@ a:hover {
   margin:1cm;
   overflow: hidden;
  }
+ 
