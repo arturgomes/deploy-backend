@@ -137,13 +137,13 @@ export default function LandingPage(props) {
   };
   // initialize and destroy the PerfectScrollbar plugin
   React.useEffect(() => {
-    if (navigator.platform.indexOf("Win") > -1) {
+    // if (navigator.platform.indexOf("Win") > -1) {
       ps = new PerfectScrollbar(mainPanel.current, {
         suppressScrollX: true,
         suppressScrollY: false
       });
       document.body.style.overflow = "hidden";
-    }
+    // }
     window.addEventListener("resize", resizeFunction);
     // Specify how to clean up after this effect:
     return function cleanup() {
@@ -160,23 +160,23 @@ export default function LandingPage(props) {
 
   useScrollPosition(
     ({ prevPos, currPos }) => {
-      // const isVisible = currPos.y > prevPos.y
+      const isVisible = currPos.y > prevPos.y
 
-      // const shouldBeStyle = isVisible ? {
-      //   backgroundColor: 'transparent',
-      //   transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
-      //   // transform: isVisible ? 'none' : 'translate(0, -100%)'
-      // }
-      //   : {
-      //     backgroundColor: '#fff',
-      //     transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
-      //     // transform: isVisible ? 'none' : 'translate(0, -20%)',
-      //     height: '1rem'
-      //   }
+      const shouldBeStyle = isVisible ? {
+        backgroundColor: 'transparent',
+        transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
+        // transform: isVisible ? 'none' : 'translate(0, -100%)'
+      }
+        : {
+          backgroundColor: '#fff',
+          transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
+          // transform: isVisible ? 'none' : 'translate(0, -20%)',
+          height: '1rem'
+        }
 
-      // if (JSON.stringify(shouldBeStyle) === JSON.stringify(headerStyle)) return
+      if (JSON.stringify(shouldBeStyle) === JSON.stringify(headerStyle)) return
 
-      // setHeaderStyle(shouldBeStyle)
+      setHeaderStyle(shouldBeStyle)
     },
     [headerStyle]
   )
