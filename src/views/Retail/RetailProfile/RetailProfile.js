@@ -8,13 +8,13 @@ import filesize from 'filesize';
 // core components
 import GridItem from "../../../components/Grid/GridItem.js";
 import GridContainer from "../../../components/Grid/GridContainer.js";
-import CustomInput from "../../../components/CustomInput/CustomInput.js";
-import Button from "../../../components/CustomButtons/Button.js";
+// import CustomInput from "../../../components/CustomInput/CustomInput.js";
+// import Button from "../../../components/CustomButtons/Button.js";
 import Card from "../../../components/Card/Card.js";
 import CardHeader from "../../../components/Card/CardHeader.js";
 // import CardAvatar from "components/Card/CardAvatar.js";
 import CardBody from "../../../components/Card/CardBody.js";
-import CardFooter from "../../../components/Card/CardFooter.js";
+// import CardFooter from "../../../components/Card/CardFooter.js";
 import Upload from "../../../components/Upload"
 import FileList from "../../../components/FileList"
 

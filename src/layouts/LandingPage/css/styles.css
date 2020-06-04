@@ -795,7 +795,7 @@ input[type='checkbox'] {
 
 .header .header-content {
 	/* padding-top: -8rem; */
-	margin-top:-5rem;
+	margin-top:-2rem;
 	/* padding-bottom: 4rem; */
 	text-align: center;
 }
@@ -851,6 +851,8 @@ input[type='checkbox'] {
 }
 
 .cards-1 .card {
+	justify-content: center;
+	align-content: center;
 	max-width: 21rem;
 	margin-right: auto;
 	margin-bottom: 4.5rem;
@@ -2244,22 +2246,23 @@ a:hover.back-to-top {
 /* end of min-width width 1200px */
 
 .iWant{
-	
+	justify-content: center;
+	align-items: center;
 	display:flex;
-	flex-direction: row;
-	margin:5px;
-	padding:5px;
+	flex-direction: column;
+	margin:10px;
+	padding:10px;
 	background-color:#fcfdf9;
 	border: 0.125rem solid #ccc ;
 	border-radius:10px;
 }
 .iWant .cta-group  {
-	margin:0 10px;
-	width:80%
+	margin:5px 10px;
+	width:100%
  }
  
 .iWant .cta-middle  {
-	margin:8% 10px;
+	margin:10px 10px;
 	justify-content: center;
 	align-items: center;
 	font-weight: bolder;
@@ -2290,7 +2293,7 @@ a:hover.back-to-top {
 
 .iWant .cta-group .btn-solid-lg1 {
 	display: inline-block;
-	padding: 1rem 0.5rem;
+	padding: 1.2rem 1rem;
 	/* padding: 1.375rem 2.625rem 1.375rem 2.625rem; */
 	border: 0.125rem solid #FFA52A ;
 	justify-content: center;
@@ -2306,7 +2309,7 @@ a:hover.back-to-top {
 }
 .iWant .cta-group .btn-solid-lg2 {
 	display: inline-block;
-	padding: 1rem 0.5rem;
+	padding: 1.2rem 1rem;
 	/* padding: 1.375rem 2.625rem 1.375rem 2.625rem; */
 	border: 0.125rem solid #e143 ;
 	width:100%;
@@ -2339,19 +2342,19 @@ a:hover.back-to-top {
 		display:flex;
 		flex-direction: row;
 		margin:5px;
-		padding:10px;
+		padding:5px;
 		background-color:#fcfdf9;
 		border: 0.125rem solid #ccc ;
 		border-radius:10px;
 	}
 	
 	.iWant .cta-group  {
-		margin:0 10px;
-		width:80%
+		margin:10px 10px;
+		width:45%
 	 }
 	 
 	.iWant .cta-middle  {
-		margin:8% 10px;
+		margin:8% 5px;
 		justify-content: center;
 		align-items: center;
 		font-weight: bolder;
@@ -2371,7 +2374,7 @@ a:hover.back-to-top {
 	.iWant .cta-group .btn-solid-lg1 {
 		display: inline-block;
 		/* padding: 0.72rem; */
-		padding: 1.2em 1em;
+		padding: 1.2em 0.5em;
 		border: 0.125rem solid #FFA52A ;
 		justify-content: center;
 		border-radius: 2rem;
@@ -2388,7 +2391,7 @@ a:hover.back-to-top {
 	.iWant .cta-group .btn-solid-lg2 {
 		display: inline-block;
 		/* padding: 0.72rem; */
-		padding: 1.2em 1em;
+		padding: 1.2em 0.5em;
 		border: 0.125rem solid #ff1443 ;
 		justify-content: center;
 		border-radius: 2rem;

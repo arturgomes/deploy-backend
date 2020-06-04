@@ -4,7 +4,7 @@ import { Link } from "react-router-dom"
 
 
 import { useScrollPosition } from '@n8tb1t/use-scroll-position'
-import PerfectScrollbar from "perfect-scrollbar";
+// import PerfectScrollbar from "perfect-scrollbar";
 
 import {
   FaQrcode,
@@ -142,7 +142,7 @@ export default function LandingPage(props) {
   //   //     suppressScrollX: true,
   //   //     suppressScrollY: false
   //   //   });
-  //   //   document.body.style.overflow = "hidden";
+  //   //   document.body.style.overflow = "hidden";gi
   //   // }
   //   // window.addEventListener("resize", resizeFunction);
   //   // // Specify how to clean up after this effect:
@@ -312,7 +312,7 @@ export default function LandingPage(props) {
 
             <div className="col-lg-12">
               <div className="card">
-                <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20 }} />
+                <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20, alignContent:'center', justifyContent:'center' }} />
                 <h4 className="card-title">Obtenha feedbacks 24/7</h4>
                 <p>Obtenha feedbacks dos clientes a qualquer hora, enqunato que seu estabelecimento estiver aberto.</p>
               </div>
