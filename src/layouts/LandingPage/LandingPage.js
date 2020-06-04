@@ -177,7 +177,7 @@ export default function LandingPage(props) {
 
       // if (JSON.stringify(shouldBeStyle) === JSON.stringify(headerStyle)) return
 
-      setHeaderStyle(shouldBeStyle)
+      // setHeaderStyle(shouldBeStyle)
     },
     [headerStyle]
   )
