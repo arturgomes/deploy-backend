@@ -45,7 +45,7 @@ import { isAuthenticated, getTu } from '../../services/auth';
 const useStyles = makeStyles(styles);
 
 
-let ps;
+// let ps;
 
 export default function LandingPage(props) {
   // const { ...rest } = props;
@@ -128,32 +128,32 @@ export default function LandingPage(props) {
   // styles
   // const classes = useStyles();
   // ref to help us initialize PerfectScrollbar on windows devices
-  const mainPanel = React.createRef();
-  // states and functions
-  const resizeFunction = () => {
-    if (window.innerWidth >= 960) {
-      // setMobileOpen(false);
-    }
-  };
-  // initialize and destroy the PerfectScrollbar plugin
-  React.useEffect(() => {
-    // if (navigator.platform.indexOf("Win") > -1) {
-    //   ps = new PerfectScrollbar(mainPanel.current, {
-    //     suppressScrollX: true,
-    //     suppressScrollY: false
-    //   });
-    //   document.body.style.overflow = "hidden";
-    // }
-    // window.addEventListener("resize", resizeFunction);
-    // // Specify how to clean up after this effect:
-    // return function cleanup() {
-    //   if (navigator.platform.indexOf("Win") > -1) {
-    //     ps.destroy();
-    //   }
-    //   window.removeEventListener("resize", resizeFunction);
-    // };
-    ps = new PerfectScrollbar(mainPanel.current);
-  }, [mainPanel]);
+  // const mainPanel = React.createRef();
+  // // states and functions
+  // const resizeFunction = () => {
+  //   if (window.innerWidth >= 960) {
+  //     // setMobileOpen(false);
+  //   }
+  // };
+  // // initialize and destroy the PerfectScrollbar plugin
+  // React.useEffect(() => {
+  //   // if (navigator.platform.indexOf("Win") > -1) {
+  //   //   ps = new PerfectScrollbar(mainPanel.current, {
+  //   //     suppressScrollX: true,
+  //   //     suppressScrollY: false
+  //   //   });
+  //   //   document.body.style.overflow = "hidden";
+  //   // }
+  //   // window.addEventListener("resize", resizeFunction);
+  //   // // Specify how to clean up after this effect:
+  //   // return function cleanup() {
+  //   //   if (navigator.platform.indexOf("Win") > -1) {
+  //   //     ps.destroy();
+  //   //   }
+  //   //   window.removeEventListener("resize", resizeFunction);
+  //   // };
+  //   const ps = new PerfectScrollbar(mainPanel.current);
+  // }, [mainPanel]);
 
   const [headerStyle] = useState({
     transition: 'all 200ms ease-in'
