@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { Component, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom"
 
@@ -38,16 +38,80 @@ import "./css/styles.css";
 import Header from "../../components/Header/Header.js";
 import Button from "../../components/CustomButtons/Button.js";
 import styles from '../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle'
+import styles1 from './css/styles.css'
 // import Parallax from "../../components/Parallax/Parallax.js";
 import feedback from "./images/feedback.svg";
-import { isAuthenticated, getTu } from '../../services/auth';
+import { login, getId, getUser, isAuthenticated, getTu } from '../../services/auth';
+import api from '../../services/api';
 
 const useStyles = makeStyles(styles);
+const classes = makeStyles(styles1);
+// const classes = useStyles();
 
 
 // let ps;
 
-export default function LandingPage(props) {
+export default class LandingPage extends Component {
+  async componentDidMount() {
+    api.get('/login/success')
+      // fetch("https://api.couponfeed.co/login/success", {
+      //   method: "GET",
+      //   credentials: "include",
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //     "Access-Control-Allow-Credentials": true
+      //   }
+      // })
+      .then(response => {
+        if (response.status === 200) return response.json();
+        throw new Error("failed to authenticate user");
+      })
+      .then(responseJson => {
+        // this.setState({
+        // authenticated: true,
+        // user: responseJson.data.login
+        // });
+        const { name, id, tu } = responseJson.data;
+        login(responseJson.data.token, name, id, tu);
+        // getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
+      })
+      .catch(error => {
+        this.setState({
+          // authenticated: false,
+          error: "Failed to authenticate user"
+        });
+      });
+    if (isAuthenticated() && (getUser() === 'customer')) {
+      const fid = decodeURIComponent(this.props.match.params.fid);
+      if (fid) {
+        // console.log("tem fid");
+        api.post(`/users/i`, {
+          fid,
+          user_id: getId()
+        })
+          .then(response => {
+            this.props.history.push("/customer");
+          })
+          .catch(err => { this.setState({ error: err.response.data.error }) })
+      }
+
+    }
+    if (isAuthenticated() && (getUser() === 'retail')) {
+      const fid = decodeURIComponent(this.props.match.params.fid);
+      if (fid) {
+        // console.log("tem fid");
+        api.post(`/users/i`, {
+          fid,
+          user_id: getId()
+        })
+          .then(response => {
+            this.props.history.push("/retail");
+          })
+          .catch(err => { this.setState({ error: err }) })
+      }
+    }
+  }
   // const { ...rest } = props;
 
   // const [prices] = useState([
@@ -155,34 +219,33 @@ export default function LandingPage(props) {
   //   const ps = new PerfectScrollbar(mainPanel.current);
   // }, [mainPanel]);
 
-  const [headerStyle] = useState({
-    transition: 'all 200ms ease-in'
-  })
+//   const[headerStyle] = useState({
+//     transition: 'all 200ms ease-in'
+//   })
 
-  useScrollPosition(
-    ({ prevPos, currPos }) => {
-      // const isVisible = currPos.y > prevPos.y
+//   useScrollPosition(
+//     ({ prevPos, currPos }) => {
+//   // const isVisible = currPos.y > prevPos.y
 
-      // const shouldBeStyle = isVisible ? {
-      //   backgroundColor: 'transparent',
-      //   transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
-      //   // transform: isVisible ? 'none' : 'translate(0, -100%)'
-      // }
-      //   : {
-      //     backgroundColor: '#fff',
-      //     transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
-      //     // transform: isVisible ? 'none' : 'translate(0, -20%)',
-      //     height: '1rem'
-      //   }
+//   // const shouldBeStyle = isVisible ? {
+//   //   backgroundColor: 'transparent',
+//   //   transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
+//   //   // transform: isVisible ? 'none' : 'translate(0, -100%)'
+//   // }
+//   //   : {
+//   //     backgroundColor: '#fff',
+//   //     transition: `all 200ms ${isVisible ? 'ease-in' : 'ease-out'}`,
+//   //     // transform: isVisible ? 'none' : 'translate(0, -20%)',
+//   //     height: '1rem'
+//   //   }
 
-      // if (JSON.stringify(shouldBeStyle) === JSON.stringify(headerStyle)) return
+//   // if (JSON.stringify(shouldBeStyle) === JSON.stringify(headerStyle)) return
 
-      // setHeaderStyle(shouldBeStyle)
-    },
-    [headerStyle]
-  )
-  const classes = useStyles();
-
+//   // setHeaderStyle(shouldBeStyle)
+// },
+//   [headerStyle]
+//   )
+render(){
   return (
     <>
       <Header
@@ -312,7 +375,7 @@ export default function LandingPage(props) {
 
             <div className="col-lg-12">
               <div className="card">
-                <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20, alignContent:'center', justifyContent:'center' }} />
+                <QueryBuilderOutlinedIcon style={{ fontSize: 120, paddingBottom: 20, alignContent: 'center', justifyContent: 'center' }} />
                 <h4 className="card-title">Obtenha feedbacks 24/7</h4>
                 <p>Obtenha feedbacks dos clientes a qualquer hora, enqunato que seu estabelecimento estiver aberto.</p>
               </div>
@@ -491,4 +554,5 @@ export default function LandingPage(props) {
       </div>
     </>
   );
+}
 }
