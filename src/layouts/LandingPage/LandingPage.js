@@ -53,16 +53,17 @@ const classes = makeStyles(styles1);
 
 export default class LandingPage extends Component {
   async componentDidMount() {
-    api.get('/login/success')
-      // fetch("https://api.couponfeed.co/login/success", {
-      //   method: "GET",
-      //   credentials: "include",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //     "Access-Control-Allow-Credentials": true
-      //   }
-      // })
+    // api.get('/login/success')
+      fetch("https://api.couponfeed.co/login/success", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": "http://couponfeed.co"
+        }
+      })
       .then(responseJson => {
         // this.setState({
         // authenticated: true,

@@ -36,18 +36,17 @@ const useStyles = makeStyles(theme => ({
 
 export default class Login extends Component {
   async componentDidMount() {
-    api.get('/login/success')
-    // fetch("https://api.couponfeed.co/login/success", {
-    //   method: "GET",
-    //   // credentials: "include",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //     // "Access-Control-Allow-Credentials": true,
-    //     "Access-Control-Allow-Origin":'https://www.couponfeed.co/'
-
-    //   }
-    // })
+    // api.get('/login/success')
+    fetch("https://api.couponfeed.co/login/success", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": "http://couponfeed.co"
+        }
+      })
     .then(response => {
       if (response.status === 200) return response.json();
       throw new Error("failed to authenticate user");
