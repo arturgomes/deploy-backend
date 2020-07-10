@@ -33,12 +33,12 @@ export default class LoginFacebook extends Component {
   }
   render() {
     let facebookData;
-    this.state.authenticated ?
-      facebookData = (
-        <div>
-          Ola {this.state.authenticated}
-        </div>
-      ) :
+    // this.state.authenticated ?
+      // facebookData = (
+      //   <div>
+      //     Ola {this.state.authenticated}
+      //   </div>
+      // ) :
       facebookData = (<>
         {/* <FacebookLogin
           textButton="Login com Facebook"
