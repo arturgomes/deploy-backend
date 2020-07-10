@@ -9,6 +9,9 @@ const api = axios.create({
 });
 
 api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
+api.defaults.headers.post['Access-Control-Allow-Origin'] = 'https://www.couponfeed.co';
+
+
 
 api.interceptors.request.use(async config => {
   const token = getToken();
