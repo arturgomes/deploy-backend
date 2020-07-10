@@ -53,25 +53,22 @@ const classes = makeStyles(styles1);
 
 export default class LandingPage extends Component {
   async componentDidMount() {
-    api.get('/login/success')
-      // fetch("https://api.couponfeed.co/login/success", {
-      //   method: "GET",
-      //   credentials: "include",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //     "Access-Control-Allow-Credentials": true
-      //   }
-      // })
-      .then(response => {
-        if (response.status === 200) return response.json();
-        throw new Error("failed to authenticate user");
+    // api.get('/login/success')
+      fetch("https://api.couponfeed.co/login/success", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true
+        }
       })
       .then(responseJson => {
         // this.setState({
         // authenticated: true,
         // user: responseJson.data.login
         // });
+        console.log(responseJson)
         const { name, id, tu } = responseJson.data;
         login(responseJson.data.token, name, id, tu);
         // getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
