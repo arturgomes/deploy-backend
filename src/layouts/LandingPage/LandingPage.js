@@ -58,11 +58,11 @@ export default class LandingPage extends Component {
         method: "GET",
         mode: 'cors',
 
-        credentials: "include",
+        // credentials: "include",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true,
+          // "Access-Control-Allow-Credentials": true,
           "Access-Control-Allow-Origin":'https://couponfeed.co/'
         }
       })
