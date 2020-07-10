@@ -36,6 +36,35 @@ const useStyles = makeStyles(theme => ({
 
 export default class Login extends Component {
   async componentDidMount() {
+    api.get('/login/success')
+    // fetch("https://api.couponfeed.co/login/success", {
+    //   method: "GET",
+    //   credentials: "include",
+    //   headers: {
+    //     Accept: "application/json",
+    //     "Content-Type": "application/json",
+    //     "Access-Control-Allow-Credentials": true
+    //   }
+    // })
+    .then(response => {
+      if (response.status === 200) return response.json();
+      throw new Error("failed to authenticate user");
+    })
+    .then(responseJson => {
+      // this.setState({
+        // authenticated: true,
+        // user: responseJson.data.login
+      // });
+      const {name, id, tu} = responseJson.data;
+      login(responseJson.data.token, name, id, tu);
+      // getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
+    })
+    .catch(error => {
+      this.setState({
+        // authenticated: false,
+        error: "Failed to authenticate user"
+      });
+    });
     if (isAuthenticated() && (getUser() === 'customer')) {
       const fid = decodeURIComponent(this.props.match.params.fid);
       if (fid) {

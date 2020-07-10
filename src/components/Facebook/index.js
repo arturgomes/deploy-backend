@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 
 // import FacebookLogin from 'react-facebook-login'
 // import GoogleLogin from 'react-google-login';
-// import api from '../../services/api'
-import { login } from "../../services/auth";
+import api from '../../services/api'
+import { login, getUser } from "../../services/auth";
 
 // import {TiSocialFacebookCircular} from 'react-icons/ti';
 // import styles from '../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle'
@@ -12,42 +12,11 @@ import { login } from "../../services/auth";
 
 
 export default class LoginFacebook extends Component {
-  state = {
-    auth: false,
-    login: '',
-    picture: ''
-  }
-  componentDidMount() {
-    fetch("https://api.couponfeed.co/login/success", {
-      method: "GET",
-      credentials: "include",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-        "Access-Control-Allow-Credentials": true
-      }
-    })
-    .then(response => {
-      if (response.status === 200) return response.json();
-      throw new Error("failed to authenticate user");
-    })
-    .then(responseJson => {
-      this.setState({
-        authenticated: true,
-        user: responseJson.data.login
-      });
-      const {name, id, tu} = responseJson.data;
-      login(responseJson.data.token, name, id, tu);
-    })
-    .catch(error => {
-      this.setState({
-        authenticated: false,
-        error: "Failed to authenticate user"
-      });
-    });
-  }
-
-
+  // state = {
+  //   auth: false,
+  //   login: '',
+  //   picture: ''
+  // }
 
   responseFacebook = (response) => {
     console.log(response);
