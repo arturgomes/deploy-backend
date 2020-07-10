@@ -15,7 +15,7 @@ export default class Question extends Component {
         <>
           <Button
             size="small"
-            style={{ backgroundColor: option.color, margin: '2px', maxWidth: '30px', maxHeight: '30px', minWidth: '25px', minHeight: '30px' }}
+            style={{ backgroundColor: option.color, color:'#fff', margin: '2px', maxWidth: '30px', maxHeight: '30px', minWidth: '25px', minHeight: '30px' }}
             key={option}
             onClick={() => this.props.onChange(option.value)}
             type="button"

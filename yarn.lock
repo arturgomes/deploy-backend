@@ -13533,6 +13533,11 @@ react-event-listener@^0.6.2, react-event-listener@^0.6.6:
     prop-types "^15.6.0"
     warning "^4.0.1"
 
+react-facebook-login@^4.1.1:
+  version "4.1.1"
+  resolved "https://registry.yarnpkg.com/react-facebook-login/-/react-facebook-login-4.1.1.tgz#005121236a6ac0dee02099976fb1a3265f9d633e"
+  integrity sha512-COnHEHlYGTKipz4963safFAK9PaNTcCiXfPXMS/yxo8El+/AJL5ye8kMJf23lKSSGGPgqFQuInskIHVqGqTvSw==
+
 react-fit@^1.0.3:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-fit/-/react-fit-1.2.0.tgz#de8340d0013e1cbaa8cbca2b7562c50aa0941712"
@@ -13573,6 +13578,14 @@ react-google-charts@^3.0.15:
   integrity sha512-78s5xOQOJvL+jIewrWQZEHtlVk+5Yh4zZy+ODA1on1o1FaRjKWXxoo4n4JQl1XuqkF/A9NWque3KqM6pMggjzQ==
   dependencies:
     react-load-script "^0.0.6"
+
+react-google-login@^5.1.20:
+  version "5.1.20"
+  resolved "https://registry.yarnpkg.com/react-google-login/-/react-google-login-5.1.20.tgz#06afbf5fd9013455ae3bfba93054630df203542d"
+  integrity sha512-/5vDx8Hy7Wo1fO1VC/0e5D6/ZGWgIgvcscI8mYZUQ653QOFf0c4GhTnKkebX5uE7m5rAB/2bzzZIUlIesGqWig==
+  dependencies:
+    "@types/react" "*"
+    prop-types "^15.6.0"
 
 react-google-maps@^9.4.5:
   version "9.4.5"

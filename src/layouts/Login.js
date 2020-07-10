@@ -4,6 +4,9 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
+import { Divider} from 'semantic-ui-react'
+
+
 import Button from "../components/CustomButtons/Button.js";
 
 // import Button from "@material-ui/core/Button";
@@ -13,7 +16,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Grid from '@material-ui/core/Grid';
 import BasicLayout from "../components/CouponFeed/BasicLayout";
-
+import LoginFacebook from '../components/Facebook'
 import api from "../services/api";
 
 import { login, getUser, getId, isAuthenticated } from "../services/auth";
@@ -121,6 +124,10 @@ export default class Login extends Component {
         <Typography component="h1" variant="h5">
           Fazer Login
           </Typography>
+          <LoginFacebook/>
+          
+          <Divider horizontal style={{color:"#444",marginTop:'20px',marginBottom:'20px'}}><hr style={{ border: '1px solid red'}}/>ou</Divider>
+         
         <form
           className={useStyles.form}
           noValidate
@@ -178,6 +185,7 @@ export default class Login extends Component {
             </Grid>
           </Grid>
         </form>
+      
       </BasicLayout>
     );
   }
