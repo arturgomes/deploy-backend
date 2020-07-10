@@ -3,8 +3,8 @@ import React, { Component } from 'react'
 
 // import FacebookLogin from 'react-facebook-login'
 // import GoogleLogin from 'react-google-login';
-import api from '../../services/api'
-import { login, getUser } from "../../services/auth";
+// import api from '../../services/api'
+// import { login, getUser } from "../../services/auth";
 
 // import {TiSocialFacebookCircular} from 'react-icons/ti';
 // import styles from '../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle'

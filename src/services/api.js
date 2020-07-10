@@ -8,6 +8,7 @@ const api = axios.create({
   // baseURL: 'https://cors-anywhere.herokuapp.com/https://api.couponfeed.co',
 });
 
+api.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 api.interceptors.request.use(async config => {
   const token = getToken();
