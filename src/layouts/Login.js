@@ -44,7 +44,7 @@ export default class Login extends Component {
         Accept: "application/json",
         "Content-Type": "application/json",
         "Access-Control-Allow-Credentials": true,
-        "Access-Control-Allow-Origin":'https://couponfeed.co/'
+        "Access-Control-Allow-Origin":'https://www.couponfeed.co/'
 
       }
     })
