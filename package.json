@@ -1,6 +1,5 @@
 {
   "homepage": "https://couponfeed.co",
-  "proxy": "https://cors-anywhere.herokuapp.com/",
   "browserslist": {
     "development": [
       "last 1 chrome version",
