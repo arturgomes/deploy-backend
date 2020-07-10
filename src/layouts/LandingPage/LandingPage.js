@@ -56,14 +56,11 @@ export default class LandingPage extends Component {
     api.get('/login/success')
       // fetch("https://api.couponfeed.co/login/success", {
       //   method: "GET",
-      //   // mode: 'cors',
-
-      //   // credentials: "include",
+      //   credentials: "include",
       //   headers: {
       //     Accept: "application/json",
       //     "Content-Type": "application/json",
-      //     // "Access-Control-Allow-Credentials": true,
-      //     "Access-Control-Allow-Origin":'https://couponfeed.co/'
+      //     "Access-Control-Allow-Credentials": true
       //   }
       // })
       .then(responseJson => {

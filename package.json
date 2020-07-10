@@ -73,7 +73,6 @@
     "jest": "24.9.0",
     "jquery": "^3.3.1",
     "jw-react-pagination": "^1.0.7",
-    "local-cors-proxy": "^1.1.0",
     "lodash": "^4.17.15",
     "lorem-ipsum": "^1.0.6",
     "material-ui-dropzone": "^2.4.9",
@@ -192,8 +191,7 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "start": "react-scripts start",
-    "test": "react-scripts test",
-    "proxy": "lcp --proxyUrl https://api.couponfeed.co"
+    "test": "react-scripts test"
   },
   "version": "0.2.0"
 }
