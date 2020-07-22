@@ -16,6 +16,7 @@ import Shortner from "./layouts/Shortner.js";
 import Feedback from "./layouts/Feedback.js";
 import Logout from "./layouts/Logout.js";
 import Login from "./layouts/Login.js";
+import Validate from "./layouts/Validate.js";
 import SignUp from "./layouts/SignUp.js";
 import SignUpRetail from "./layouts/SignUpRetail.js";
 import LandingPage from "./layouts/LandingPage/LandingPage.js";
@@ -60,6 +61,7 @@ ReactDOM.render(
       <Route path="/" exact component={LandingPage} />
       <Route path="/logout" exact component={Logout} />
       <Route path="/login/" exact component={Login} />
+      <Route path="/validate/" exact component={Validate} />
       <Route path="/login/:fid" component={Login} />
       
       <Route path="/signup" exact component={SignUp} />

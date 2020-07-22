@@ -35,69 +35,7 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default class Login extends Component {
-  async componentDidMount() {
-    api.get('/auth/success')
-    // fetch("https://api.couponfeed.co/auth/success", {
-    //   // fetch("http://localhost:3000/login/success", {
-    //   method: "GET",
-    //   // credentials: "include",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Credentials": true
-    //   }
-    // })
-      .then(response => {
-        if (response.status === 200) return response.json();
-        throw new Error("failed to authenticate user");
-      })
-      .then(responseJson => {
-        // this.setState({
-        // authenticated: true,
-        // user: responseJson.data.login
-        // });
-        console.log(responseJson);
-        const { name, id, tu } = responseJson.data.login;
-        login(responseJson.data.token, name, id, tu);
-        getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
-        // getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
-      })
-      .catch(error => {
-        this.setState({
-          // authenticated: false,
-          error: "Failed to authenticate user"
-        });
-      });
-    // if (isAuthenticated() && (getUser() === 'customer')) {
-    //   const fid = decodeURIComponent(this.props.match.params.fid);
-    //   if (fid) {
-    //     // console.log("tem fid");
-    //     api.post(`/users/i`, {
-    //       fid,
-    //       user_id: getId()
-    //     })
-    //       .then(response => {
-    //         this.props.history.push("/customer");
-    //       })
-    //       .catch(err => { this.setState({ error: err.response.data.error }) })
-    //   }
-
-    // }
-    // if (isAuthenticated() && (getUser() === 'retail')) {
-    //   const fid = decodeURIComponent(this.props.match.params.fid);
-    //   if (fid) {
-    //     // console.log("tem fid");
-    //     api.post(`/users/i`, {
-    //       fid,
-    //       user_id: getId()
-    //     })
-    //       .then(response => {
-    //         this.props.history.push("/retail");
-    //       })
-    //       .catch(err => { this.setState({ error: err }) })
-    //   }
-    // }
-  }
+  
   handleSignIn = async e => {
     e.preventDefault();
     // const fid = decodeURIComponent(this.props.match.params.fid);
