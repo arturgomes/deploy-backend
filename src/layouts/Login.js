@@ -19,7 +19,7 @@ import BasicLayout from "../components/CouponFeed/BasicLayout";
 import LoginFacebook from '../components/Facebook'
 import api from "../services/api";
 
-import { login, getUser, getId, isAuthenticated } from "../services/auth";
+import { login, getUser } from "../services/auth";
 
 const useStyles = makeStyles(theme => ({
   root: {

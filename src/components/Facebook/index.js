@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { makeStyles } from "@material-ui/core/styles";
 
-import FacebookLogin from 'react-facebook-login'
+// import FacebookLogin from 'react-facebook-login'
 // import GoogleLogin from 'react-google-login';
 // import api from '../../services/api'
 // import { login, getUser } from "../../services/auth";
@@ -9,7 +9,7 @@ import FacebookLogin from 'react-facebook-login'
 // import {TiSocialFacebookCircular} from 'react-icons/ti';
 // import styles from '../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle'
 // const useStyles = makeStyles(styles);
-import {FacebookLoginButton} from './button'
+// import {FacebookLoginButton} from './button'
 
 export default class LoginFacebook extends Component {
   // state = {
