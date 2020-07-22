@@ -1,18 +1,23 @@
 import React, { Component } from 'react';
 
 class Validate extends Component {
+  state = {
+    readyToRedirect: false,
+    shop_id:''
+  }
+  
   async componentDidMount() {
-    api.get('/auth/success')
-    // fetch("https://api.couponfeed.co/auth/success", {
-    //   // fetch("http://localhost:3000/login/success", {
-    //   method: "GET",
-    //   // credentials: "include",
-    //   headers: {
-    //     Accept: "application/json",
-    //     "Content-Type": "application/json",
-    //     "Access-Control-Allow-Credentials": true
-    //   }
-    // })
+    // api.get('/auth/success')
+    fetch("https://api.couponfeed.co/auth/success", {
+      // fetch("http://localhost:3000/login/success", {
+      method: "GET",
+      // credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true
+      }
+    })
       .then(response => {
         console.log(response)
         if (response.status === 200) return response.json();
@@ -36,13 +41,17 @@ class Validate extends Component {
         });
       });
     }
-  render() {
-    return (
-      <div>
-        
-      </div>
-    );
-  }
+    render() {
+      if (!this.state.readyToRedirect){
+          return <CircularProgress />
+      }
+      else{
+        return <Redirect
+            to={`/feed/${this.state.shop_id}`}
+            />;
+      }
+      
+    }
 }
 
 export default Validate;
