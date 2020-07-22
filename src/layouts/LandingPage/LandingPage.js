@@ -53,17 +53,18 @@ const classes = makeStyles(styles1);
 
 export default class LandingPage extends Component {
   async componentDidMount() {
-    api.get('/login/success')
-      // fetch("https://api.couponfeed.co/login/success", {
-      //   method: "GET",
-      //   // credentials: "include",
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //     // "Access-Control-Allow-Credentials": true,
-      //     "Access-Control-Allow-Origin": "http://couponfeed.co"
-      //   }
-      // })
+    // api.get('/auth/login/success')
+    fetch("https://api.couponfeed.co/auth/login/success", {
+      // fetch("http://localhost:3000/login/success", {
+        method: "GET",
+        // credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          // "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Origin": "http://couponfeed.co"
+        }
+      })
       .then(responseJson => {
         // this.setState({
         // authenticated: true,
@@ -71,7 +72,7 @@ export default class LandingPage extends Component {
         // });
         console.log(responseJson)
         const { name, id, tu } = responseJson.data;
-        login(responseJson.data.token, name, id, tu);
+        login(responseJson.data.cookies, name, id, tu);
         // getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
       })
       .catch(error => {

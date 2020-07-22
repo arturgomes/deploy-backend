@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 // import { makeStyles } from "@material-ui/core/styles";
 
-// import FacebookLogin from 'react-facebook-login'
+import FacebookLogin from 'react-facebook-login'
 // import GoogleLogin from 'react-google-login';
 // import api from '../../services/api'
 // import { login, getUser } from "../../services/auth";
@@ -9,7 +9,7 @@ import React, { Component } from 'react'
 // import {TiSocialFacebookCircular} from 'react-icons/ti';
 // import styles from '../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle'
 // const useStyles = makeStyles(styles);
-
+import {FacebookLoginButton} from './button'
 
 export default class LoginFacebook extends Component {
   // state = {
@@ -25,10 +25,16 @@ export default class LoginFacebook extends Component {
   responseGoogle = (response) => {
     console.log(response);
   }
-   componentClicked =  () => {
+  componentFacebookClicked =  () => {
     // await api.post(`/a/facebook`)
-    // window.open("https://api.couponfeed.co/facebook", "_self");
-    window.open("https://api.couponfeed.co/facebook", "_self");
+    window.open("https://api.couponfeed.co/auth/facebook", "_self");
+    // window.open("http://localhost:3000/auth/facebook", "_self");
+    // console.log("clicked")
+  }
+  componentGoogleClicked =  () => {
+    // await api.post(`/a/facebook`)
+    window.open("https://api.couponfeed.co/auth/google", "_self");
+    // window.open("http://localhost:3000/auth/facebook", "_self");
     // console.log("clicked")
   }
   render() {
@@ -40,6 +46,7 @@ export default class LoginFacebook extends Component {
       //   </div>
       // ) :
       facebookData = (<>
+        {/* { */}
         {/* <FacebookLogin
           textButton="Login com Facebook"
           appId="307286726964664"
@@ -52,9 +59,12 @@ export default class LoginFacebook extends Component {
             >This is my custom Facebook button</button>
           )}
           onClick={this.componentClicked}
-          callback={this.responseFacebook} /> */}
+          callback={this.responseFacebook} />  */}
+          {/* } */}
           <ul>
-          <li onClick={this.componentClicked}>Login</li>
+            {/* <FacebookLoginButton/> */}
+          <li onClick={this.componentFacebookClicked}>Login com Facebook</li>
+          <li onClick={this.componentGoogleClicked}>Login com Google</li>
           </ul>
         {/* <GoogleLogin
           clientId="696384323916-spmu7mjsuge1a55dh2v65dtke3jgvjb6.apps.googleusercontent.com"

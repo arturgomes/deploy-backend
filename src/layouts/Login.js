@@ -4,7 +4,7 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
-import { Divider} from 'semantic-ui-react'
+import { Divider } from 'semantic-ui-react'
 
 
 import Button from "../components/CustomButtons/Button.js";
@@ -36,65 +36,67 @@ const useStyles = makeStyles(theme => ({
 
 export default class Login extends Component {
   async componentDidMount() {
-    api.get('/login/success')
-    // fetch("https://api.couponfeed.co/login/success", {
-    //     method: "GET",
-    //     // credentials: "include",
-    //     headers: {
-    //       Accept: "application/json",
-    //       "Content-Type": "application/json",
-    //       // "Access-Control-Allow-Credentials": true,
-    //       "Access-Control-Allow-Origin": "http://couponfeed.co"
-    //     }
-    //   })
-    .then(response => {
-      if (response.status === 200) return response.json();
-      throw new Error("failed to authenticate user");
+    // api.get('/auth/login/success')
+    fetch("https://api.couponfeed.co/auth/success", {
+      // fetch("http://localhost:3000/login/success", {
+      method: "GET",
+      // credentials: "include",
+      headers: {
+        Accept: "application/json",
+        "Content-Type": "application/json",
+        "Access-Control-Allow-Credentials": true
+      }
     })
-    .then(responseJson => {
-      // this.setState({
+      .then(response => {
+        if (response.status === 200) return response.json();
+        throw new Error("failed to authenticate user");
+      })
+      .then(responseJson => {
+        // this.setState({
         // authenticated: true,
         // user: responseJson.data.login
-      // });
-      const {name, id, tu} = responseJson.data;
-      login(responseJson.data.token, name, id, tu);
-      // getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
-    })
-    .catch(error => {
-      this.setState({
-        // authenticated: false,
-        error: "Failed to authenticate user"
+        // });
+        console.log(responseJson);
+        const { name, id, tu } = responseJson.data.login;
+        login(responseJson.data.token, name, id, tu);
+        getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
+        // getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
+      })
+      .catch(error => {
+        this.setState({
+          // authenticated: false,
+          error: "Failed to authenticate user"
+        });
       });
-    });
-    if (isAuthenticated() && (getUser() === 'customer')) {
-      const fid = decodeURIComponent(this.props.match.params.fid);
-      if (fid) {
-        // console.log("tem fid");
-        api.post(`/users/i`, {
-          fid,
-          user_id: getId()
-        })
-          .then(response => {
-            this.props.history.push("/customer");
-          })
-          .catch(err => { this.setState({ error: err.response.data.error }) })
-      }
+    // if (isAuthenticated() && (getUser() === 'customer')) {
+    //   const fid = decodeURIComponent(this.props.match.params.fid);
+    //   if (fid) {
+    //     // console.log("tem fid");
+    //     api.post(`/users/i`, {
+    //       fid,
+    //       user_id: getId()
+    //     })
+    //       .then(response => {
+    //         this.props.history.push("/customer");
+    //       })
+    //       .catch(err => { this.setState({ error: err.response.data.error }) })
+    //   }
 
-    }
-    if (isAuthenticated() && (getUser() === 'retail')) {
-      const fid = decodeURIComponent(this.props.match.params.fid);
-      if (fid) {
-        // console.log("tem fid");
-        api.post(`/users/i`, {
-          fid,
-          user_id: getId()
-        })
-          .then(response => {
-            this.props.history.push("/retail");
-          })
-          .catch(err => { this.setState({ error: err }) })
-      }
-    }
+    // }
+    // if (isAuthenticated() && (getUser() === 'retail')) {
+    //   const fid = decodeURIComponent(this.props.match.params.fid);
+    //   if (fid) {
+    //     // console.log("tem fid");
+    //     api.post(`/users/i`, {
+    //       fid,
+    //       user_id: getId()
+    //     })
+    //       .then(response => {
+    //         this.props.history.push("/retail");
+    //       })
+    //       .catch(err => { this.setState({ error: err }) })
+    //   }
+    // }
   }
   handleSignIn = async e => {
     e.preventDefault();
@@ -143,6 +145,8 @@ export default class Login extends Component {
     }
   };
 
+
+
   render() {
 
     return (
@@ -154,10 +158,10 @@ export default class Login extends Component {
         <Typography component="h1" variant="h5">
           Fazer Login
           </Typography>
-          <LoginFacebook/>
-          
-          <Divider horizontal style={{color:"#444",marginTop:'20px',marginBottom:'20px'}}><hr style={{ border: '1px solid red'}}/>ou</Divider>
-         
+        <LoginFacebook />
+
+        <Divider horizontal style={{ color: "#444", marginTop: '20px', marginBottom: '20px' }}><hr style={{ border: '1px solid red' }} />ou</Divider>
+
         <form
           className={useStyles.form}
           noValidate
@@ -215,7 +219,7 @@ export default class Login extends Component {
             </Grid>
           </Grid>
         </form>
-      
+
       </BasicLayout>
     );
   }
