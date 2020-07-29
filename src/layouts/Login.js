@@ -79,7 +79,7 @@ export default class Login extends Component {
       // await api.get("https://api.couponfeed.co/auth/success")
       fetch("https://api.couponfeed.co/auth/success", {
         method: "GET",
-        // credentials: "include",
+        credentials: "include",
         headers: {
           Accept: "application/json",
           "Content-Type": "application/json",
