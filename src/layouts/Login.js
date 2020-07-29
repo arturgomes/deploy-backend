@@ -76,7 +76,7 @@ export default class Login extends Component {
   // }
   async componentDidMount() {
 
-      await api.get("/auth/success")
+      await api.get("/auth/success",{crossDomain:true})
       // fetch("https://api.couponfeed.co/auth/success", {
       //   method: "GET",
       //   credentials: "include",
