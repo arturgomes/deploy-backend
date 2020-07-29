@@ -27,14 +27,14 @@ export default class LoginFacebook extends Component {
   }
   componentFacebookClicked =  () => {
     // await api.post(`/a/facebook`)
-    // window.open("https://api.couponfeed.co/auth/facebook", "_self");
-    window.open("http://localhost:3000/auth/facebook", "_self");
+    window.open("https://api.couponfeed.co/auth/facebook", "_self");
+    // window.open("http://localhost:3000/auth/facebook", "_self");
     // console.log("clicked")
   }
   componentGoogleClicked =  () => {
     // await api.post(`/a/facebook`)
-    // window.open("https://api.couponfeed.co/auth/google", "_self");
-    window.open("http://localhost:3000/auth/google", "_self");
+    window.open("https://api.couponfeed.co/auth/google", "_self");
+    // window.open("http://localhost:3000/auth/google", "_self");
     // console.log("clicked")
   }
   render() {

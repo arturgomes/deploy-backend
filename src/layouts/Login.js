@@ -77,7 +77,7 @@ export default class Login extends Component {
   async componentDidMount() {
 
     
-      fetch("http://localhost:3000/auth/success", {
+      fetch("https://api.couponfeed.co/auth/success", {
         method: "GET",
         credentials: "include",
         headers: {
