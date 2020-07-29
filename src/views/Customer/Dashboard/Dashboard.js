@@ -30,7 +30,7 @@ import Button from "../../../components/CustomButtons/Button.js";
 
 import api from "../../../services/api";
 import {
-  getId,
+  getId, getUser
 } from "../../../services/auth";
 
 
@@ -46,8 +46,8 @@ function openInNewTab(url) {
 class Dashboard extends Component {
   state = {
     isLoading: true,
-    user_name: '',
-    cpf: '',
+    name: '',
+    thumbnail: '',
     member_since: '',
     loyalties: [],
     last_feedback: '',
@@ -58,33 +58,47 @@ class Dashboard extends Component {
 
     // this.setState({isLoading:false})
     // console.log("tá carregando")
+    // console.log(getUser())
     await api
       .post("/dashboardDataC", { user_id: getId() })
       .then(response => {
-        console.log(response.data);
+        
         const { fb,
           last_feedback,
           loyalties,
           total_feedbacks,
           user } = response.data;
+          
         // console.log(dados)
         const newfb = this.makeLoyaltyList(fb, loyalties);
-        console.log(newfb);
-        this.setState({
-          user_name: user.name,
-          cpf: user.cpf,
-          member_since: user.createdAt,
+        console.log({ fb,
+          last_feedback,
           loyalties,
-          last_feedback: last_feedback.createdAt,
           total_feedbacks,
-          fb: newfb
+          user });
+        const { createdAt, feedbacks, name, thumbnail } = user;
+        const lf = (last_feedback === null) ? 'Sem feedbacks' : last_feedback.createdAt;
+        console.log(lf)
+        // console.log(this.state)
+        this.setState({
+          isLoading:false,
+          name,
+          thumbnail,
+          member_since: createdAt,
+          loyalties,
+          last_feedback: lf,
+          total_feedbacks,
+          fb:newfb,
         })
+console.log(this)
+
         console.log(this.state)
 
       })
       .catch(error => {
         // Error 😨
         if (error.response) {
+          console.log(error)
           /*
            * The request was made and the server responded with a
            * status code that falls out of the range of 2xx
@@ -100,7 +114,7 @@ class Dashboard extends Component {
           // console.log(error.request);
         }
       });
-    this.setState({ isLoading: false });
+    // this.setState({ isLoading: false });
   }
   findFeedcoins = (retail_id, loyalties) => {
     // console.log(retail_id,loyalties);
@@ -134,12 +148,13 @@ class Dashboard extends Component {
 
   render() {
     const {
-      user_name,
+      name,
+      thumbnail,
       member_since,
       last_feedback,
       total_feedbacks,
       fb,
-      cpf,
+      // cpf,
       loyalties
     } = this.state;
     const { classes } = this.props;
@@ -155,24 +170,24 @@ class Dashboard extends Component {
               <CardHeader color="primary" stats icon>
                 <CardIcon color="primary">
                   <Icon classes={{ root: classes.iconRoot }}>
-                    <Avatar alt={user_name} className={classes.orange}>
-                      {this.getInitials(user_name)}
+                    <Avatar alt={name} className={classes.orange} src={thumbnail}>
+                      {this.getInitials(name)}
                     </Avatar>
                   </Icon>
                 </CardIcon>
                 <p style={{ margin: "15px 5px", fontSize: "20px" }}>
                   {/* <p><Flag code="br" height="16" /></p> */}
-                  {user_name}
+                  {name}
                 </p>
-                <p style={{ margin: "15px 5px", fontSize: "15px", color: "#aaa" }}>
-                  {/* <p><Flag code="br" height="16" /></p> */}
-                  {cpf}
-                </p>
+                {/* <p style={{ margin: "15px 5px", fontSize: "15px", color: "#aaa" }}> */}
+                {/* <p><Flag code="br" height="16" /></p> */}
+                {/* {cpf} */}
+                {/* </p> */}
               </CardHeader>
               <CardBody>
                 <p className={useStyles.cardCategory}>Total de Feedcoins: <span className={classes.successText}>{total_feedbacks}</span></p>
 
-                <p className={useStyles.cardCategory}>Ultimo Feedback: <span className={classes.successText}>{last_feedback && format(parseISO(last_feedback), "dd ' de ' MMMM  ' de '  y", { locale: pt })}</span></p>
+                <p className={useStyles.cardCategory}>Ultimo Feedback: <span className={classes.successText}>{(last_feedback !== 'Sem feedbacks') && format(parseISO(last_feedback), "dd ' de ' MMMM  ' de '  y", { locale: pt }) || 'Sem feedbacks'}</span></p>
                 {/* <p className={useStyles.cardCategory}>Ultimo Feedback: <span className={classes.successText}>{format(parseISO(last_feedback), "dd ' de ' MMMM  ' de '  y", { locale: pt })}</span></p> */}
                 {/* <p className={useStyles.cardCategory}>Ultimo Feedback: <span className={classes.successText}>{last_feedback}</span></p> */}
                 <p className={useStyles.cardCategory}>Membro desde <span className={classes.successText}>{member_since && format(parseISO(member_since), "dd ' de ' MMMM  ' de '  y", { locale: pt })}</span></p>
@@ -213,7 +228,7 @@ class Dashboard extends Component {
                     item.feedbacks_count >= item.fc[0].feedcoins ? <><Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><IoMdPrint /></Button>
                       {/* <Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><FaEdit/></Button> */}
                       {/* <Button onClick={() => openInNewTab(`/print-qr/${item.id}`)}><MdDeleteForever/></Button> */}
-                    </>:<></>] : [])
+                    </> : <></>] : [])
                   }
                 />
               </CardBody>
@@ -226,7 +241,7 @@ class Dashboard extends Component {
         <GridContainer>
           <GridItem xs={12} sm={3} md={12}>
             <Card >
-            <CardHeader color="success" stats>
+              <CardHeader color="success" stats>
                 <h4 style={{
                   color: "rgba(255,255,255,1)",
                   margin: "0",
@@ -243,15 +258,15 @@ class Dashboard extends Component {
                 }}>Vamos lá, preencha aqui os dados sobre a nova loja a ser cadastrada.</p> */}
               </CardHeader>
               <CardBody>
-                {loyalties===null ? <p>Você ainda não deu nenhum feedback</p> : (<Table
+                {loyalties === null ? <p>Você ainda não deu nenhum feedback</p> : (<Table
                   tableHeaderColor="primary"
-                  tableHead={["Loja", "Promoção", "Descrição", "Premio","Pontos Necessários"]}
+                  tableHead={["Loja", "Promoção", "Descrição", "Premio", "Pontos Necessários"]}
                   tableData={
-                    loyalties.map(item => [`${item.Retail.retail_name}`, `${item.name}`,`${item.description}`, `${item.discount}`, `${item.feedcoins}`] )
+                    loyalties.map(item => [`${item.Retail.retail_name}`, `${item.name}`, `${item.description}`, `${item.discount}`, `${item.feedcoins}`])
                   }
                 />)}
               </CardBody>
-              </Card>
+            </Card>
           </GridItem>
           <GridItem xs={12} sm={3} md={6}>
             {/* <Card plain>Oi</Card> */}

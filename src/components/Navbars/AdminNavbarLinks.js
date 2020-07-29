@@ -1,6 +1,7 @@
 import React from "react";
 import classNames from "classnames";
 import { Redirect } from 'react-router';
+import * as Cookies from "js-cookie";
 
 // @material-ui/core components
 import { makeStyles } from "@material-ui/core/styles";
@@ -23,6 +24,7 @@ import Button from "../../components/CustomButtons/Button.js";
 
 import styles from "../../assets/jss/material-dashboard-react/components/headerLinksStyle.js";
 import { logout, isAuthenticated } from "../../services/auth";
+
 
 const useStyles = makeStyles(styles);
 
@@ -50,10 +52,11 @@ export default function AdminNavbarLinks(props) {
   };
   const handleCloseProfile = e => {
     e.preventDefault();
+    window.open("http://localhost:3000/auth/logout", "_self");
     logout();
-    localStorage.removeItem('token');
-    localStorage.removeItem('user');
-    window.location.href = '/login'
+    Cookies.remove('session') // will set "cookie_name" to "value"
+    Cookies.remove('session.sig') // will set "cookie_name" to "value"
+    window.location.href = '/'
   };
 
   if (!isAuthenticated())
@@ -204,16 +207,18 @@ export default function AdminNavbarLinks(props) {
               }}
             >
               <Paper>
-                <ClickAwayListener onClickAway={handleCloseProfile}>
+                <ClickAwayListener 
+                // onClickAway={handleCloseProfile}
+                >
                   <MenuList role="menu">
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      // onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
                       Profile
                     </MenuItem>
                     <MenuItem
-                      onClick={handleCloseProfile}
+                      // onClick={handleCloseProfile}
                       className={classes.dropdownItem}
                     >
                       Settings

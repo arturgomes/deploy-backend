@@ -5,6 +5,7 @@ import "perfect-scrollbar/css/perfect-scrollbar.css";
 import { makeStyles } from "@material-ui/core/styles";
 import Avatar from "@material-ui/core/Avatar";
 import { Divider } from 'semantic-ui-react'
+// import { FaSpinner } from 'react-icons/fa';
 
 
 import Button from "../components/CustomButtons/Button.js";
@@ -19,7 +20,7 @@ import BasicLayout from "../components/CouponFeed/BasicLayout";
 import LoginFacebook from '../components/Facebook'
 import api from "../services/api";
 
-import { login, getUser } from "../services/auth";
+import { login, getUser, isAuthenticated } from "../services/auth";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -35,7 +36,82 @@ const useStyles = makeStyles(theme => ({
 }));
 
 export default class Login extends Component {
-  
+
+  state = {
+    user: {},
+    error: null,
+    authenticated: false
+  };
+
+  // componentDidMount() {
+
+  //   // Fetch does not send cookies. So you should add credentials: 'include'
+  //   // fetch("http://localhost:3000/auth/login/success", {
+  //     fetch("http://localhost:3000/auth/success", {
+  //     method: "GET",
+  //     credentials: "include",
+  //     headers: {
+  //       Accept: "application/json",
+  //       "Content-Type": "application/json",
+  //       "Access-Control-Allow-Credentials": true
+  //     }
+  //   })
+  //     .then(response => {
+  //       console.log(response);
+  //       if (response.status === 200) return response.json();
+  //       throw new Error("failed to authenticate user");
+  //     })
+  //     .then(responseJson => {
+  //       this.setState({
+  //         authenticated: true,
+  //         user: responseJson.user
+  //       });
+  //     })
+  //     .catch(error => {
+  //       this.setState({
+  //         authenticated: false,
+  //         error: "Failed to authenticate user"
+  //       });
+  //     });
+  // }
+  async componentDidMount() {
+
+    
+      fetch("http://localhost:3000/auth/success", {
+        method: "GET",
+        credentials: "include",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true
+        }
+      })
+        .then(response => {
+          if (response.status === 200) return response.json();
+          throw new Error("failed to authenticate user");
+        })
+        .then(responseJson => {
+          if (!isAuthenticated()) {
+          // console.log(responseJson)
+          this.setState({
+            authenticated: true,
+            user: responseJson.user
+          });
+          // console.log(responseJson.token);
+          const { name, id, tu } = responseJson.login;
+          login(responseJson.token, name, id, tu);
+          // this.props.history.push("/customer");
+          getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
+        }
+        })
+        .catch(error => {
+          this.setState({
+            // authenticated: false,
+            error: "Failed to authenticate user"
+          });
+        });
+  }
+
   handleSignIn = async e => {
     e.preventDefault();
     // const fid = decodeURIComponent(this.props.match.params.fid);
@@ -52,7 +128,6 @@ export default class Login extends Component {
           if (response.data.login !== null) {
             const { name, id, tu } = response.data.login;
             login(response.data.token, name, id, tu);
-
             getUser() === 'customer' ? this.props.history.push("/customer") : this.props.history.push("/retail");
           } else {
             this.setState({ err: "Usuario ou senha inválidos" });
@@ -86,6 +161,7 @@ export default class Login extends Component {
 
 
   render() {
+    // const { authenticated } = this.state;
 
     return (
 
