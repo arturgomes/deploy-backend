@@ -77,7 +77,7 @@ export default class Login extends Component {
   async componentDidMount() {
 
       // await api.get("/auth/success",{crossDomain:true})
-      fetch("https://cors-anywhere.herokuapp.com/https://api.couponfeed.co/auth/success/", {
+      fetch("https://api.couponfeed.co/auth/success/", {
         method: "GET",
         credentials: "include",
         headers: {
@@ -96,7 +96,8 @@ export default class Login extends Component {
           this.setState({
             authenticated: true,
             user: responseJson.user
-          });
+          })
+          .catch(() => console.log("Can’t access " + url + " response. Blocked by browser?"));
           // console.log(responseJson.token);
           const { name, id, tu } = responseJson.login;
           login(responseJson.token, name, id, tu);
