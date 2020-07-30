@@ -45,17 +45,17 @@ export default class Login extends Component {
 
   async componentDidMount() {
 
-      // await api.get("/auth/success",{crossDomain:true})
       const url = "https://api.couponfeed.co/auth/success/";
-      fetch(url, {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true
-        }
-      })
+      await api.get("/auth/success",{crossDomain:true})
+      // fetch(url, {
+      //   method: "GET",
+      //   credentials: 'include',
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //     "Access-Control-Allow-Credentials": true
+      //   }
+      // })
         .then(response => {
           if (response.status === 200) return response.json();
           throw new Error("failed to authenticate user");
