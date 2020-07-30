@@ -43,49 +43,18 @@ export default class Login extends Component {
     authenticated: false
   };
 
-  // componentDidMount() {
-
-  //   // Fetch does not send cookies. So you should add credentials: 'include'
-  //   // fetch("http://localhost:3000/auth/login/success", {
-  //     fetch("http://localhost:3000/auth/success", {
-  //     method: "GET",
-  //     credentials: "include",
-  //     headers: {
-  //       Accept: "application/json",
-  //       "Content-Type": "application/json",
-  //       "Access-Control-Allow-Credentials": true
-  //     }
-  //   })
-  //     .then(response => {
-  //       console.log(response);
-  //       if (response.status === 200) return response.json();
-  //       throw new Error("failed to authenticate user");
-  //     })
-  //     .then(responseJson => {
-  //       this.setState({
-  //         authenticated: true,
-  //         user: responseJson.user
-  //       });
-  //     })
-  //     .catch(error => {
-  //       this.setState({
-  //         authenticated: false,
-  //         error: "Failed to authenticate user"
-  //       });
-  //     });
-  // }
   async componentDidMount() {
 
-      // await api.get("/auth/success",{crossDomain:true})
-      fetch("https://api.couponfeed.co/auth/success/", {
-        method: "GET",
-        credentials: "include",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json",
-          "Access-Control-Allow-Credentials": true
-        }
-      })
+      await api.get("/auth/success",{crossDomain:true})
+      // fetch("https://api.couponfeed.co/auth/success/", {
+      //   method: "GET",
+      //   credentials: "include",
+      //   headers: {
+      //     Accept: "application/json",
+      //     "Content-Type": "application/json",
+      //     "Access-Control-Allow-Credentials": true
+      //   }
+      // })
         .then(response => {
           if (response.status === 200) return response.json();
           throw new Error("failed to authenticate user");
