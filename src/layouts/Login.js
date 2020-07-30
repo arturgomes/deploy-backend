@@ -45,17 +45,17 @@ export default class Login extends Component {
 
   async componentDidMount() {
 
-      const url = "https://api.couponfeed.co/auth/success/";
-      await api.get("/auth/success")
-      // fetch(url, {
-      //   method: "GET",
-      //   credentials: 'include',
-      //   headers: {
-      //     Accept: "application/json",
-      //     "Content-Type": "application/json",
-      //     "Access-Control-Allow-Credentials": true
-      //   }
-      // })
+      const url = "https://cors-anywhere.herokuapp.com/https://api.couponfeed.co/auth/success/";
+      // await api.get("/auth/success",{credentials:'include'})
+      fetch(url, {
+        method: "GET",
+        credentials: 'include',
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Credentials": true
+        }
+      })
         .then(response => {
           if (response.status === 200) return response.json();
           throw new Error("failed to authenticate user");
