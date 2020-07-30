@@ -45,7 +45,7 @@ export default class Login extends Component {
 
   async componentDidMount() {
 
-      const url = "https://cors-anywhere.herokuapp.com/https://api.couponfeed.co/auth/success/";
+      const url = "https://api.couponfeed.co/auth/success/";
       // await api.get("/auth/success",{credentials:'include'})
       fetch(url, {
         method: "GET",
