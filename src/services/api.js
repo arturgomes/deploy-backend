@@ -4,11 +4,11 @@ import { getToken } from "./auth";
 
 const api = axios.create({
   // baseURL: 'http://localhost:3000',
-  baseURL: 'https://api.couponfeed.co',
+  baseURL: 'https://api.couponfeed.co/proxy',
   withCredentials: true,
   // crossorigin:true
   headers: {                  
-    "Access-Control-Allow-Origin": "http://localhost:3001",
+    // "Access-Control-Allow-Origin": "http://localhost:3001",
     // "Access-Control-Allow-Origin": "https://couponfeed.co/",
   //   "Access-Control-Allow-Headers": "Authorization", 
   //   "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE" ,
