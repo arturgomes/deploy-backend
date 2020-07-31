@@ -1,6 +1,6 @@
 {
   "homepage": "https://couponfeed.co",
-  "proxy" : "http://backend:5000",
+  "proxy": "https://cors-anywhere.herokuapp.com/",
   "browserslist": {
     "development": [
       "last 1 chrome version",
@@ -73,7 +73,6 @@
     "identicon.js": "^2.3.3",
     "jest": "24.9.0",
     "jquery": "^3.3.1",
-    "js-cookie": "^2.2.1",
     "jw-react-pagination": "^1.0.7",
     "lodash": "^4.17.15",
     "lorem-ipsum": "^1.0.6",
@@ -193,7 +192,9 @@
     "build": "react-scripts build",
     "eject": "react-scripts eject",
     "start": "react-scripts start",
-    "test": "react-scripts test"
+    "test": "react-scripts test",
+    "proxy": "lcp --proxyUrl https://api.couponfeed.co"
+
   },
   "version": "0.2.0"
 }

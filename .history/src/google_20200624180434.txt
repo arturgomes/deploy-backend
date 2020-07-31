@@ -1,0 +1,2 @@
+id cliente: 696384323916-spmu7mjsuge1a55dh2v65dtke3jgvjb6.apps.googleusercontent.com
+chave secreta: Gf1baRjuShgk_gYZoCCU6BJA
