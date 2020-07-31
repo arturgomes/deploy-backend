@@ -6,6 +6,7 @@ const api = axios.create({
   // baseURL: 'http://localhost:3000',
   baseURL: 'https://api.couponfeed.co',
   withCredentials: true,
+  crossorigin:true
   // headers: {                  
   //   "Access-Control-Allow-Origin": "http://localhost:3001",
   //   // "Access-Control-Allow-Origin": "https://couponfeed.co/",
