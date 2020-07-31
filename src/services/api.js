@@ -9,7 +9,7 @@ const api = axios.create({
   // crossorigin:true
   headers: {                  
     // "Access-Control-Allow-Origin": "http://localhost:3001",
-    // "Access-Control-Allow-Origin": "https://couponfeed.co/",
+    "Access-Control-Allow-Origin": "https://couponfeed.co/",
   //   "Access-Control-Allow-Headers": "Authorization", 
   //   "Access-Control-Allow-Methods": "GET, POST, OPTIONS, PUT, PATCH, DELETE" ,
   //   "Content-Type": "application/json;charset=UTF-8"                   
