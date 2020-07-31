@@ -1,15 +1,5 @@
-import React, { Component } from 'react'
-// import { makeStyles } from "@material-ui/core/styles";
-
-// import FacebookLogin from 'react-facebook-login'
-// import GoogleLogin from 'react-google-login';
-// import api from '../../services/api'
-// import { login, getUser } from "../../services/auth";
-
-// import {TiSocialFacebookCircular} from 'react-icons/ti';
-// import styles from '../../assets/jss/material-kit-react/views/componentsSections/navbarsStyle'
-// const useStyles = makeStyles(styles);
-// import {FacebookLoginButton} from './button'
+import React, { Component } from 'react';
+import FacebookButton from './FacebookButton';
 
 export default class LoginFacebook extends Component {
   // state = {
@@ -18,25 +8,7 @@ export default class LoginFacebook extends Component {
   //   picture: ''
   // }
 
-  responseFacebook = (response) => {
-    console.log(response);
-  }
-
-  responseGoogle = (response) => {
-    console.log(response);
-  }
-  componentFacebookClicked =  () => {
-    // await api.post(`/a/facebook`)
-    window.open("https://api.couponfeed.co/auth/facebook", "_self");
-    // window.open("http://localhost:3000/auth/facebook", "_self");
-    // console.log("clicked")
-  }
-  componentGoogleClicked =  () => {
-    // await api.post(`/a/facebook`)
-    window.open("https://api.couponfeed.co/auth/google", "_self");
-    // window.open("http://localhost:3000/auth/google", "_self");
-    // console.log("clicked")
-  }
+  
   render() {
     let facebookData;
     // this.state.authenticated ?

@@ -30,7 +30,8 @@ import Button from "../../../components/CustomButtons/Button.js";
 
 import api from "../../../services/api";
 import {
-  getId, getUser
+  getId, 
+  // getUser
 } from "../../../services/auth";
 
 
@@ -76,7 +77,9 @@ class Dashboard extends Component {
           loyalties,
           total_feedbacks,
           user });
-        const { createdAt, feedbacks, name, thumbnail } = user;
+        const { createdAt, 
+          // feedbacks, 
+          name, thumbnail } = user;
         const lf = (last_feedback === null) ? 'Sem feedbacks' : last_feedback.createdAt;
         console.log(lf)
         // console.log(this.state)
@@ -90,9 +93,6 @@ class Dashboard extends Component {
           total_feedbacks,
           fb:newfb,
         })
-console.log(this)
-
-        console.log(this.state)
 
       })
       .catch(error => {
